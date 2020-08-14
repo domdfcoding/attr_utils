@@ -99,9 +99,9 @@ def add_init_annotations(obj: Callable) -> Callable:
 					else:
 						annotations[arg_name] = arg_type
 
-	if hasattr(obj.__init__, "__annotations__"):
-		obj.__init__.__annotations__.update(annotations)
+	if hasattr(obj.__init__, "__annotations__"):  # type: ignore
+		obj.__init__.__annotations__.update(annotations)  # type: ignore
 	else:  # pragma: no cover
-		obj.__init__.__annotations__ = annotations
+		obj.__init__.__annotations__ = annotations  # type: ignore
 
 	return obj
