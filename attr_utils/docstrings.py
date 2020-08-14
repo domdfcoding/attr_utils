@@ -26,6 +26,13 @@
 # stdlib
 from typing import Any, Callable, Dict, Optional
 
+__all__ = ["add_attrs_doc"]
+
+attrs_docstring = "Automatically created by attrs."
+eq_default = "Return self==value."
+ne_default = "Check equality and either forward a NotImplemented or return the result\n    negated."
+repr_default = {"Return repr(self).", attrs_docstring}
+
 
 def add_attrs_doc(obj: Callable) -> Callable:
 	"""
@@ -33,8 +40,6 @@ def add_attrs_doc(obj: Callable) -> Callable:
 
 	:param obj:
 	"""
-
-	attrs_docstring = "Automatically created by attrs."
 
 	new_docstrings = {
 			"__eq__": "Return ``self == other``.",
@@ -56,15 +61,14 @@ def add_attrs_doc(obj: Callable) -> Callable:
 			"__repr__": str,
 			}
 
-	if obj.__eq__.__doc__ is None or obj.__eq__.__doc__.strip() == "Return self==value.":
+	if obj.__eq__.__doc__ is None or obj.__eq__.__doc__.strip() == eq_default:
 		obj.__eq__.__doc__ = new_docstrings["__eq__"]
 
-	if obj.__ne__.__doc__ is None or obj.__ne__.__doc__.strip(
-	) == ("Check equality and either forward a NotImplemented or return the result\n    negated."):
+	if obj.__ne__.__doc__ is None or obj.__ne__.__doc__.strip() == ne_default:
 		obj.__ne__.__doc__ = new_docstrings["__ne__"]
 
 	if hasattr(obj, "__repr__"):
-		if obj.__repr__.__doc__ is None or obj.__repr__.__doc__.strip() in {"Return repr(self).", attrs_docstring}:
+		if obj.__repr__.__doc__ is None or obj.__repr__.__doc__.strip() in repr_default:
 			obj.__repr__.__doc__ = new_docstrings["__repr__"]
 
 	for attribute in new_docstrings:

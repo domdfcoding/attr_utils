@@ -25,10 +25,10 @@
 
 # stdlib
 import inspect
-from typing import Any, Dict, Optional, Type
+from typing import Callable, Dict, Optional, Type
 
 
-def add_init_annotations(obj: Any) -> Any:
+def add_init_annotations(obj: Callable) -> Callable:
 	"""
 	Add type annotations to the ``__init__`` of an `attrs <https://www.attrs.org/en/stable/>`_ class.
 
