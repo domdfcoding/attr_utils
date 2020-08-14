@@ -101,7 +101,7 @@ def add_init_annotations(obj: Any) -> Any:
 
 	if hasattr(obj.__init__, "__annotations__"):
 		obj.__init__.__annotations__.update(annotations)
-	else:
+	else:  # pragma: no cover
 		obj.__init__.__annotations__ = annotations
 
 	return obj
