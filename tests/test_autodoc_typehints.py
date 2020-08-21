@@ -22,13 +22,23 @@
 #
 
 # stdlib
-import pathlib
 import re
 import sys
-import textwrap
 import typing
 from typing import (
-		Any, AnyStr, Callable, Dict, Generic, Mapping, NewType, Optional, Pattern, Tuple, Type, TypeVar, Union
+		Any,
+		AnyStr,
+		Callable,
+		Dict,
+		Generic,
+		Mapping,
+		NewType,
+		Optional,
+		Pattern,
+		Tuple,
+		Type,
+		TypeVar,
+		Union,
 		)
 
 # 3rd party
