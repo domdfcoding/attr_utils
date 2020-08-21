@@ -40,13 +40,12 @@ from typing import AnyStr, TypeVar
 # 3rd party
 from sphinx.util import logging
 from sphinx_autodoc_typehints import (
-		backfill_type_hints,
 		builder_ready,
 		get_all_type_hints,
 		get_annotation_args,
 		get_annotation_class_name,
 		get_annotation_module,
-		process_signature,
+		process_signature
 		)
 
 # this package

@@ -21,204 +21,209 @@
 #  OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+# stdlib
 import typing
 from mailbox import Mailbox
 from typing import Callable, Union
 
 try:
-    from dataclasses import dataclass
+	# stdlib
+	from dataclasses import dataclass
 except ImportError:
-    def dataclass(cls):
-        return cls
+
+	def dataclass(cls):
+		return cls
 
 
 def get_local_function():
-    def wrapper(self) -> str:
-        """
-        Wrapper
-        """
-    return wrapper
+
+	def wrapper(self) -> str:
+		"""
+		Wrapper
+		"""
+
+	return wrapper
 
 
 class Class:
-    """
-    Initializer docstring.
+	"""
+	Initializer docstring.
 
-    :param x: foo
-    :param y: bar
-    :param z: baz
-    """
+	:param x: foo
+	:param y: bar
+	:param z: baz
+	"""
 
-    def __init__(self, x: bool, y: int, z: typing.Optional[str] = None) -> None:
-        pass
+	def __init__(self, x: bool, y: int, z: typing.Optional[str] = None) -> None:
+		pass
 
-    def a_method(self, x: bool, y: int, z: typing.Optional[str] = None) -> str:
-        """
-        Method docstring.
+	def a_method(self, x: bool, y: int, z: typing.Optional[str] = None) -> str:
+		"""
+		Method docstring.
 
-        :param x: foo
-        :param y: bar
-        :param z: baz
-        """
+		:param x: foo
+		:param y: bar
+		:param z: baz
+		"""
 
-    def _private_method(self, x: str) -> str:
-        """
-        Private method docstring.
+	def _private_method(self, x: str) -> str:
+		"""
+		Private method docstring.
 
-        :param x: foo
-        """
+		:param x: foo
+		"""
 
-    def __dunder_method(self, x: str) -> str:
-        """
-        Dunder method docstring.
+	def __dunder_method(self, x: str) -> str:
+		"""
+		Dunder method docstring.
 
-        :param x: foo
-        """
+		:param x: foo
+		"""
 
-    def __magic_custom_method__(self, x: str) -> str:
-        """
-        Magic dunder method docstring.
+	def __magic_custom_method__(self, x: str) -> str:
+		"""
+		Magic dunder method docstring.
 
-        :param x: foo
-        """
+		:param x: foo
+		"""
 
-    @classmethod
-    def a_classmethod(cls, x: bool, y: int, z: typing.Optional[str] = None) -> str:
-        """
-        Classmethod docstring.
+	@classmethod
+	def a_classmethod(cls, x: bool, y: int, z: typing.Optional[str] = None) -> str:
+		"""
+		Classmethod docstring.
 
-        :param x: foo
-        :param y: bar
-        :param z: baz
-        """
+		:param x: foo
+		:param y: bar
+		:param z: baz
+		"""
 
-    @staticmethod
-    def a_staticmethod(x: bool, y: int, z: typing.Optional[str] = None) -> str:
-        """
-        Staticmethod docstring.
+	@staticmethod
+	def a_staticmethod(x: bool, y: int, z: typing.Optional[str] = None) -> str:
+		"""
+		Staticmethod docstring.
 
-        :param x: foo
-        :param y: bar
-        :param z: baz
-        """
+		:param x: foo
+		:param y: bar
+		:param z: baz
+		"""
 
-    @property
-    def a_property(self) -> str:
-        """
-        Property docstring
-        """
+	@property
+	def a_property(self) -> str:
+		"""
+		Property docstring
+		"""
 
-    class InnerClass:
-        """
-        Inner class.
-        """
+	class InnerClass:
+		"""
+		Inner class.
+		"""
 
-        def inner_method(self, x: bool) -> str:
-            """
-            Inner method.
+		def inner_method(self, x: bool) -> str:
+			"""
+			Inner method.
 
-            :param x: foo
-            """
+			:param x: foo
+			"""
 
-        def __dunder_inner_method(self, x: bool) -> str:
-            """
-            Dunder inner method.
+		def __dunder_inner_method(self, x: bool) -> str:
+			"""
+			Dunder inner method.
 
-            :param x: foo
-            """
+			:param x: foo
+			"""
 
-    locally_defined_callable_field = get_local_function()
+	locally_defined_callable_field = get_local_function()
 
 
 class DummyException(Exception):
-    """
-    Exception docstring
+	"""
+	Exception docstring
 
-    :param message: blah
-    """
+	:param message: blah
+	"""
 
-    def __init__(self, message: str) -> None:
-        super().__init__(message)
+	def __init__(self, message: str) -> None:
+		super().__init__(message)
 
 
 def function(x: bool, y: int, z_: typing.Optional[str] = None) -> str:
-    """
-    Function docstring.
+	"""
+	Function docstring.
 
-    :param x: foo
-    :param y: bar
-    :param z\\_: baz
-    :return: something
-    :rtype: bytes
-    """
+	:param x: foo
+	:param y: bar
+	:param z\\_: baz
+	:return: something
+	:rtype: bytes
+	"""
 
 
 def function_with_escaped_default(x: str = '\b'):
-    """
-    Function docstring.
+	"""
+	Function docstring.
 
-    :param x: foo
-    """
+	:param x: foo
+	"""
 
 
 def function_with_unresolvable_annotation(x: 'a.b.c'):  # noqa: F821
-    """
-    Function docstring.
+	"""
+	Function docstring.
 
-    :arg x: foo
-    """
+	:arg x: foo
+	"""
 
 
 def function_with_typehint_comment(
-    x,  # type: int
-    y   # type: str
-):
-    # type: (...) -> None
-    """
-    Function docstring.
+		x,  # type: int
+		y  # type: str
+		):
+	# type: (...) -> None
+	"""
+	Function docstring.
 
-    :parameter x: foo
-    :param y: bar
-    """
+	:parameter x: foo
+	:param y: bar
+	"""
 
 
 class ClassWithTypehints(object):
-    """
-    Class docstring.
+	"""
+	Class docstring.
 
-    :param x: foo
-    """
+	:param x: foo
+	"""
 
-    def __init__(
-        self,
-        x  # type: int
-    ):
-        # type: (...) -> None
-        pass
+	def __init__(
+			self,
+			x  # type: int
+			):
+		# type: (...) -> None
+		pass
 
-    def foo(
-        self,
-        x  # type: str
-    ):
-        # type: (...) -> int
-        """
-        Method docstring.
+	def foo(
+			self,
+			x  # type: str
+			):
+		# type: (...) -> int
+		"""
+		Method docstring.
 
-        :arg x: foo
-        """
-        return 42
+		:arg x: foo
+		"""
+		return 42
 
 
 def function_with_typehint_comment_not_inline(x=None, *y, z, **kwargs):
-    # type: (Union[str, bytes], *str, bytes, **int) -> None
-    """
-    Function docstring.
+	# type: (Union[str, bytes], *str, bytes, **int) -> None
+	"""
+	Function docstring.
 
-    :arg x: foo
-    :argument y: bar
-    :parameter z: baz
-    :parameter kwargs: some kwargs
-    """
+	:arg x: foo
+	:argument y: bar
+	:parameter z: baz
+	:parameter kwargs: some kwargs
+	"""
 
 
 class ClassWithTypehintsNotInline(object):
@@ -253,30 +258,30 @@ class ClassWithTypehintsNotInline(object):
 
 
 def undocumented_function(x: int) -> str:
-    """Hi"""
+	"""Hi"""
 
-    return str(x)
+	return str(x)
 
 
 @dataclass
 class DataClass:
-    """Class docstring."""
+	"""Class docstring."""
 
 
 class Decorator:
-    """
-    Initializer docstring.
+	"""
+	Initializer docstring.
 
-    :param func: function
-    """
+	:param func: function
+	"""
 
-    def __init__(self, func: Callable[[int, str], str]):
-        pass
+	def __init__(self, func: Callable[[int, str], str]):
+		pass
 
 
 def mocked_import(x: Mailbox):
-    """
-    A docstring.
+	"""
+	A docstring.
 
-    :param x: function
-    """
+	:param x: function
+	"""
