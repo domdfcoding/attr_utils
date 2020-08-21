@@ -1,5 +1,3 @@
-# Demo for autodoc_typehints_attrs
-
 # stdlib
 from typing import Any, Callable, Dict, List, Tuple, get_type_hints
 

@@ -46,9 +46,7 @@ from sphinx_autodoc_typehints import (
 		get_annotation_args,
 		get_annotation_class_name,
 		get_annotation_module,
-		load_args,
 		process_signature,
-		split_type_comment_args
 		)
 
 # this package
@@ -78,7 +76,7 @@ def format_annotation(annotation, fully_qualified: bool = False) -> str:
 	# Type variables are also handled specially
 	try:
 		if isinstance(annotation, TypeVar) and annotation is not AnyStr:  # type: ignore
-			return '\\' + repr(annotation)
+			return f"\\:py:data:`{annotation!r}`"
 	except TypeError:
 		pass
 
