@@ -27,6 +27,8 @@
 import inspect
 from typing import Callable, Dict, Optional, Type
 
+__all__ = ["add_init_annotations"]
+
 
 def add_init_annotations(obj: Callable) -> Callable:
 	"""
@@ -38,10 +40,12 @@ def add_init_annotations(obj: Callable) -> Callable:
 	This module attempts to generate the annotations for use in Sphinx documentation,
 	even when converter functions *are* used, based on the following assumptions:
 
-	* If the converter function is a python ``type``, such as :class:`str`, :class:`int`,
-	or :class:`list`, the type annotation will be that type.
-		This may be problematic for lists and will be fixed later.
+	* If the converter function is a Python ``type``, such as :class:`str`, :class:`int`,
+	  or :class:`list`, the type annotation will be that type.
+	  This may be problematic for lists and will be fixed later.
+
 	* If the converter function has an annotation for its first argument, that annotation is used.
+
 	* If the converter function is not annotated, the type of the attribute will be used.
 
 	For example:
