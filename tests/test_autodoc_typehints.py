@@ -26,6 +26,7 @@ import re
 import sys
 import typing
 from typing import (
+		IO,
 		Any,
 		AnyStr,
 		Callable,
@@ -38,7 +39,7 @@ from typing import (
 		Tuple,
 		Type,
 		TypeVar,
-		Union,
+		Union
 		)
 
 # 3rd party
@@ -47,13 +48,6 @@ import typing_extensions
 
 # this package
 from attr_utils.autodoc_typehints import format_annotation, process_docstring
-
-try:
-	# stdlib
-	from typing import IO
-except ImportError:
-	# stdlib
-	from typing.io import IO
 
 T = TypeVar('T')
 U = TypeVar('U', covariant=True)
@@ -83,7 +77,7 @@ class D(typing_extensions.Protocol):
 	pass
 
 
-class E(typing_extensions.Protocol[T]):
+class E(typing_extensions.Protocol[T]):  # type: ignore
 	pass
 
 
@@ -195,6 +189,6 @@ def test_format_annotation_both_libs(inv, library, annotation, params, expected_
 
 
 def test_process_docstring_slot_wrapper():
-	lines = []
+	lines: typing.List[str] = []
 	process_docstring(None, 'class', 'SlotWrapper', Slotted, None, lines)
 	assert not lines
