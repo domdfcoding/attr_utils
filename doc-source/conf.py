@@ -34,25 +34,26 @@ language = 'en'
 package_root = "attr_utils"
 
 extensions = [
-		'sphinx.ext.intersphinx',
-		'sphinx.ext.autodoc',
-		'sphinx.ext.mathjax',
-		'sphinx.ext.viewcode',
-		'sphinxcontrib.httpdomain',
-		"sphinxcontrib.extras_require",
-		"sphinx.ext.todo",
-		"sphinxemoji.sphinxemoji",
-		"notfound.extension",
-		"sphinx_tabs.tabs",
-		"sphinx-prompt",
-		"sphinx_autodoc_typehints",
-		"sphinx.ext.autosummary",
-		"autodocsumm",
-		"sphinx_copybutton",
-		"sphinxcontrib.default_values",
-		"sphinxcontrib.toctree_plus",
-		# "sphinx_gitstamp",
-		]
+	'sphinx.ext.intersphinx',
+	'sphinx.ext.autodoc',
+	'sphinx.ext.mathjax',
+	'sphinx.ext.viewcode',
+	'sphinxcontrib.httpdomain',
+	'sphinxcontrib.extras_require',
+	'sphinx.ext.todo',
+	'sphinxemoji.sphinxemoji',
+	'notfound.extension',
+	'sphinx_tabs.tabs',
+	'sphinx-prompt',
+	'sphinx.ext.autosummary',
+	'autodocsumm',
+	'sphinx_copybutton',
+	'sphinxcontrib.default_values',
+	'sphinxcontrib.toctree_plus',
+	'seed_intersphinx_mapping',
+	'autodoc_augment_defaults',
+	'sphinx_autodoc_typehints',
+	]
 
 sphinxemoji_style = 'twemoji'
 todo_include_todos = bool(os.environ.get("SHOW_TODOS", 0))
@@ -68,18 +69,11 @@ suppress_warnings = ['image.nonlocal_uri']
 pygments_style = 'default'
 
 intersphinx_mapping = {
-		'rtd': ('https://docs.readthedocs.io/en/latest/', None),
-		'sphinx': ('https://www.sphinx-doc.org/en/stable/', None),
 		'python': ('https://docs.python.org/3/', None),
-		"NumPy": ('https://numpy.org/doc/stable/', None),
-		"SciPy": ('https://docs.scipy.org/doc/scipy/reference', None),
-		"Pandas": ('https://pandas.pydata.org/docs/', None),
-		"matplotlib": ('https://matplotlib.org', None),
+		'sphinx': ('https://www.sphinx-doc.org/en/stable/', None),
+		'rtd': ('https://docs.readthedocs.io/en/latest/', None),
 		"h5py": ('https://docs.h5py.org/en/latest/', None),
-		"Sphinx": ('https://www.sphinx-doc.org/en/master/', None),
-		"Django": ('https://docs.djangoproject.com/en/dev/', 'https://docs.djangoproject.com/en/dev/_objects/'),
 		"sarge": ('https://sarge.readthedocs.io/en/latest/', None),
-		"attrs": ('https://www.attrs.org/en/stable/', None),
 		}
 
 html_theme = 'domdf_sphinx_theme'
@@ -110,6 +104,7 @@ autodoc_default_options = {
 		"autosummary": None,
 		'exclude-members': ','.join([   # Exclude "standard" methods.
 				"__dict__",
+				"__class__",
 				"__dir__",
 				"__weakref__",
 				"__module__",
@@ -121,7 +116,10 @@ autodoc_default_options = {
 				"__attrs_attrs__",
 				"__init__",
 				"__new__",
-				])
+				"__getnewargs__",
+				"__abstractmethods__",
+				"__hash__",
+				]),
 		}
 
 
