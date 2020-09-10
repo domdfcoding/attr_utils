@@ -7,9 +7,6 @@ import os
 import re
 import sys
 
-# 3rd party
-from sphinx.locale import _
-
 sys.path.append(os.path.abspath('.'))
 sys.path.append(os.path.abspath('..'))
 
@@ -18,7 +15,10 @@ from __pkginfo__ import __version__
 # User-configurable lines
 # End of user-configurable lines
 
-github_url = "https://github.com/domdfcoding/attr_utils"
+github_username = "domdfcoding"
+github_repository = "attr_utils"
+github_url = f"https://github.com/{github_username}/{github_repository}"
+
 
 rst_prolog = f""".. |pkgname| replace:: attr_utils
 .. |pkgname2| replace:: ``attr_utils``
@@ -34,6 +34,9 @@ language = 'en'
 package_root = "attr_utils"
 
 extensions = [
+	'sphinx_toolbox',
+	'sphinx_toolbox.autodoc_augment_defaults',
+	'sphinx_toolbox.autodoc_typehints',
 	'sphinx.ext.intersphinx',
 	'sphinx.ext.autodoc',
 	'sphinx.ext.mathjax',
@@ -51,8 +54,7 @@ extensions = [
 	'sphinxcontrib.default_values',
 	'sphinxcontrib.toctree_plus',
 	'seed_intersphinx_mapping',
-	'autodoc_augment_defaults',
-	'sphinx_autodoc_typehints',
+	'sphinx.ext.autosectionlabel',
 	]
 
 sphinxemoji_style = 'twemoji'
@@ -99,6 +101,7 @@ texinfo_documents = [('index', slug, project, author, slug, project, 'Miscellane
 
 toctree_plus_types = {"class", "function", "method", "data"}
 
+
 autodoc_default_options = {
 		'members': None,  # Include all members (methods).
 		'special-members': None,
@@ -122,31 +125,3 @@ autodoc_default_options = {
 				"__hash__",
 				]),
 		}
-
-
-# Extensions to theme docs
-def setup(app):
-	from sphinx.domains.python import PyField
-	from sphinx.util.docfields import Field
-
-	app.add_object_type(
-			'confval',
-			'confval',
-			objname='configuration value',
-			indextemplate='pair: %s; configuration value',
-			doc_field_types=[
-					PyField(
-							'type',
-							label=_('Type'),
-							has_arg=False,
-							names=('type', ),
-							bodyrolename='class',
-							),
-					Field(
-							'default',
-							label=_('Default'),
-							has_arg=False,
-							names=('default', ),
-							),
-					]
-			)

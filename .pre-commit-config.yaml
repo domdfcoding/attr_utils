@@ -22,17 +22,23 @@ repos:
     - id: mixed-line-ending
 
  - repo: https://github.com/domdfcoding/pre-commit-hooks
-   rev: v0.0.3
+   rev: v0.0.4
    hooks:
     - id: requirements-txt-sorter
       args: [--allow-git]
     - id: check-docstring-first
+    - id: bind-requirements
+
+ - repo: https://github.com/domdfcoding/flake8-dunder-all
+   rev: v0.0.4
+   hooks:
+    - id: ensure-dunder-all
+      files: ^attr_utils/.*\.py$
 
  - repo: https://github.com/pre-commit/pygrep-hooks
    rev: v1.5.1
    hooks:
     - id: python-no-eval
-    - id: python-use-type-annotations
 
  - repo: https://github.com/asottile/pyupgrade
    rev: v1.5.1
@@ -58,13 +64,3 @@ repos:
    hooks:
     - id: forbid-crlf
     - id: remove-crlf
-
-# - repo: https://github.com/shellcheck-py/shellcheck-py
-#   rev: v0.7.1.1
-#   hooks:
-#    - id: shellcheck
-
-# - repo: https://github.com/adrienverge/yamllint
-#   rev: v1.23.0
-#   hooks:
-#    - id: yamllint
