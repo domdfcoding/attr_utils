@@ -2,7 +2,7 @@
 #
 #  annotations.py
 """
-Add type annotations to the ``__init__`` of an `attrs <https://www.attrs.org/en/stable/>`_ class.
+Add type annotations to the ``__init__`` of an attrs_ class.
 
 Since :pull:`363 <python-attrs/attrs>` attrs has
 populated the ``__init__.__annotations__`` based on the types of attributes.
@@ -17,6 +17,8 @@ even when converter functions *are* used, based on the following assumptions:
 * If the converter function has an annotation for its first argument, that annotation is used.
 
 * If the converter function is not annotated, the type of the attribute will be used.
+
+.. _attrs: https://www.attrs.org/en/stable/
 
 
 Examples
@@ -114,7 +116,9 @@ __all__ = ["add_init_annotations", "attr_docstring_hook", "setup"]
 
 def add_init_annotations(obj: Callable) -> Callable:
 	"""
-	Add type annotations to the ``__init__`` of an `attrs <https://www.attrs.org/en/stable/>`__ class.
+	Add type annotations to the ``__init__`` of an attrs_ class.
+
+	.. _attrs: https://www.attrs.org/en/stable/
 	"""
 
 	if not hasattr(obj, "__attrs_attrs__"):
@@ -160,7 +164,9 @@ def parse_occupations(occupations: Iterable[str]) -> Iterable[str]:  # pragma: n
 @attr.s
 class AttrsClass:
 	"""
-	Example of using :func:`~.add_init_annotations` for attrs classes with Sphinx documentation.
+	Example of using :func:`~.add_init_annotations` for attrs_ classes with Sphinx documentation.
+
+	.. _attrs: https://www.attrs.org/en/stable/
 
 	:param name: The name of the person.
 	:param age: The age of the person.
@@ -175,7 +181,9 @@ class AttrsClass:
 def attr_docstring_hook(obj: Any) -> Any:
 	"""
 	Hook for :mod:`sphinx_toolbox.autodoc_typehints` to add annotations to the ``__init__`` of
-	`attrs <https://github.com/python-attrs/attrs>`__ classes.
+	attrs_ classes.
+
+	.. _attrs: https://www.attrs.org/en/stable/
 
 	:param obj: The object being documented.
 	"""
@@ -190,8 +198,9 @@ def attr_docstring_hook(obj: Any) -> Any:
 
 def setup(app: "Sphinx") -> Dict[str, Any]:
 	"""
-	Extension to `sphinx-autodoc-typehints <https://pypi.org/project/sphinx-autodoc-typehints/>`_
-	to populate ``__init__.__annotations__`` for `attrs <https://github.com/python-attrs/attrs>`__ classes.
+	Sphinx extension to populate ``__init__.__annotations__`` for attrs_ classes.
+
+	.. _attrs: https://www.attrs.org/en/stable/
 
 	:param app:
 
@@ -200,6 +209,7 @@ def setup(app: "Sphinx") -> Dict[str, Any]:
 
 	# 3rd party
 	from sphinx_toolbox.autodoc_typehints import docstring_hooks
+
 	docstring_hooks.append((attr_docstring_hook, 50))
 
 	app.setup_extension("sphinx_toolbox.autodoc_typehints")

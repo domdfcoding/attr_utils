@@ -109,6 +109,17 @@ Installation
 
 .. end installation
 
+
+| ``attr_utils`` provides both utility functions and a Sphinx extension, :mod:`attr_utils.annotations`.
+| Enable the extension by adding the following to the ``extensions`` variable in your ``conf.py``:
+
+.. extensions:: attr_utils.annotations
+	:no-preamble:
+
+	sphinx.ext.autodoc
+	sphinx_toolbox.autodoc_typehints
+
+
 .. toctree::
 	:hidden:
 
@@ -123,7 +134,7 @@ Installation
 
 .. toctree::
 	:maxdepth: 3
-	:caption: Documentation
+	:caption: Contributing
 
 	contributing
 	Source

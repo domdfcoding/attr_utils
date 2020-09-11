@@ -57,7 +57,7 @@ def add_attrs_doc(obj: Callable) -> Callable:
 	"""
 	Add better docstrings to attrs generated functions.
 
-	:param obj:
+	:param obj: The class to improve the docstrings for.
 	"""
 
 	new_docstrings = {

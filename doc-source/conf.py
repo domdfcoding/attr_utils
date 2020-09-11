@@ -129,3 +129,4 @@ autodoc_default_options = {
 
 
 set_type_checking_flag = True
+intersphinx_mapping['sphinx_toolbox'] = ('https://sphinx-toolbox.readthedocs.io/en/latest/', None)
