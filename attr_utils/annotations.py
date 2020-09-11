@@ -1,6 +1,78 @@
 #!/usr/bin/env python
 #
 #  annotations.py
+"""
+Add type annotations to the ``__init__`` of an `attrs <https://www.attrs.org/en/stable/>`_ class.
+
+Since :pull:`363 <python-attrs/attrs>` attrs has
+populated the ``__init__.__annotations__`` based on the types of attributes.
+However, annotations were deliberately omitted when converter functions were used.
+This module attempts to generate the annotations for use in Sphinx documentation,
+even when converter functions *are* used, based on the following assumptions:
+
+* If the converter function is a Python ``type``, such as :class:`str`, :class:`int`,
+  or :class:`list`, the type annotation will be that type.
+  This may be problematic for lists and will be fixed later.
+
+* If the converter function has an annotation for its first argument, that annotation is used.
+
+* If the converter function is not annotated, the type of the attribute will be used.
+
+
+Examples
+---------------
+
+**Library Usage:**
+
+.. code-block:: python
+
+	def my_converter(arg: List[Dict[str, Any]]):
+		return arg
+
+
+	def untyped_converter(arg):
+		return arg
+
+
+	@attr.s
+	class SomeClass:
+		a_string: str = attr.ib(converter=str)
+		custom_converter: Any = attr.ib(converter=my_converter)
+		untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)
+
+	add_attrs_annotations(SomeClass)
+
+	print(SomeClass.__init__.__annotations__)
+	# {
+	#	'return': None,
+	#	'a_string': <class 'str'>,
+	#	'custom_converter': typing.List[typing.Dict[str, typing.Any]],
+	#	'untyped': typing.Tuple[str, int, float],
+	#	}
+
+**Sphinx documentation**:
+
+	.. literalinclude:: ../../attr_utils/annotations.py
+		:tab-width: 4
+		:pyobject: AttrsClass
+
+The ``parse_occupations`` looks like:
+
+	.. literalinclude:: ../../attr_utils/annotations.py
+		:tab-width: 4
+		:pyobject: parse_occupations
+
+The Sphinx output looks like:
+
+	.. autoclass:: attr_utils.annotations.AttrsClass
+		:members:
+		:no-special-members:
+
+
+API Reference
+---------------
+
+"""
 #
 #  Copyright © 2020 Dominic Davis-Foster <dominic@davis-foster.co.uk>
 #
@@ -25,57 +97,24 @@
 
 # stdlib
 import inspect
-from typing import Callable, Dict, Optional, Type
+from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional, Type
 
-__all__ = ["add_init_annotations"]
+# 3rd party
+import attr
+
+# this package
+from attr_utils import __version__
+
+if TYPE_CHECKING:
+	# 3rd party
+	from sphinx.application import Sphinx
+
+__all__ = ["add_init_annotations", "attr_docstring_hook", "setup"]
 
 
 def add_init_annotations(obj: Callable) -> Callable:
 	"""
-	Add type annotations to the ``__init__`` of an `attrs <https://www.attrs.org/en/stable/>`_ class.
-
-	Since `#363 <https://github.com/python-attrs/attrs/pull/363>`__ attrs has
-	populated the ``__init__.__annotations__`` based on the types of attributes.
-	However, annotations were deliberately omitted when converter functions were used.
-	This module attempts to generate the annotations for use in Sphinx documentation,
-	even when converter functions *are* used, based on the following assumptions:
-
-	* If the converter function is a Python ``type``, such as :class:`str`, :class:`int`,
-	  or :class:`list`, the type annotation will be that type.
-	  This may be problematic for lists and will be fixed later.
-
-	* If the converter function has an annotation for its first argument, that annotation is used.
-
-	* If the converter function is not annotated, the type of the attribute will be used.
-
-	For example:
-
-	.. code-block:: python
-
-		def my_converter(arg: List[Dict[str, Any]]):
-			return arg
-
-
-		def untyped_converter(arg):
-			return arg
-
-
-		@attr.s
-		class SomeClass:
-			a_string: str = attr.ib(converter=str)
-			custom_converter: Any = attr.ib(converter=my_converter)
-			untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)
-
-		add_attrs_annotations(SomeClass)
-
-		print(SomeClass.__init__.__annotations__)
-		# {
-		#	'return': None,
-		#	'a_string': <class 'str'>,
-		#	'custom_converter': typing.List[typing.Dict[str, typing.Any]],
-		#	'untyped': typing.Tuple[str, int, float],
-		#	}
-
+	Add type annotations to the ``__init__`` of an `attrs <https://www.attrs.org/en/stable/>`__ class.
 	"""
 
 	if not hasattr(obj, "__attrs_attrs__"):
@@ -109,3 +148,63 @@ def add_init_annotations(obj: Callable) -> Callable:
 		obj.__init__.__annotations__ = annotations  # type: ignore
 
 	return obj
+
+
+def parse_occupations(occupations: Iterable[str]) -> Iterable[str]:  # pragma: no cover
+	if isinstance(occupations, str):
+		return [x.strip() for x in occupations.split(",")]
+	else:
+		return [str(x) for x in occupations]
+
+
+@attr.s
+class AttrsClass:
+	"""
+	Example of using :func:`~.add_init_annotations` for attrs classes with Sphinx documentation.
+
+	:param name: The name of the person.
+	:param age: The age of the person.
+	:param occupations: The occupation(s) of the person.
+	"""
+
+	name: str = attr.ib(converter=str)
+	age: int = attr.ib(converter=int)
+	occupations: List[str] = attr.ib(converter=parse_occupations)
+
+
+def attr_docstring_hook(obj: Any) -> Any:
+	"""
+	Hook for :mod:`sphinx_toolbox.autodoc_typehints` to add annotations to the ``__init__`` of
+	`attrs <https://github.com/python-attrs/attrs>`__ classes.
+
+	:param obj: The object being documented.
+	"""
+
+	if callable(obj):
+
+		if inspect.isclass(obj):
+			obj = add_init_annotations(obj)
+
+	return obj
+
+
+def setup(app: "Sphinx") -> Dict[str, Any]:
+	"""
+	Extension to `sphinx-autodoc-typehints <https://pypi.org/project/sphinx-autodoc-typehints/>`_
+	to populate ``__init__.__annotations__`` for `attrs <https://github.com/python-attrs/attrs>`__ classes.
+
+	:param app:
+
+	:return:
+	"""
+
+	# 3rd party
+	from sphinx_toolbox.autodoc_typehints import docstring_hooks
+	docstring_hooks.append((attr_docstring_hook, 50))
+
+	app.setup_extension("sphinx_toolbox.autodoc_typehints")
+
+	return {
+			"version": __version__,
+			"parallel_read_safe": True,
+			}
