@@ -30,20 +30,20 @@ def test_add_init_annotations():
 
 	# print(SomeClass.__init__.__annotations__)
 	assert SomeClass.__init__.__annotations__ == {
-			'return': None,
-			'a_string': str,
-			'custom_converter': List[Dict[str, Any]],
-			'untyped': Tuple[str, int, float],
-			'no_converter': Callable[[str], None],
+			"return": None,
+			"a_string": str,
+			"custom_converter": List[Dict[str, Any]],
+			"untyped": Tuple[str, int, float],
+			"no_converter": Callable[[str], None],
 			}
 
 	# print(typing.get_type_hints(SomeClass.__init__))
 	assert get_type_hints(SomeClass.__init__) == {
-			'return': type(None),
-			'a_string': str,
-			'custom_converter': List[Dict[str, Any]],
-			'untyped': Tuple[str, int, float],
-			'no_converter': Callable[[str], None],
+			"return": type(None),
+			"a_string": str,
+			"custom_converter": List[Dict[str, Any]],
+			"untyped": Tuple[str, int, float],
+			"no_converter": Callable[[str], None],
 			}
 
 

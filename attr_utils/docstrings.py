@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 #
-#  annotations.py
+#  docstrings.py
+"""
+Add better docstrings to attrs generated functions.
+"""
 #
 #  Copyright © 2020 Dominic Davis-Foster <dominic@davis-foster.co.uk>
 #

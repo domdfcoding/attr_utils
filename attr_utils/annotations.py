@@ -186,7 +186,7 @@ def attr_docstring_hook(obj: Any) -> Any:
 	.. _attrs: https://www.attrs.org/en/stable/
 
 	:param obj: The object being documented.
-	"""
+	"""  # noqa D400
 
 	if callable(obj):
 

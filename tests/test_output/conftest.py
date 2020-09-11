@@ -33,11 +33,10 @@ from typing import Any, Dict, NamedTuple, Sequence, Tuple
 # 3rd party
 import pytest
 from bs4 import BeautifulSoup  # type: ignore
-from docutils.nodes import system_message
 from domdf_python_tools.paths import PathPlus
 from sphinx.testing.path import path
 
-pytest_plugins = 'sphinx.testing.fixtures'
+pytest_plugins = "sphinx.testing.fixtures"
 
 
 @pytest.fixture(scope="session")
