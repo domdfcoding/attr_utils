@@ -55,8 +55,10 @@ def add_attrs_doc(obj: Type) -> Type:
 			"__repr__": f"Return a string representation of the :class:`~.{obj.__name__}`.",
 			}
 
-	if obj.__ne__.__doc__ is None or obj.__ne__.__doc__.strip() in {object.__ne__.__doc__, ne_default}:
-		obj.__ne__.__doc__ = new_docstrings["__ne__"]
+	if hasattr(obj, "__ne__"):
+		if PYPY or not isinstance(obj.__ne__, (WrapperDescriptorType, MethodDescriptorType, MethodWrapperType)):
+			if obj.__ne__.__doc__ is None or obj.__ne__.__doc__.strip() in {object.__ne__.__doc__, ne_default}:
+				obj.__ne__.__doc__ = new_docstrings["__ne__"]
 
 	if hasattr(obj, "__repr__"):
 		if (
