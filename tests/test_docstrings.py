@@ -34,7 +34,10 @@ def test_add_attrs_doc():
 		assert SomeClass.__gt__.__doc__ == doc
 		assert SomeClass.__lt__.__doc__ == doc
 		assert SomeClass.__le__.__doc__ == doc
-		assert SomeClass.__ne__.__doc__ == "\n    Check equality and either forward a NotImplemented or return the result\n    negated.\n    "
+		assert SomeClass.__ne__.__doc__ in {
+				"Return ``self != other``.",
+				"\n    Check equality and either forward a NotImplemented or return the result\n    negated.\n    ",
+				}
 		assert SomeClass.__repr__.__doc__ == doc
 	else:
 
