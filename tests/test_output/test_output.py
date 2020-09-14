@@ -10,6 +10,6 @@ def test_build(app):
 	app.build()
 
 
-@pytest.mark.parametrize("page", ["index.html"], indirect=True)
+@pytest.mark.parametrize("page", ["annotations.html", "docstrings.html"], indirect=True)
 def test_html_output(page: BeautifulSoup, file_regression: FileRegressionFixture):
 	check_html_regression(page, file_regression)

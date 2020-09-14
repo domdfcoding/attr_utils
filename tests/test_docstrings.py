@@ -24,7 +24,7 @@ class SomeClass:
 	untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)  # type: ignore
 
 
-def test_add_attrs_doc_20():
+def test_add_attrs_doc():
 
 	if attr.__version__ == "19.3.0":
 		doc = "\n        Automatically created by attrs.\n        "

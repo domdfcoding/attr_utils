@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Attr-Utils Demo — Python  documentation
+  </title>
+  <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
+  </script>
+  <script src="_static/jquery.js">
+  </script>
+  <script src="_static/underscore.js">
+  </script>
+  <script src="_static/doctools.js">
+  </script>
+  <script src="_static/language_data.js">
+  </script>
+  <meta content="width=device-width, initial-scale=0.9, maximum-scale=0.9" name="viewport"/>
+ </head>
+ <body>
+  <div class="document">
+   <div class="documentwrapper">
+    <div class="bodywrapper">
+     <div class="body" role="main">
+      <div class="section" id="attr-utils-demo">
+       <h1>
+        Attr-Utils Demo
+        <a class="headerlink" href="#attr-utils-demo" title="Permalink to this headline">
+         ¶
+        </a>
+       </h1>
+       <p>
+        The Sphinx output looks like:
+       </p>
+       <blockquote>
+        <div>
+         <span class="target" id="module-attr_utils.annotations">
+         </span>
+         <p>
+          Add type annotations to the
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            __init__
+           </span>
+          </code>
+          of an
+          <a class="reference external" href="https://www.attrs.org/en/stable/">
+           attrs
+          </a>
+          class.
+         </p>
+         <p>
+          Since
+          <a href="#id1">
+           <span class="problematic" id="id2">
+            :pull:`363 &lt;python-attrs/attrs&gt;`
+           </span>
+          </a>
+          attrs has
+populated the
+          <code class="docutils literal notranslate">
+           <span class="pre">
+            __init__.__annotations__
+           </span>
+          </code>
+          based on the types of attributes.
+However, annotations were deliberately omitted when converter functions were used.
+This module attempts to generate the annotations for use in Sphinx documentation,
+even when converter functions
+          <em>
+           are
+          </em>
+          used, based on the following assumptions:
+         </p>
+         <ul class="simple">
+          <li>
+           <p>
+            If the converter function is a Python
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              type
+             </span>
+            </code>
+            , such as
+            <code class="xref py py-class docutils literal notranslate">
+             <span class="pre">
+              str
+             </span>
+            </code>
+            ,
+            <code class="xref py py-class docutils literal notranslate">
+             <span class="pre">
+              int
+             </span>
+            </code>
+            ,
+or
+            <code class="xref py py-class docutils literal notranslate">
+             <span class="pre">
+              list
+             </span>
+            </code>
+            , the type annotation will be that type.
+This may be problematic for lists and will be fixed later.
+           </p>
+          </li>
+          <li>
+           <p>
+            If the converter function has an annotation for its first argument, that annotation is used.
+           </p>
+          </li>
+          <li>
+           <p>
+            If the converter function is not annotated, the type of the attribute will be used.
+           </p>
+          </li>
+         </ul>
+         <div class="section" id="examples">
+          <h2>
+           Examples
+           <a class="headerlink" href="#examples" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <p>
+           <strong>
+            Library Usage:
+           </strong>
+          </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="k">def</span> <span class="nf">my_converter</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]):</span>
+        <span class="k">return</span> <span class="n">arg</span>
+
+
+<span class="k">def</span> <span class="nf">untyped_converter</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">arg</span>
+
+
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">SomeClass</span><span class="p">:</span>
+        <span class="n">a_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+        <span class="n">custom_converter</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">my_converter</span><span class="p">)</span>
+        <span class="n">untyped</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">untyped_converter</span><span class="p">)</span>
+
+<span class="n">add_attrs_annotations</span><span class="p">(</span><span class="n">SomeClass</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">SomeClass</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__annotations__</span><span class="p">)</span>
+<span class="c1"># {</span>
+<span class="c1">#       'return': None,</span>
+<span class="c1">#       'a_string': &lt;class 'str'&gt;,</span>
+<span class="c1">#       'custom_converter': typing.List[typing.Dict[str, typing.Any]],</span>
+<span class="c1">#       'untyped': typing.Tuple[str, int, float],</span>
+<span class="c1">#       }</span>
+</pre>
+           </div>
+          </div>
+          <p>
+           <strong>
+            Sphinx documentation
+           </strong>
+           :
+          </p>
+          <blockquote>
+           <div>
+           </div>
+          </blockquote>
+          <p>
+           The
+           <code class="docutils literal notranslate">
+            <span class="pre">
+             parse_occupations
+            </span>
+           </code>
+           looks like:
+          </p>
+          <blockquote>
+           <div>
+           </div>
+          </blockquote>
+          <p>
+           The Sphinx output looks like:
+          </p>
+          <blockquote>
+           <div>
+            <dl class="py class">
+             <dt id="attr_utils.annotations.AttrsClass">
+              <em class="property">
+               class
+              </em>
+              <code class="sig-prename descclassname">
+               attr_utils.annotations.
+              </code>
+              <code class="sig-name descname">
+               AttrsClass
+              </code>
+              <span class="sig-paren">
+               (
+              </span>
+              <em class="sig-param">
+               <span class="n">
+                name
+               </span>
+              </em>
+              ,
+              <em class="sig-param">
+               <span class="n">
+                age
+               </span>
+              </em>
+              ,
+              <em class="sig-param">
+               <span class="n">
+                occupations
+               </span>
+              </em>
+              <span class="sig-paren">
+               )
+              </span>
+              <a class="headerlink" href="#attr_utils.annotations.AttrsClass" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               Example of using
+               <code class="xref py py-func docutils literal notranslate">
+                <span class="pre">
+                 add_init_annotations()
+                </span>
+               </code>
+               for
+               <a class="reference external" href="https://www.attrs.org/en/stable/">
+                attrs
+               </a>
+               classes with Sphinx documentation.
+              </p>
+              <dl class="field-list simple">
+               <dt class="field-odd">
+                Parameters
+               </dt>
+               <dd class="field-odd">
+                <ul class="simple">
+                 <li>
+                  <p>
+                   <strong>
+                    name
+                   </strong>
+                   (
+                   <code class="xref py py-class docutils literal notranslate">
+                    <span class="pre">
+                     str
+                    </span>
+                   </code>
+                   ) – The name of the person.
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <strong>
+                    age
+                   </strong>
+                   (
+                   <code class="xref py py-class docutils literal notranslate">
+                    <span class="pre">
+                     int
+                    </span>
+                   </code>
+                   ) – The age of the person.
+                  </p>
+                 </li>
+                 <li>
+                  <p>
+                   <strong>
+                    occupations
+                   </strong>
+                   (
+                   <code class="xref py py-class docutils literal notranslate">
+                    <span class="pre">
+                     Iterable
+                    </span>
+                   </code>
+                   [
+                   <code class="xref py py-class docutils literal notranslate">
+                    <span class="pre">
+                     str
+                    </span>
+                   </code>
+                   ]) – The occupation(s) of the person.
+                  </p>
+                 </li>
+                </ul>
+               </dd>
+              </dl>
+             </dd>
+            </dl>
+           </div>
+          </blockquote>
+         </div>
+         <div class="section" id="api-reference">
+          <h2>
+           API Reference
+           <a class="headerlink" href="#api-reference" title="Permalink to this headline">
+            ¶
+           </a>
+          </h2>
+          <dl class="py class">
+           <dt id="id0">
+            <em class="property">
+             class
+            </em>
+            <code class="sig-prename descclassname">
+             attr_utils.annotations.
+            </code>
+            <code class="sig-name descname">
+             AttrsClass
+            </code>
+            <span class="sig-paren">
+             (
+            </span>
+            <em class="sig-param">
+             <span class="n">
+              name
+             </span>
+            </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              age
+             </span>
+            </em>
+            ,
+            <em class="sig-param">
+             <span class="n">
+              occupations
+             </span>
+            </em>
+            <span class="sig-paren">
+             )
+            </span>
+            <a class="headerlink" href="#id0" title="Permalink to this definition">
+             ¶
+            </a>
+           </dt>
+           <dd>
+            <p>
+             Example of using
+             <code class="xref py py-func docutils literal notranslate">
+              <span class="pre">
+               add_init_annotations()
+              </span>
+             </code>
+             for
+             <a class="reference external" href="https://www.attrs.org/en/stable/">
+              attrs
+             </a>
+             classes with Sphinx documentation.
+            </p>
+            <dl class="field-list simple">
+             <dt class="field-odd">
+              Parameters
+             </dt>
+             <dd class="field-odd">
+              <ul class="simple">
+               <li>
+                <p>
+                 <strong>
+                  name
+                 </strong>
+                 (
+                 <code class="xref py py-class docutils literal notranslate">
+                  <span class="pre">
+                   str
+                  </span>
+                 </code>
+                 ) – The name of the person.
+                </p>
+               </li>
+               <li>
+                <p>
+                 <strong>
+                  age
+                 </strong>
+                 (
+                 <code class="xref py py-class docutils literal notranslate">
+                  <span class="pre">
+                   int
+                  </span>
+                 </code>
+                 ) – The age of the person.
+                </p>
+               </li>
+               <li>
+                <p>
+                 <strong>
+                  occupations
+                 </strong>
+                 (
+                 <code class="xref py py-class docutils literal notranslate">
+                  <span class="pre">
+                   Iterable
+                  </span>
+                 </code>
+                 [
+                 <code class="xref py py-class docutils literal notranslate">
+                  <span class="pre">
+                   str
+                  </span>
+                 </code>
+                 ]) – The occupation(s) of the person.
+                </p>
+               </li>
+              </ul>
+             </dd>
+            </dl>
+            <dl class="py method">
+             <dt id="attr_utils.annotations.AttrsClass.__eq__">
+              <code class="sig-name descname">
+               __eq__
+              </code>
+              <span class="sig-paren">
+               (
+              </span>
+              <em class="sig-param">
+               <span class="n">
+                other
+               </span>
+              </em>
+              <span class="sig-paren">
+               )
+              </span>
+              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__eq__" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               Return
+               <code class="docutils literal notranslate">
+                <span class="pre">
+                 self
+                </span>
+                <span class="pre">
+                 ==
+                </span>
+                <span class="pre">
+                 other
+                </span>
+               </code>
+               .
+              </p>
+              <dl class="field-list simple">
+               <dt class="field-odd">
+                Return type
+               </dt>
+               <dd class="field-odd">
+                <p>
+                 <code class="xref py py-class docutils literal notranslate">
+                  <span class="pre">
+                   bool
+                  </span>
+                 </code>
+                </p>
+               </dd>
+              </dl>
+             </dd>
+            </dl>
+            <dl class="py method">
+             <dt id="attr_utils.annotations.AttrsClass.__ge__">
+              <code class="sig-name descname">
+               __ge__
+              </code>
+              <span class="sig-paren">
+               (
+              </span>
+              <em class="sig-param">
+               <span class="n">
+                other
+               </span>
+              </em>
+              <span class="sig-paren">
+               )
+              </span>
+              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__ge__" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               Return
+               <code class="docutils literal notranslate">
+                <span class="pre">
+                 self
+                </span>
+                <span class="pre">
+                 &gt;=
+                </span>
+                <span class="pre">
+                 other
+                </span>
+               </code>
+               .
+              </p>
+              <dl class="field-list simple">
+               <dt class="field-odd">
+                Return type
+               </dt>
+               <dd class="field-odd">
+                <p>
+                 <code class="xref py py-class docutils literal notranslate">
+                  <span class="pre">
+                   bool
+                  </span>
+                 </code>
+                </p>
+               </dd>
+              </dl>
+             </dd>
+            </dl>
+            <dl class="py method">
+             <dt id="attr_utils.annotations.AttrsClass.__gt__">
+              <code class="sig-name descname">
+               __gt__
+              </code>
+              <span class="sig-paren">
+               (
+              </span>
+              <em class="sig-param">
+               <span class="n">
+                other
+               </span>
+              </em>
+              <span class="sig-paren">
+               )
+              </span>
+              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__gt__" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               Return
+               <code class="docutils literal notranslate">
+                <span class="pre">
+                 self
+                </span>
+                <span class="pre">
+                 &gt;
+                </span>
+                <span class="pre">
+                 other
+                </span>
+               </code>
+               .
+              </p>
+              <dl class="field-list simple">
+               <dt class="field-odd">
+                Return type
+               </dt>
+               <dd class="field-odd">
+                <p>
+                 <code class="xref py py-class docutils literal notranslate">
+                  <span class="pre">
+                   bool
+                  </span>
+                 </code>
+                </p>
+               </dd>
+              </dl>
+             </dd>
+            </dl>
+            <dl class="py method">
+             <dt id="attr_utils.annotations.AttrsClass.__init__">
+              <code class="sig-name descname">
+               __init__
+              </code>
+              <span class="sig-paren">
+               (
+              </span>
+              <em class="sig-param">
+               <span class="n">
+                name
+               </span>
+              </em>
+              ,
+              <em class="sig-param">
+               <span class="n">
+                age
+               </span>
+              </em>
+              ,
+              <em class="sig-param">
+               <span class="n">
+                occupations
+               </span>
+              </em>
+              <span class="sig-paren">
+               )
+              </span>
+              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__init__" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               Method generated by attrs for class AttrsClass.
+              </p>
+             </dd>
+            </dl>
+            <dl class="py method">
+             <dt id="attr_utils.annotations.AttrsClass.__le__">
+              <code class="sig-name descname">
+               __le__
+              </code>
+              <span class="sig-paren">
+               (
+              </span>
+              <em class="sig-param">
+               <span class="n">
+                other
+               </span>
+              </em>
+              <span class="sig-paren">
+               )
+              </span>
+              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__le__" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               Return
+               <code class="docutils literal notranslate">
+                <span class="pre">
+                 self
+                </span>
+                <span class="pre">
+                 &lt;=
+                </span>
+                <span class="pre">
+                 other
+                </span>
+               </code>
+               .
+              </p>
+              <dl class="field-list simple">
+               <dt class="field-odd">
+                Return type
+               </dt>
+               <dd class="field-odd">
+                <p>
+                 <code class="xref py py-class docutils literal notranslate">
+                  <span class="pre">
+                   bool
+                  </span>
+                 </code>
+                </p>
+               </dd>
+              </dl>
+             </dd>
+            </dl>
+            <dl class="py method">
+             <dt id="attr_utils.annotations.AttrsClass.__lt__">
+              <code class="sig-name descname">
+               __lt__
+              </code>
+              <span class="sig-paren">
+               (
+              </span>
+              <em class="sig-param">
+               <span class="n">
+                other
+               </span>
+              </em>
+              <span class="sig-paren">
+               )
+              </span>
+              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__lt__" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               Return
+               <code class="docutils literal notranslate">
+                <span class="pre">
+                 self
+                </span>
+                <span class="pre">
+                 &lt;
+                </span>
+                <span class="pre">
+                 other
+                </span>
+               </code>
+               .
+              </p>
+              <dl class="field-list simple">
+               <dt class="field-odd">
+                Return type
+               </dt>
+               <dd class="field-odd">
+                <p>
+                 <code class="xref py py-class docutils literal notranslate">
+                  <span class="pre">
+                   bool
+                  </span>
+                 </code>
+                </p>
+               </dd>
+              </dl>
+             </dd>
+            </dl>
+            <dl class="py method">
+             <dt id="attr_utils.annotations.AttrsClass.__ne__">
+              <code class="sig-name descname">
+               __ne__
+              </code>
+              <span class="sig-paren">
+               (
+              </span>
+              <em class="sig-param">
+               <span class="n">
+                other
+               </span>
+              </em>
+              <span class="sig-paren">
+               )
+              </span>
+              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__ne__" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               Return
+               <code class="docutils literal notranslate">
+                <span class="pre">
+                 self
+                </span>
+                <span class="pre">
+                 !=
+                </span>
+                <span class="pre">
+                 other
+                </span>
+               </code>
+               .
+              </p>
+              <dl class="field-list simple">
+               <dt class="field-odd">
+                Return type
+               </dt>
+               <dd class="field-odd">
+                <p>
+                 <code class="xref py py-class docutils literal notranslate">
+                  <span class="pre">
+                   bool
+                  </span>
+                 </code>
+                </p>
+               </dd>
+              </dl>
+             </dd>
+            </dl>
+            <dl class="py attribute">
+             <dt id="attr_utils.annotations.AttrsClass.__weakref__">
+              <code class="sig-name descname">
+               __weakref__
+              </code>
+              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__weakref__" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               list of weak references to the object (if defined)
+              </p>
+             </dd>
+            </dl>
+           </dd>
+          </dl>
+         </div>
+         <dl class="py class">
+          <dt id="id5">
+           <em class="property">
+            class
+           </em>
+           <code class="sig-prename descclassname">
+            attr_utils.annotations.
+           </code>
+           <code class="sig-name descname">
+            AttrsClass
+           </code>
+           <span class="sig-paren">
+            (
+           </span>
+           <em class="sig-param">
+            <span class="n">
+             name
+            </span>
+           </em>
+           ,
+           <em class="sig-param">
+            <span class="n">
+             age
+            </span>
+           </em>
+           ,
+           <em class="sig-param">
+            <span class="n">
+             occupations
+            </span>
+           </em>
+           <span class="sig-paren">
+            )
+           </span>
+           <a class="headerlink" href="#id5" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Example of using
+            <code class="xref py py-func docutils literal notranslate">
+             <span class="pre">
+              add_init_annotations()
+             </span>
+            </code>
+            for
+            <a class="reference external" href="https://www.attrs.org/en/stable/">
+             attrs
+            </a>
+            classes with Sphinx documentation.
+           </p>
+           <dl class="field-list simple">
+            <dt class="field-odd">
+             Parameters
+            </dt>
+            <dd class="field-odd">
+             <ul class="simple">
+              <li>
+               <p>
+                <strong>
+                 name
+                </strong>
+                (
+                <code class="xref py py-class docutils literal notranslate">
+                 <span class="pre">
+                  str
+                 </span>
+                </code>
+                ) – The name of the person.
+               </p>
+              </li>
+              <li>
+               <p>
+                <strong>
+                 age
+                </strong>
+                (
+                <code class="xref py py-class docutils literal notranslate">
+                 <span class="pre">
+                  int
+                 </span>
+                </code>
+                ) – The age of the person.
+               </p>
+              </li>
+              <li>
+               <p>
+                <strong>
+                 occupations
+                </strong>
+                (
+                <code class="xref py py-class docutils literal notranslate">
+                 <span class="pre">
+                  Iterable
+                 </span>
+                </code>
+                [
+                <code class="xref py py-class docutils literal notranslate">
+                 <span class="pre">
+                  str
+                 </span>
+                </code>
+                ]) – The occupation(s) of the person.
+               </p>
+              </li>
+             </ul>
+            </dd>
+           </dl>
+           <dl class="py method">
+            <dt id="id7">
+             <code class="sig-name descname">
+              __eq__
+             </code>
+             <span class="sig-paren">
+              (
+             </span>
+             <em class="sig-param">
+              <span class="n">
+               other
+              </span>
+             </em>
+             <span class="sig-paren">
+              )
+             </span>
+             <a class="headerlink" href="#id7" title="Permalink to this definition">
+              ¶
+             </a>
+            </dt>
+            <dd>
+             <p>
+              Return
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                self
+               </span>
+               <span class="pre">
+                ==
+               </span>
+               <span class="pre">
+                other
+               </span>
+              </code>
+              .
+             </p>
+             <dl class="field-list simple">
+              <dt class="field-odd">
+               Return type
+              </dt>
+              <dd class="field-odd">
+               <p>
+                <code class="xref py py-class docutils literal notranslate">
+                 <span class="pre">
+                  bool
+                 </span>
+                </code>
+               </p>
+              </dd>
+             </dl>
+            </dd>
+           </dl>
+           <dl class="py method">
+            <dt id="id8">
+             <code class="sig-name descname">
+              __ge__
+             </code>
+             <span class="sig-paren">
+              (
+             </span>
+             <em class="sig-param">
+              <span class="n">
+               other
+              </span>
+             </em>
+             <span class="sig-paren">
+              )
+             </span>
+             <a class="headerlink" href="#id8" title="Permalink to this definition">
+              ¶
+             </a>
+            </dt>
+            <dd>
+             <p>
+              Return
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                self
+               </span>
+               <span class="pre">
+                &gt;=
+               </span>
+               <span class="pre">
+                other
+               </span>
+              </code>
+              .
+             </p>
+             <dl class="field-list simple">
+              <dt class="field-odd">
+               Return type
+              </dt>
+              <dd class="field-odd">
+               <p>
+                <code class="xref py py-class docutils literal notranslate">
+                 <span class="pre">
+                  bool
+                 </span>
+                </code>
+               </p>
+              </dd>
+             </dl>
+            </dd>
+           </dl>
+           <dl class="py method">
+            <dt id="id9">
+             <code class="sig-name descname">
+              __gt__
+             </code>
+             <span class="sig-paren">
+              (
+             </span>
+             <em class="sig-param">
+              <span class="n">
+               other
+              </span>
+             </em>
+             <span class="sig-paren">
+              )
+             </span>
+             <a class="headerlink" href="#id9" title="Permalink to this definition">
+              ¶
+             </a>
+            </dt>
+            <dd>
+             <p>
+              Return
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                self
+               </span>
+               <span class="pre">
+                &gt;
+               </span>
+               <span class="pre">
+                other
+               </span>
+              </code>
+              .
+             </p>
+             <dl class="field-list simple">
+              <dt class="field-odd">
+               Return type
+              </dt>
+              <dd class="field-odd">
+               <p>
+                <code class="xref py py-class docutils literal notranslate">
+                 <span class="pre">
+                  bool
+                 </span>
+                </code>
+               </p>
+              </dd>
+             </dl>
+            </dd>
+           </dl>
+           <dl class="py method">
+            <dt id="id10">
+             <code class="sig-name descname">
+              __init__
+             </code>
+             <span class="sig-paren">
+              (
+             </span>
+             <em class="sig-param">
+              <span class="n">
+               name
+              </span>
+             </em>
+             ,
+             <em class="sig-param">
+              <span class="n">
+               age
+              </span>
+             </em>
+             ,
+             <em class="sig-param">
+              <span class="n">
+               occupations
+              </span>
+             </em>
+             <span class="sig-paren">
+              )
+             </span>
+             <a class="headerlink" href="#id10" title="Permalink to this definition">
+              ¶
+             </a>
+            </dt>
+            <dd>
+             <p>
+              Method generated by attrs for class AttrsClass.
+             </p>
+            </dd>
+           </dl>
+           <dl class="py method">
+            <dt id="id11">
+             <code class="sig-name descname">
+              __le__
+             </code>
+             <span class="sig-paren">
+              (
+             </span>
+             <em class="sig-param">
+              <span class="n">
+               other
+              </span>
+             </em>
+             <span class="sig-paren">
+              )
+             </span>
+             <a class="headerlink" href="#id11" title="Permalink to this definition">
+              ¶
+             </a>
+            </dt>
+            <dd>
+             <p>
+              Return
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                self
+               </span>
+               <span class="pre">
+                &lt;=
+               </span>
+               <span class="pre">
+                other
+               </span>
+              </code>
+              .
+             </p>
+             <dl class="field-list simple">
+              <dt class="field-odd">
+               Return type
+              </dt>
+              <dd class="field-odd">
+               <p>
+                <code class="xref py py-class docutils literal notranslate">
+                 <span class="pre">
+                  bool
+                 </span>
+                </code>
+               </p>
+              </dd>
+             </dl>
+            </dd>
+           </dl>
+           <dl class="py method">
+            <dt id="id12">
+             <code class="sig-name descname">
+              __lt__
+             </code>
+             <span class="sig-paren">
+              (
+             </span>
+             <em class="sig-param">
+              <span class="n">
+               other
+              </span>
+             </em>
+             <span class="sig-paren">
+              )
+             </span>
+             <a class="headerlink" href="#id12" title="Permalink to this definition">
+              ¶
+             </a>
+            </dt>
+            <dd>
+             <p>
+              Return
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                self
+               </span>
+               <span class="pre">
+                &lt;
+               </span>
+               <span class="pre">
+                other
+               </span>
+              </code>
+              .
+             </p>
+             <dl class="field-list simple">
+              <dt class="field-odd">
+               Return type
+              </dt>
+              <dd class="field-odd">
+               <p>
+                <code class="xref py py-class docutils literal notranslate">
+                 <span class="pre">
+                  bool
+                 </span>
+                </code>
+               </p>
+              </dd>
+             </dl>
+            </dd>
+           </dl>
+           <dl class="py method">
+            <dt id="id13">
+             <code class="sig-name descname">
+              __ne__
+             </code>
+             <span class="sig-paren">
+              (
+             </span>
+             <em class="sig-param">
+              <span class="n">
+               other
+              </span>
+             </em>
+             <span class="sig-paren">
+              )
+             </span>
+             <a class="headerlink" href="#id13" title="Permalink to this definition">
+              ¶
+             </a>
+            </dt>
+            <dd>
+             <p>
+              Return
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                self
+               </span>
+               <span class="pre">
+                !=
+               </span>
+               <span class="pre">
+                other
+               </span>
+              </code>
+              .
+             </p>
+             <dl class="field-list simple">
+              <dt class="field-odd">
+               Return type
+              </dt>
+              <dd class="field-odd">
+               <p>
+                <code class="xref py py-class docutils literal notranslate">
+                 <span class="pre">
+                  bool
+                 </span>
+                </code>
+               </p>
+              </dd>
+             </dl>
+            </dd>
+           </dl>
+           <dl class="py attribute">
+            <dt id="id14">
+             <code class="sig-name descname">
+              __weakref__
+             </code>
+             <a class="headerlink" href="#id14" title="Permalink to this definition">
+              ¶
+             </a>
+            </dt>
+            <dd>
+             <p>
+              list of weak references to the object (if defined)
+             </p>
+            </dd>
+           </dl>
+          </dd>
+         </dl>
+        </div>
+       </blockquote>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div aria-label="main navigation" class="sphinxsidebar" role="navigation">
+    <div class="sphinxsidebarwrapper">
+     <h1 class="logo">
+      <a href="index.html">
+       Python
+      </a>
+     </h1>
+     <h3>
+      Navigation
+     </h3>
+     <div class="relations">
+      <h3>
+       Related Topics
+      </h3>
+      <ul>
+       <li>
+        <a href="index.html">
+         Documentation overview
+        </a>
+        <ul>
+        </ul>
+       </li>
+      </ul>
+     </div>
+     <div id="searchbox" role="search" style="display: none">
+      <h3 id="searchlabel">
+       Quick search
+      </h3>
+      <div class="searchformwrapper">
+       <form action="search.html" class="search" method="get">
+        <input aria-labelledby="searchlabel" name="q" type="text"/>
+        <input type="submit" value="Go"/>
+       </form>
+      </div>
+     </div>
+     <script>
+      $('#searchbox').show(0);
+     </script>
+    </div>
+   </div>
+   <div class="clearer">
+   </div>
+  </div>
+ </body>
+</html>
