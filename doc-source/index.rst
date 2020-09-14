@@ -110,14 +110,15 @@ Installation
 .. end installation
 
 
-| ``attr_utils`` provides both utility functions and a Sphinx extension, :mod:`attr_utils.annotations`.
-| Enable the extension by adding the following to the ``extensions`` variable in your ``conf.py``:
+| ``attr_utils`` provides both utility functions and two Sphinx extensions: :mod:`attr_utils.annotations` and :mod:`attr_utils.autoattrs`.
+| Enable the extensions by adding the following to the ``extensions`` variable in your ``conf.py``:
 
-.. extensions:: attr_utils.annotations
+.. extensions:: attr_utils.autoattrs
 	:no-preamble:
 
 	sphinx.ext.autodoc
-	sphinx_toolbox.autodoc_typehints
+	sphinx_toolbox.more_autodoc.typehints
+	attr_utils.annotations
 
 
 .. toctree::

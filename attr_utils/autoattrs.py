@@ -4,6 +4,8 @@
 """
 A Sphinx directive for documenting `attrs <https://www.attrs.org/>`_ classes.
 
+The :rst:dir:`autoattrs` directive can be used directly or as part of :rst:dir:`automodule`.
+
 .. versionadded:: 0.1.0
 """
 #
@@ -65,6 +67,7 @@ from sphinx.ext.autodoc import ClassDocumenter
 from sphinx_toolbox import __version__
 from sphinx_toolbox.more_autodoc.utils import unknown_module_warning
 
+# this package
 from attr_utils.docstrings import add_attrs_doc
 
 __all__ = ["AttrsDocumenter", "setup"]
@@ -96,6 +99,18 @@ class AttrsDocumenter(ClassDocumenter):
 		return hasattr(member, "__attrs_attrs__")
 
 	def import_object(self, raiseerror: bool = False) -> bool:
+		"""
+		Import the object given by ``self.modname`` and ``self.objpath`` and set
+		it as ``self.object``.
+
+		If the object is an `attrs <https://www.attrs.org/>`__ class
+		:func:`attr_utils.docstrings.add_attrs_doc` will be called.
+
+		:param raiseerror:
+
+		:return: :py:obj:`True` if successful, :py:obj:`False` if an error occurred.
+		"""
+
 		ret = super().import_object(raiseerror)
 		if hasattr(self.object, "__attrs_attrs__"):
 			self.object = add_attrs_doc(self.object)
