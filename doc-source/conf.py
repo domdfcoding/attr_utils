@@ -35,8 +35,7 @@ package_root = "attr_utils"
 
 extensions = [
 	'sphinx_toolbox',
-	'sphinx_toolbox.autodoc_augment_defaults',
-	'sphinx_toolbox.autodoc_typehints',
+	'sphinx_toolbox.more_autodoc',
 	'sphinx.ext.intersphinx',
 	'sphinx.ext.autodoc',
 	'sphinx.ext.mathjax',

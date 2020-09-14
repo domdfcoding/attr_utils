@@ -63,7 +63,7 @@ from typing import Any, Dict, Optional
 from sphinx.application import Sphinx
 from sphinx.ext.autodoc import ClassDocumenter
 from sphinx_toolbox import __version__
-from sphinx_toolbox.autodoc_helpers import unknown_module_warning
+from sphinx_toolbox.more_autodoc.utils import unknown_module_warning
 
 from attr_utils.docstrings import add_attrs_doc
 

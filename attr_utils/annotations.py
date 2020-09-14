@@ -180,7 +180,7 @@ class AttrsClass:
 
 def attr_docstring_hook(obj: Any) -> Any:
 	"""
-	Hook for :mod:`sphinx_toolbox.autodoc_typehints` to add annotations to the ``__init__`` of
+	Hook for :mod:`sphinx_toolbox.more_autodoc.typehints` to add annotations to the ``__init__`` of
 	attrs_ classes.
 
 	.. _attrs: https://www.attrs.org/en/stable/
@@ -208,11 +208,11 @@ def setup(app: "Sphinx") -> Dict[str, Any]:
 	"""
 
 	# 3rd party
-	from sphinx_toolbox.autodoc_typehints import docstring_hooks
+	from sphinx_toolbox.more_autodoc.typehints import docstring_hooks
 
 	docstring_hooks.append((attr_docstring_hook, 50))
 
-	app.setup_extension("sphinx_toolbox.autodoc_typehints")
+	app.setup_extension("sphinx_toolbox.more_autodoc.typehints")
 
 	return {
 			"version": __version__,
