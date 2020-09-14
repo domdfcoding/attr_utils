@@ -29,9 +29,10 @@ Add better docstrings to attrs generated functions.
 # stdlib
 import re
 from typing import Optional, Pattern, Type
-from domdf_python_tools.doctools import base_new_docstrings, prettify_docstrings, PYPY
-from domdf_python_tools.typing import MethodDescriptorType, MethodWrapperType, WrapperDescriptorType
 
+# 3rd party
+from domdf_python_tools.doctools import PYPY, base_new_docstrings, prettify_docstrings
+from domdf_python_tools.typing import MethodDescriptorType, MethodWrapperType, WrapperDescriptorType
 
 __all__ = ["add_attrs_doc"]
 
@@ -59,9 +60,9 @@ def add_attrs_doc(obj: Type) -> Type:
 
 	if hasattr(obj, "__repr__"):
 		if (
-				obj.__repr__.__doc__.strip() == attrs_docstring
+				obj.__repr__.__doc__ is None or obj.__repr__.__doc__.strip() == attrs_docstring
 				or attrs_20_1_docstring.match(obj.__repr__.__doc__)
-			):
+				):
 			_new_doc = f"{new_docstrings['__repr__']}"  # \n\n{attrs_docstring}
 			obj.__repr__.__doc__ = _new_doc  # prevents strange formatting in pycharm
 
@@ -80,11 +81,7 @@ def add_attrs_doc(obj: Type) -> Type:
 
 		doc: Optional[str] = attribute.__doc__
 
-		if (
-				doc is None
-				or doc.strip() == attrs_docstring
-				or attrs_20_1_docstring.match(doc)
-			):
+		if doc is None or doc.strip() == attrs_docstring or attrs_20_1_docstring.match(doc):
 			_new_doc = f"{new_docstrings[attr_name]}"  # \n\n{attrs_docstring}
 			attribute.__doc__ = _new_doc  # prevents strange formatting in pycharm
 
