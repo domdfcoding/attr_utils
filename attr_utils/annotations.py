@@ -12,13 +12,23 @@ even when converter functions *are* used, based on the following assumptions:
 
 * If the converter function is a Python ``type``, such as :class:`str`, :class:`int`,
   or :class:`list`, the type annotation will be that type.
-  This may be problematic for lists and will be fixed later.
+  If the converter and the type annotation refer to the same type
+  (e.g. :class:`list` and :class:`typing.List`) the type annotation will be used.
 
 * If the converter function has an annotation for its first argument, that annotation is used.
 
 * If the converter function is not annotated, the type of the attribute will be used.
 
+The annotation can also be provided via the ``'annotation'`` key in the
+`metadata dict <https://www.attrs.org/en/stable/examples.html#metadata>`_.
+If you prefer you can instead provide this as a keyword argument to :func:`~.attrib`
+which will construct the metadata dict and call :func:`attr.ib` for you.
+
 .. _attrs: https://www.attrs.org/en/stable/
+
+.. versionchanged:: 0.2.0
+
+	Improved support for container types.
 
 
 Examples
@@ -41,6 +51,7 @@ Examples
 		a_string: str = attr.ib(converter=str)
 		custom_converter: Any = attr.ib(converter=my_converter)
 		untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)
+		annotated: List[str] = attr.ib(converter=list, metadata={"annotation": Sequence[str]})
 
 	add_attrs_annotations(SomeClass)
 
@@ -99,10 +110,11 @@ API Reference
 
 # stdlib
 import inspect
-from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional, Type
+from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional, Type, Union
 
 # 3rd party
 import attr
+from typing_inspect import get_origin
 
 # this package
 from attr_utils import __version__
@@ -111,7 +123,7 @@ if TYPE_CHECKING:
 	# 3rd party
 	from sphinx.application import Sphinx
 
-__all__ = ["add_init_annotations", "attr_docstring_hook", "setup"]
+__all__ = ["add_init_annotations", "attrib", "attr_docstring_hook", "setup"]
 
 
 def add_init_annotations(obj: Callable) -> Callable:
@@ -136,12 +148,19 @@ def add_init_annotations(obj: Callable) -> Callable:
 				annotations[arg_name] = a.type
 			else:
 
-				if isinstance(a.converter, type):
-					annotations[arg_name] = a.converter
+				if "annotation" in a.metadata:
+					annotations[arg_name] = a.metadata["annotation"]
+
+				elif isinstance(a.converter, type):
+					if a.converter is get_origin(a.type):
+						annotations[arg_name] = a.type
+					else:
+						annotations[arg_name] = a.converter
+
 				else:
 					signature = inspect.signature(a.converter)
 					arg_type = next(iter(signature.parameters.items()))[1].annotation
-					if arg_type is inspect._empty:  # type: ignore
+					if arg_type is inspect.Signature.empty:  # type: ignore
 						annotations[arg_name] = a.type
 					else:
 						annotations[arg_name] = arg_type
@@ -154,28 +173,53 @@ def add_init_annotations(obj: Callable) -> Callable:
 	return obj
 
 
-def parse_occupations(occupations: Iterable[str]) -> Iterable[str]:  # pragma: no cover
-	if isinstance(occupations, str):
-		return [x.strip() for x in occupations.split(",")]
-	else:
-		return [str(x) for x in occupations]
-
-
-@attr.s
-class AttrsClass:
+def attrib(
+		default=attr.NOTHING,
+		validator=None,
+		repr=True,
+		hash=None,
+		init=True,
+		metadata=None,
+		annotation: Union[Type, object] = attr.NOTHING,  # type: ignore
+		converter=None,
+		factory=None,
+		kw_only=False,
+		eq=None,
+		order=None,
+		on_setattr=None,
+		):
 	"""
-	Example of using :func:`~.add_init_annotations` for attrs_ classes with Sphinx documentation.
+	Wrapper around :func:`attr.ib` which supports the ``annotation``
+	keyword argument for use by :func:`~.add_init_annotations`.
 
-	.. _attrs: https://www.attrs.org/en/stable/
+	:param metadata: The type to add to ``__init__.__annotations__``, if different from
+		that the type taken as input to the converter function or the type hint of the attribute.
 
-	:param name: The name of the person.
-	:param age: The age of the person.
-	:param occupations: The occupation(s) of the person.
+	See the documentation for :func:`attr.ib` for descriptions of the other arguments.
+
+	.. versionadded:: 0.2.0
 	"""
 
-	name: str = attr.ib(converter=str)
-	age: int = attr.ib(converter=int)
-	occupations: List[str] = attr.ib(converter=parse_occupations)
+	if annotation is not attr.NOTHING:
+		if metadata is None:
+			metadata = {}
+
+		metadata["annotation"] = annotation
+
+	return attr.ib(
+			default=default,
+			validator=validator,
+			repr=repr,
+			hash=hash,
+			init=init,
+			metadata=metadata,
+			converter=converter,
+			factory=factory,
+			kw_only=kw_only,
+			eq=eq,
+			order=order,
+			on_setattr=on_setattr,
+			)
 
 
 def attr_docstring_hook(obj: Any) -> Any:
@@ -218,3 +262,32 @@ def setup(app: "Sphinx") -> Dict[str, Any]:
 			"version": __version__,
 			"parallel_read_safe": True,
 			}
+
+
+################################
+# Demo
+################################
+
+
+def parse_occupations(occupations: Iterable[str]) -> Iterable[str]:  # pragma: no cover
+	if isinstance(occupations, str):
+		return [x.strip() for x in occupations.split(",")]
+	else:
+		return [str(x) for x in occupations]
+
+
+@attr.s
+class AttrsClass:
+	"""
+	Example of using :func:`~.add_init_annotations` for attrs_ classes with Sphinx documentation.
+
+	.. _attrs: https://www.attrs.org/en/stable/
+
+	:param name: The name of the person.
+	:param age: The age of the person.
+	:param occupations: The occupation(s) of the person.
+	"""
+
+	name: str = attr.ib(converter=str)
+	age: int = attr.ib(converter=int)
+	occupations: List[str] = attr.ib(converter=parse_occupations)
