@@ -125,6 +125,7 @@ Installation
 	:hidden:
 
 	Home<self>
+	demo
 
 .. toctree::
 	:maxdepth: 3

@@ -36,25 +36,21 @@ package_root = "attr_utils"
 extensions = [
 	'sphinx_toolbox',
 	'sphinx_toolbox.more_autodoc',
+	'sphinx_toolbox.more_autosummary',
 	'sphinx.ext.intersphinx',
-	'sphinx.ext.autodoc',
 	'sphinx.ext.mathjax',
-	'sphinx.ext.viewcode',
 	'sphinxcontrib.httpdomain',
 	'sphinxcontrib.extras_require',
 	'sphinx.ext.todo',
 	'sphinxemoji.sphinxemoji',
 	'notfound.extension',
-	'sphinx_tabs.tabs',
-	'sphinx-prompt',
-	'sphinx.ext.autosummary',
-	'autodocsumm',
 	'sphinx_copybutton',
 	'sphinxcontrib.default_values',
 	'sphinxcontrib.toctree_plus',
 	'seed_intersphinx_mapping',
 	'sphinx.ext.autosectionlabel',
 	'attr_utils.annotations',
+	'attr_utils.autoattrs',
 	]
 
 sphinxemoji_style = 'twemoji'
@@ -108,9 +104,11 @@ toctree_plus_types = {
 		"flag",
 		"confval",
 		"directive",
+		"role",
 		"confval",
 		"protocol",
 		"typeddict",
+		"namedtuple",
 		}
 
 add_module_names = False
@@ -120,6 +118,7 @@ autodoc_default_options = {
 		'members': None,  # Include all members (methods).
 		'special-members': None,
 		"autosummary": None,
+		"show-inheritance": None,
 		'exclude-members': ','.join([   # Exclude "standard" methods.
 				"__dict__",
 				"__class__",

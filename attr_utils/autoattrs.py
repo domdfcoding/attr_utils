@@ -4,6 +4,9 @@
 """
 A Sphinx directive for documenting `attrs <https://www.attrs.org/>`_ classes.
 
+Provides the :rst:dir:`autoattrs` directive to document a :class:`typing.NamedTuple`.
+It behaves much like :rst:dir:`autoclass` and :rst:dir:`autofunction`.
+
 The :rst:dir:`autoattrs` directive can be used directly or as part of :rst:dir:`automodule`.
 
 .. versionadded:: 0.1.0

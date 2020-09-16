@@ -31,6 +31,7 @@ tox_testenv_extras: sphinx
 
 extra_sphinx_extensions:
   - attr_utils.annotations
+  - attr_utils.autoattrs
 
 sphinx_conf_epilogue:
   - set_type_checking_flag = True
