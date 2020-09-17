@@ -39,7 +39,7 @@ __copyright__ = """
 2020 Dominic Davis-Foster <dominic@davis-foster.co.uk>
 """
 
-__version__ = "0.1.1"
+__version__ = "0.2.0"
 modname = "attr_utils"
 pypi_name = "attr_utils"
 import_name = "attr_utils"
