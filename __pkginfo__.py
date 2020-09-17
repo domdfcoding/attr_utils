@@ -51,7 +51,7 @@ github_username = "domdfcoding"
 web = github_url = "https://github.com/domdfcoding/attr_utils"
 repo_root = pathlib.Path(__file__).parent
 install_requires = (repo_root / "requirements.txt").read_text(encoding="utf-8").split('\n')
-extras_require = {'sphinx': ['sphinx>=3.0.3', 'sphinx_toolbox>=0.6.0'], 'all': ['sphinx>=3.0.3', 'sphinx_toolbox>=0.6.0']}
+extras_require = {'sphinx': ['sphinx>=3.0.3', 'sphinx_toolbox>=0.8.1'], 'all': ['sphinx>=3.0.3', 'sphinx_toolbox>=0.8.1']}
 
 
 
