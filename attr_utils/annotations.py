@@ -114,7 +114,7 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional,
 
 # 3rd party
 import attr
-from typing_inspect import get_origin
+from typing_inspect import get_origin  # type: ignore
 
 # this package
 from attr_utils import __version__
