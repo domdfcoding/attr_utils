@@ -87,6 +87,7 @@ from textwrap import dedent
 from typing import Any, Dict, List, MutableMapping, Optional, Tuple, Type
 
 # 3rd party
+import attr
 from sphinx.application import Sphinx
 from sphinx.ext.autodoc import ClassDocumenter, Documenter
 from sphinx.pycode import ModuleAnalyzer
@@ -139,7 +140,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		:param parent:
 		"""
 
-		return hasattr(member, "__attrs_attrs__")
+		return attr.has(member)
 
 	def add_content(self, more_content: Any, no_docstring: bool = False) -> None:  # type: ignore
 		"""
@@ -165,7 +166,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		"""
 
 		ret = super().import_object(raiseerror)
-		if hasattr(self.object, "__attrs_attrs__"):
+		if attr.has(self.object):
 			self.object = add_attrs_doc(self.object)
 
 		return ret
@@ -210,7 +211,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		params, pre_output, post_output = parse_parameters(docstring, tab_size=tab_size)
 		all_docs = {}
 
-		for field in (a.name for a in self.object.__attrs_attrs__ if a.init):
+		for field in (a.name for a in attr.fields(self.object) if a.init):
 			doc: List[str] = ['']
 
 			# Prefer doc from class docstring
@@ -262,7 +263,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		:return:
 		"""
 
-		attrib_names = (attr.name for attr in self.object.__attrs_attrs__ if attr.init)
+		attrib_names = (a.name for a in attr.fields(self.object) if a.init)
 
 		no_init_attribs = self.options.get("no-init-attribs", False)
 

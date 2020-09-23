@@ -138,12 +138,12 @@ def add_init_annotations(obj: Callable) -> Callable:
 	.. _attrs: https://www.attrs.org/en/stable/
 	"""
 
-	if not hasattr(obj, "__attrs_attrs__"):
+	if not attr.has(obj):  # type: ignore
 		return obj
 
 	annotations: Dict[str, Optional[Type]] = {"return": None}
 
-	attrs = getattr(obj, "__attrs_attrs__")
+	attrs = attr.fields(obj)  # type: ignore
 
 	for a in attrs:
 		arg_name = a.name.lstrip("_")

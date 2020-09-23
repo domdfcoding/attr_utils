@@ -42,4 +42,5 @@ class AttrsClass(Protocol):
 	:class:`~typing.Protocol` for attrs classes.
 	"""
 
+	#: Special attribute used internally by attrs.
 	__attrs_attrs__: Tuple[Attribute, ...]
