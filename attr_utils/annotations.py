@@ -31,6 +31,11 @@ which will construct the metadata dict and call :func:`attr.ib` for you.
 	Improved support for container types.
 
 
+.. attention::
+
+	Due to changes in the :mod:`typing` module :mod:`~attr_utils.annotations`
+	is only officially supported on Python 3.7 and above.
+
 Examples
 ---------------
 
@@ -160,7 +165,7 @@ def add_init_annotations(obj: Callable) -> Callable:
 				else:
 					signature = inspect.signature(a.converter)
 					arg_type = next(iter(signature.parameters.items()))[1].annotation
-					if arg_type is inspect.Signature.empty:  # type: ignore
+					if arg_type is inspect.Signature.empty:
 						annotations[arg_name] = a.type
 					else:
 						annotations[arg_name] = arg_type
@@ -186,7 +191,7 @@ def attrib(
 		kw_only=False,
 		eq=None,
 		order=None,
-		on_setattr=None,
+		**kwargs,
 		):
 	"""
 	Wrapper around :func:`attr.ib` which supports the ``annotation``
@@ -218,7 +223,7 @@ def attrib(
 			kw_only=kw_only,
 			eq=eq,
 			order=order,
-			on_setattr=on_setattr,
+			**kwargs,
 			)
 
 

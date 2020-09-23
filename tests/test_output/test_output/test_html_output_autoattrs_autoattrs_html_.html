@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Demo — Python  documentation
+  </title>
+  <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
+  </script>
+  <script src="_static/jquery.js">
+  </script>
+  <script src="_static/underscore.js">
+  </script>
+  <script src="_static/doctools.js">
+  </script>
+  <script src="_static/language_data.js">
+  </script>
+  <meta content="width=device-width, initial-scale=0.9, maximum-scale=0.9" name="viewport"/>
+ </head>
+ <body>
+  <div class="document">
+   <div class="documentwrapper">
+    <div class="bodywrapper">
+     <div class="body" role="main">
+      <div class="section" id="demo">
+       <h1>
+        Demo
+        <a class="headerlink" href="#demo" title="Permalink to this headline">
+         ¶
+        </a>
+       </h1>
+       <dl class="py class">
+        <dt id="demo.Device">
+         <em class="property">
+          class
+         </em>
+         <code class="sig-prename descclassname">
+          demo.
+         </code>
+         <code class="sig-name descname">
+          Device
+         </code>
+         <span class="sig-paren">
+          (
+         </span>
+         <em class="sig-param">
+          <span class="n">
+           device_id
+          </span>
+         </em>
+         ,
+         <em class="sig-param">
+          <span class="n">
+           display_name
+          </span>
+         </em>
+         ,
+         <em class="sig-param">
+          <span class="n">
+           rc_device
+          </span>
+         </em>
+         ,
+         <em class="sig-param">
+          <span class="n">
+           configuration
+          </span>
+          <span class="o">
+           =
+          </span>
+          <span class="default_value">
+           []
+          </span>
+         </em>
+         ,
+         <em class="sig-param">
+          <span class="n">
+           configuration2
+          </span>
+          <span class="o">
+           =
+          </span>
+          <span class="default_value">
+           []
+          </span>
+         </em>
+         ,
+         <em class="sig-param">
+          <span class="n">
+           configuration3
+          </span>
+          <span class="o">
+           =
+          </span>
+          <span class="default_value">
+           []
+          </span>
+         </em>
+         ,
+         <em class="sig-param">
+          <span class="n">
+           configuration4
+          </span>
+          <span class="o">
+           =
+          </span>
+          <span class="default_value">
+           []
+          </span>
+         </em>
+         <span class="sig-paren">
+          )
+         </span>
+         <a class="headerlink" href="#demo.Device" title="Permalink to this definition">
+          ¶
+         </a>
+        </dt>
+        <dd>
+         <p>
+          Represents a device in an
+          <code class="xref py py-class docutils literal notranslate">
+           <span class="pre">
+            AcqMethod
+           </span>
+          </code>
+          .
+         </p>
+         <dl class="field-list simple">
+          <dt class="field-odd">
+           Parameters
+          </dt>
+          <dd class="field-odd">
+           <ul class="simple">
+            <li>
+             <p>
+              <strong>
+               device_id
+              </strong>
+              (
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                str
+               </span>
+              </code>
+              ) – The ID of the device
+             </p>
+            </li>
+            <li>
+             <p>
+              <strong>
+               display_name
+              </strong>
+              (
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                str
+               </span>
+              </code>
+              ) – The display name for the device.
+             </p>
+            </li>
+            <li>
+             <p>
+              <strong>
+               rc_device
+              </strong>
+              (
+              <code class="xref py py-data docutils literal notranslate">
+               <span class="pre">
+                Union
+               </span>
+              </code>
+              [
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                str
+               </span>
+              </code>
+              ,
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                bool
+               </span>
+              </code>
+              ]) – Flag to indicate the device is an RC Device. If
+              <code class="xref py py-obj docutils literal notranslate">
+               <span class="pre">
+                False
+               </span>
+              </code>
+              the device is an SCIC.
+             </p>
+            </li>
+            <li>
+             <p>
+              <strong>
+               configuration
+              </strong>
+              (
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                List
+               </span>
+              </code>
+              [
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                Dict
+               </span>
+              </code>
+              [
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                str
+               </span>
+              </code>
+              ,
+              <code class="xref py py-data docutils literal notranslate">
+               <span class="pre">
+                Any
+               </span>
+              </code>
+              ]]) – List of key: value mappings for configuration options.
+             </p>
+            </li>
+            <li>
+             <p>
+              <strong>
+               configuration2
+              </strong>
+              (
+              <code class="xref py py-data docutils literal notranslate">
+               <span class="pre">
+                Tuple
+               </span>
+              </code>
+              [
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                Dict
+               </span>
+              </code>
+              [
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                str
+               </span>
+              </code>
+              ,
+              <code class="xref py py-data docutils literal notranslate">
+               <span class="pre">
+                Any
+               </span>
+              </code>
+              ]]) – Alternative form of
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                configuration
+               </span>
+              </code>
+              .
+             </p>
+            </li>
+            <li>
+             <p>
+              <strong>
+               configuration3
+              </strong>
+              (
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                Sequence
+               </span>
+              </code>
+              [
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                Dict
+               </span>
+              </code>
+              [
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                str
+               </span>
+              </code>
+              ,
+              <code class="xref py py-data docutils literal notranslate">
+               <span class="pre">
+                Any
+               </span>
+              </code>
+              ]]) – Alternative form of
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                configuration
+               </span>
+              </code>
+              .
+             </p>
+            </li>
+            <li>
+             <p>
+              <strong>
+               configuration4
+              </strong>
+              (
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                Sequence
+               </span>
+              </code>
+              [
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                Dict
+               </span>
+              </code>
+              [
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                str
+               </span>
+              </code>
+              ,
+              <code class="xref py py-data docutils literal notranslate">
+               <span class="pre">
+                Any
+               </span>
+              </code>
+              ]]) – Alternative form of
+              <code class="docutils literal notranslate">
+               <span class="pre">
+                configuration
+               </span>
+              </code>
+              .
+             </p>
+            </li>
+           </ul>
+          </dd>
+         </dl>
+         <dl class="py method">
+          <dt id="demo.Device.__eq__">
+           <code class="sig-name descname">
+            __eq__
+           </code>
+           <span class="sig-paren">
+            (
+           </span>
+           <em class="sig-param">
+            <span class="n">
+             other
+            </span>
+           </em>
+           <span class="sig-paren">
+            )
+           </span>
+           <a class="headerlink" href="#demo.Device.__eq__" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Return
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              self
+             </span>
+             <span class="pre">
+              ==
+             </span>
+             <span class="pre">
+              other
+             </span>
+            </code>
+            .
+           </p>
+           <dl class="field-list simple">
+            <dt class="field-odd">
+             Return type
+            </dt>
+            <dd class="field-odd">
+             <p>
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                bool
+               </span>
+              </code>
+             </p>
+            </dd>
+           </dl>
+          </dd>
+         </dl>
+         <dl class="py method">
+          <dt id="demo.Device.__ge__">
+           <code class="sig-name descname">
+            __ge__
+           </code>
+           <span class="sig-paren">
+            (
+           </span>
+           <em class="sig-param">
+            <span class="n">
+             other
+            </span>
+           </em>
+           <span class="sig-paren">
+            )
+           </span>
+           <a class="headerlink" href="#demo.Device.__ge__" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Return
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              self
+             </span>
+             <span class="pre">
+              &gt;=
+             </span>
+             <span class="pre">
+              other
+             </span>
+            </code>
+            .
+           </p>
+           <dl class="field-list simple">
+            <dt class="field-odd">
+             Return type
+            </dt>
+            <dd class="field-odd">
+             <p>
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                bool
+               </span>
+              </code>
+             </p>
+            </dd>
+           </dl>
+          </dd>
+         </dl>
+         <dl class="py method">
+          <dt id="demo.Device.__getstate__">
+           <code class="sig-name descname">
+            __getstate__
+           </code>
+           <span class="sig-paren">
+            (
+           </span>
+           <span class="sig-paren">
+            )
+           </span>
+           <a class="headerlink" href="#demo.Device.__getstate__" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Used for
+            <a class="reference external" href="https://docs.python.org/3/library/pickle.html">
+             pickling
+            </a>
+            .
+           </p>
+           <p>
+            Automatically created by attrs.
+           </p>
+          </dd>
+         </dl>
+         <dl class="py method">
+          <dt id="demo.Device.__gt__">
+           <code class="sig-name descname">
+            __gt__
+           </code>
+           <span class="sig-paren">
+            (
+           </span>
+           <em class="sig-param">
+            <span class="n">
+             other
+            </span>
+           </em>
+           <span class="sig-paren">
+            )
+           </span>
+           <a class="headerlink" href="#demo.Device.__gt__" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Return
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              self
+             </span>
+             <span class="pre">
+              &gt;
+             </span>
+             <span class="pre">
+              other
+             </span>
+            </code>
+            .
+           </p>
+           <dl class="field-list simple">
+            <dt class="field-odd">
+             Return type
+            </dt>
+            <dd class="field-odd">
+             <p>
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                bool
+               </span>
+              </code>
+             </p>
+            </dd>
+           </dl>
+          </dd>
+         </dl>
+         <dl class="py method">
+          <dt id="demo.Device.__le__">
+           <code class="sig-name descname">
+            __le__
+           </code>
+           <span class="sig-paren">
+            (
+           </span>
+           <em class="sig-param">
+            <span class="n">
+             other
+            </span>
+           </em>
+           <span class="sig-paren">
+            )
+           </span>
+           <a class="headerlink" href="#demo.Device.__le__" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Return
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              self
+             </span>
+             <span class="pre">
+              &lt;=
+             </span>
+             <span class="pre">
+              other
+             </span>
+            </code>
+            .
+           </p>
+           <dl class="field-list simple">
+            <dt class="field-odd">
+             Return type
+            </dt>
+            <dd class="field-odd">
+             <p>
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                bool
+               </span>
+              </code>
+             </p>
+            </dd>
+           </dl>
+          </dd>
+         </dl>
+         <dl class="py method">
+          <dt id="demo.Device.__lt__">
+           <code class="sig-name descname">
+            __lt__
+           </code>
+           <span class="sig-paren">
+            (
+           </span>
+           <em class="sig-param">
+            <span class="n">
+             other
+            </span>
+           </em>
+           <span class="sig-paren">
+            )
+           </span>
+           <a class="headerlink" href="#demo.Device.__lt__" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Return
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              self
+             </span>
+             <span class="pre">
+              &lt;
+             </span>
+             <span class="pre">
+              other
+             </span>
+            </code>
+            .
+           </p>
+           <dl class="field-list simple">
+            <dt class="field-odd">
+             Return type
+            </dt>
+            <dd class="field-odd">
+             <p>
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                bool
+               </span>
+              </code>
+             </p>
+            </dd>
+           </dl>
+          </dd>
+         </dl>
+         <dl class="py method">
+          <dt id="demo.Device.__ne__">
+           <code class="sig-name descname">
+            __ne__
+           </code>
+           <span class="sig-paren">
+            (
+           </span>
+           <em class="sig-param">
+            <span class="n">
+             other
+            </span>
+           </em>
+           <span class="sig-paren">
+            )
+           </span>
+           <a class="headerlink" href="#demo.Device.__ne__" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Return
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              self
+             </span>
+             <span class="pre">
+              !=
+             </span>
+             <span class="pre">
+              other
+             </span>
+            </code>
+            .
+           </p>
+           <dl class="field-list simple">
+            <dt class="field-odd">
+             Return type
+            </dt>
+            <dd class="field-odd">
+             <p>
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                bool
+               </span>
+              </code>
+             </p>
+            </dd>
+           </dl>
+          </dd>
+         </dl>
+         <dl class="py method">
+          <dt id="demo.Device.__repr__">
+           <code class="sig-name descname">
+            __repr__
+           </code>
+           <span class="sig-paren">
+            (
+           </span>
+           <span class="sig-paren">
+            )
+           </span>
+           <a class="headerlink" href="#demo.Device.__repr__" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Return a string representation of the
+            <a class="reference internal" href="#demo.Device" title="demo.Device">
+             <code class="xref py py-class docutils literal notranslate">
+              <span class="pre">
+               Device
+              </span>
+             </code>
+            </a>
+            .
+           </p>
+           <dl class="field-list simple">
+            <dt class="field-odd">
+             Return type
+            </dt>
+            <dd class="field-odd">
+             <p>
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                str
+               </span>
+              </code>
+             </p>
+            </dd>
+           </dl>
+          </dd>
+         </dl>
+         <dl class="py method">
+          <dt id="demo.Device.__setstate__">
+           <code class="sig-name descname">
+            __setstate__
+           </code>
+           <span class="sig-paren">
+            (
+           </span>
+           <em class="sig-param">
+            <span class="n">
+             state
+            </span>
+           </em>
+           <span class="sig-paren">
+            )
+           </span>
+           <a class="headerlink" href="#demo.Device.__setstate__" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Used for
+            <a class="reference external" href="https://docs.python.org/3/library/pickle.html">
+             pickling
+            </a>
+            .
+           </p>
+           <p>
+            Automatically created by attrs.
+           </p>
+          </dd>
+         </dl>
+         <dl class="py attribute">
+          <dt id="demo.Device.configuration">
+           <code class="sig-name descname">
+            configuration
+           </code>
+           <em class="property">
+            : List
+            <span class="p">
+             [
+            </span>
+            Dict
+            <span class="p">
+             [
+            </span>
+            str
+            <span class="p">
+             ,
+            </span>
+            Any
+            <span class="p">
+             ]
+            </span>
+            <span class="p">
+             ]
+            </span>
+           </em>
+           <a class="headerlink" href="#demo.Device.configuration" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            List of key: value mappings for configuration options.
+           </p>
+          </dd>
+         </dl>
+         <dl class="py attribute">
+          <dt id="demo.Device.configuration2">
+           <code class="sig-name descname">
+            configuration2
+           </code>
+           <em class="property">
+            : Tuple
+            <span class="p">
+             [
+            </span>
+            Dict
+            <span class="p">
+             [
+            </span>
+            str
+            <span class="p">
+             ,
+            </span>
+            Any
+            <span class="p">
+             ]
+            </span>
+            <span class="p">
+             ]
+            </span>
+           </em>
+           <a class="headerlink" href="#demo.Device.configuration2" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Alternative form of
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              configuration
+             </span>
+            </code>
+            .
+           </p>
+          </dd>
+         </dl>
+         <dl class="py attribute">
+          <dt id="demo.Device.configuration3">
+           <code class="sig-name descname">
+            configuration3
+           </code>
+           <em class="property">
+            : List
+            <span class="p">
+             [
+            </span>
+            Dict
+            <span class="p">
+             [
+            </span>
+            str
+            <span class="p">
+             ,
+            </span>
+            Any
+            <span class="p">
+             ]
+            </span>
+            <span class="p">
+             ]
+            </span>
+           </em>
+           <a class="headerlink" href="#demo.Device.configuration3" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Alternative form of
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              configuration
+             </span>
+            </code>
+            .
+           </p>
+          </dd>
+         </dl>
+         <dl class="py attribute">
+          <dt id="demo.Device.configuration4">
+           <code class="sig-name descname">
+            configuration4
+           </code>
+           <em class="property">
+            : List
+            <span class="p">
+             [
+            </span>
+            Dict
+            <span class="p">
+             [
+            </span>
+            str
+            <span class="p">
+             ,
+            </span>
+            Any
+            <span class="p">
+             ]
+            </span>
+            <span class="p">
+             ]
+            </span>
+           </em>
+           <a class="headerlink" href="#demo.Device.configuration4" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Alternative form of
+            <code class="docutils literal notranslate">
+             <span class="pre">
+              configuration
+             </span>
+            </code>
+            .
+           </p>
+          </dd>
+         </dl>
+         <dl class="py attribute">
+          <dt id="demo.Device.device_id">
+           <code class="sig-name descname">
+            device_id
+           </code>
+           <em class="property">
+            : str
+           </em>
+           <a class="headerlink" href="#demo.Device.device_id" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            The ID of the device
+           </p>
+          </dd>
+         </dl>
+         <dl class="py attribute">
+          <dt id="demo.Device.display_name">
+           <code class="sig-name descname">
+            display_name
+           </code>
+           <em class="property">
+            : str
+           </em>
+           <a class="headerlink" href="#demo.Device.display_name" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            The display name for the device.
+           </p>
+          </dd>
+         </dl>
+         <dl class="py attribute">
+          <dt id="demo.Device.rc_device">
+           <code class="sig-name descname">
+            rc_device
+           </code>
+           <em class="property">
+            : bool
+           </em>
+           <a class="headerlink" href="#demo.Device.rc_device" title="Permalink to this definition">
+            ¶
+           </a>
+          </dt>
+          <dd>
+           <p>
+            Flag to indicate the device is an RC Device. If
+            <code class="xref py py-obj docutils literal notranslate">
+             <span class="pre">
+              False
+             </span>
+            </code>
+            the device is an SCIC.
+           </p>
+          </dd>
+         </dl>
+        </dd>
+       </dl>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div aria-label="main navigation" class="sphinxsidebar" role="navigation">
+    <div class="sphinxsidebarwrapper">
+     <h1 class="logo">
+      <a href="index.html">
+       Python
+      </a>
+     </h1>
+     <h3>
+      Navigation
+     </h3>
+     <div class="relations">
+      <h3>
+       Related Topics
+      </h3>
+      <ul>
+       <li>
+        <a href="index.html">
+         Documentation overview
+        </a>
+        <ul>
+        </ul>
+       </li>
+      </ul>
+     </div>
+     <div id="searchbox" role="search" style="display: none">
+      <h3 id="searchlabel">
+       Quick search
+      </h3>
+      <div class="searchformwrapper">
+       <form action="search.html" class="search" method="get">
+        <input aria-labelledby="searchlabel" name="q" type="text"/>
+        <input type="submit" value="Go"/>
+       </form>
+      </div>
+     </div>
+     <script>
+      $('#searchbox').show(0);
+     </script>
+    </div>
+   </div>
+   <div class="clearer">
+   </div>
+  </div>
+ </body>
+</html>

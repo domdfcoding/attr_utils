@@ -4,6 +4,10 @@
 """
 A Sphinx directive for documenting `attrs <https://www.attrs.org/>`_ classes.
 
+.. attention::
+
+	Due to changes in the :mod:`typing` module :mod:`~attr_utils.autoattrs` is only officially supported on
+	Python 3.7 and above.
 
 .. rst:directive:: autoattrs
 
@@ -80,20 +84,19 @@ A Sphinx directive for documenting `attrs <https://www.attrs.org/>`_ classes.
 
 # stdlib
 from textwrap import dedent
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, MutableMapping, Optional, Tuple, Type
 
 # 3rd party
 from sphinx.application import Sphinx
+from sphinx.ext.autodoc import ClassDocumenter, Documenter
 from sphinx.pycode import ModuleAnalyzer
 from sphinx_toolbox import __version__
-from sphinx_toolbox.utils import flag, unknown_module_warning
-from sphinx.ext.autodoc import Documenter, ClassDocumenter
-from sphinx_toolbox.utils import parse_parameters
+from sphinx_toolbox.more_autosummary import PatchedAutoSummClassDocumenter
+from sphinx_toolbox.utils import flag, parse_parameters, unknown_module_warning
 
 # this package
 from attr_utils.docstrings import add_attrs_doc
-from sphinx_toolbox.more_autosummary import PatchedAutoSummClassDocumenter
-
+from attr_utils.utils import AttrsClass
 
 __all__ = ["AttrsDocumenter", "setup"]
 
@@ -123,6 +126,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 			**PatchedAutoSummClassDocumenter.option_spec,
 			"no-init-attribs": flag,
 			}
+	object: Type[AttrsClass]
 
 	@classmethod
 	def can_document_member(cls, member: Any, membername: str, isattr: bool, parent: Any) -> bool:
@@ -137,7 +141,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 		return hasattr(member, "__attrs_attrs__")
 
-	def add_content(self, more_content: Any, no_docstring: bool = True):
+	def add_content(self, more_content: Any, no_docstring: bool = False) -> None:  # type: ignore
 		"""
 		Add extra content (from docstrings, attribute docs etc.), but not the class docstring.
 
@@ -229,7 +233,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		self._docstring_processed = True
 
 		if hasattr(self.object, "__slots__"):
-			slots_dict = {}
+			slots_dict: MutableMapping[str, Optional[str]] = {}
 			for item in self.object.__slots__:
 				if item in all_docs:
 					slots_dict[item] = all_docs[item]
@@ -270,10 +274,10 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 			return None
 
 		listener_id = self.env.app.connect("autodoc-skip-member", unskip_attrs)
-		members = super().filter_members(members, want_all)
+		members_ = super().filter_members(members, want_all)
 		self.env.app.disconnect(listener_id)
 
-		return members
+		return members_
 
 	def generate(
 			self,
