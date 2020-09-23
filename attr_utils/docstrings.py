@@ -53,6 +53,8 @@ def add_attrs_doc(obj: Type) -> Type:
 	new_docstrings = {
 			**base_new_docstrings,
 			"__repr__": f"Return a string representation of the :class:`~.{obj.__name__}`.",
+			"__setstate__": f"Used for `pickling <https://docs.python.org/3/library/pickle.html>`_.\n\n{attrs_docstring}",
+			"__getstate__": f"Used for `pickling <https://docs.python.org/3/library/pickle.html>`_.\n\n{attrs_docstring}",
 			}
 
 	if hasattr(obj, "__ne__"):
