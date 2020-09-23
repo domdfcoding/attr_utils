@@ -4,10 +4,27 @@
 """
 A Sphinx directive for documenting `attrs <https://www.attrs.org/>`_ classes.
 
-Provides the :rst:dir:`autoattrs` directive to document a :class:`typing.NamedTuple`.
-It behaves much like :rst:dir:`autoclass` and :rst:dir:`autofunction`.
 
-The :rst:dir:`autoattrs` directive can be used directly or as part of :rst:dir:`automodule`.
+.. rst:directive:: autoattrs
+
+	Autodoc directive to document an `attrs <https://www.attrs.org/>`_ class.
+
+	It behaves much like :rst:dir:`autoclass`. It can be used directly or as part of :rst:dir:`automodule`.
+
+	Docstrings for parameters in ``__init__`` can be given in the class docstring or alongside each attribute
+	(see :rst:dir:`autoattribute` for the syntax). The second option is recommended as it interacts better
+	with other parts of autodoc. However, the class docstring can be used to override the description
+	for a given parameter.
+
+	.. rst:directive:option:: no-init-attribs
+		:type: flag
+
+		Excludes attributes taken as arguments in ``__init__`` from the output, even if they are documented.
+
+		This may be useful for simple classes where converter functions aren't used.
+
+		This option cannot be used as part of :rst:dir:`automodule`.
+
 
 .. versionadded:: 0.1.0
 """
@@ -62,31 +79,50 @@ The :rst:dir:`autoattrs` directive can be used directly or as part of :rst:dir:`
 #
 
 # stdlib
-from typing import Any, Dict, Optional
+from textwrap import dedent
+from typing import Any, Dict, List, Optional, Tuple
 
 # 3rd party
 from sphinx.application import Sphinx
-from sphinx.ext.autodoc import ClassDocumenter
+from sphinx.pycode import ModuleAnalyzer
 from sphinx_toolbox import __version__
-from sphinx_toolbox.more_autodoc.utils import unknown_module_warning
+from sphinx_toolbox.utils import flag, unknown_module_warning
+from sphinx.ext.autodoc import Documenter, ClassDocumenter
+from sphinx_toolbox.utils import parse_parameters
 
 # this package
 from attr_utils.docstrings import add_attrs_doc
+from sphinx_toolbox.more_autosummary import PatchedAutoSummClassDocumenter
+
 
 __all__ = ["AttrsDocumenter", "setup"]
 
 
-class AttrsDocumenter(ClassDocumenter):
+class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 	r"""
 	Sphinx autodoc :class:`~sphinx.ext.autodoc.Documenter`
 	for documenting `attrs <https://www.attrs.org/>`__ classes.
 
 	.. versionadded:: 0.1.0
+
+	.. versionchanged:: 0.3.0
+
+		Parameters for ``__init__`` can be documented either in the class docstring or for the attribute.
+		The class docstring has priority.
+
+	.. versionchanged:: 0.3.0
+
+		Added support for `autodocsumm <https://github.com/Chilipp/autodocsumm>`_.
+
 	"""
 
 	objtype = "attrs"
 	directivetype = "class"
 	priority = ClassDocumenter.priority + 1
+	option_spec = {
+			**PatchedAutoSummClassDocumenter.option_spec,
+			"no-init-attribs": flag,
+			}
 
 	@classmethod
 	def can_document_member(cls, member: Any, membername: str, isattr: bool, parent: Any) -> bool:
@@ -100,6 +136,16 @@ class AttrsDocumenter(ClassDocumenter):
 		"""
 
 		return hasattr(member, "__attrs_attrs__")
+
+	def add_content(self, more_content: Any, no_docstring: bool = True):
+		"""
+		Add extra content (from docstrings, attribute docs etc.), but not the class docstring.
+
+		:param more_content:
+		:param no_docstring:
+		"""
+
+		Documenter.add_content(self, more_content, True)
 
 	def import_object(self, raiseerror: bool = False) -> bool:
 		"""
@@ -119,6 +165,115 @@ class AttrsDocumenter(ClassDocumenter):
 			self.object = add_attrs_doc(self.object)
 
 		return ret
+
+	def sort_members(
+			self,
+			documenters: List[Tuple[Documenter, bool]],
+			order: str,
+			) -> List[Tuple[Documenter, bool]]:
+		"""
+		Sort the given member list and add attribute docstrings to the class docstring.
+
+		:param documenters:
+		:param order:
+		"""
+
+		# The documenters for the fields and methods, in the desired order
+		# The fields will be in bysource order regardless of the order option
+		documenters = super().sort_members(documenters, order)
+
+		if hasattr(self, "_docstring_processed"):
+			return documenters
+
+		# Mapping of member names to docstrings (as list of strings)
+		member_docstrings = {
+				k[1]: v
+				for k, v in ModuleAnalyzer.for_module(self.object.__module__).find_attr_docs().items()
+				}
+
+		# set sourcename and add content from attribute documentation
+		sourcename = self.get_sourcename()
+
+		# Size varies depending on docutils config
+		tab_size = self.env.app.config.docutils_tab_width  # type: ignore
+
+		if self.object.__doc__:
+			docstring = dedent(self.object.__doc__).expandtabs(tab_size).split("\n")
+		else:
+			docstring = []
+
+		parameter_docs = []
+		params, pre_output, post_output = parse_parameters(docstring, tab_size=tab_size)
+		all_docs = {}
+
+		for field in (a.name for a in self.object.__attrs_attrs__ if a.init):
+			doc: List[str] = ['']
+
+			# Prefer doc from class docstring
+			if field in params:
+				doc, arg_type = params.pop(field).values()  # type: ignore
+
+			# Otherwise use attribute docstring
+			if not ''.join(doc).strip() and field in member_docstrings:
+				doc = member_docstrings[field]
+
+			field_entry = [f":param {field}:", *doc]
+			parameter_docs.append(" ".join(field_entry))
+			all_docs[field] = ''.join(doc).strip()
+
+		self.add_line('', sourcename)
+		for line in list(self.process_doc([[*pre_output, *parameter_docs, '', '', *post_output]])):
+			self.add_line(line, sourcename)
+		self.add_line('', sourcename)
+
+		self._docstring_processed = True
+
+		if hasattr(self.object, "__slots__"):
+			slots_dict = {}
+			for item in self.object.__slots__:
+				if item in all_docs:
+					slots_dict[item] = all_docs[item]
+				else:
+					slots_dict[item] = None
+
+			self.object.__slots__ = slots_dict
+
+		if hasattr(self, "add_autosummary"):
+			self.add_autosummary()
+
+		return documenters
+
+	def filter_members(
+			self,
+			members: List[Tuple[str, Any]],
+			want_all: bool,
+			) -> List[Tuple[str, Any, bool]]:
+		"""
+		Filter the list of members to always include init attributes unless the
+		``:no-init-attribs:`` flag was given.
+
+		:param members:
+		:param want_all:
+
+		:return:
+		"""
+
+		attrib_names = (attr.name for attr in self.object.__attrs_attrs__ if attr.init)
+
+		no_init_attribs = self.options.get("no-init-attribs", False)
+
+		def unskip_attrs(app, what, name, obj, skip, options):
+			if skip and not no_init_attribs:
+				return not (name in attrib_names)
+			elif no_init_attribs and (name in attrib_names):
+				return True
+			return None
+
+		listener_id = self.env.app.connect("autodoc-skip-member", unskip_attrs)
+		members = super().filter_members(members, want_all)
+		self.env.app.disconnect(listener_id)
+
+		return members
 
 	def generate(
 			self,
@@ -162,6 +317,11 @@ def setup(app: Sphinx) -> Dict[str, Any]:
 
 	.. versionadded:: 0.1.0
 	"""
+
+	# Hack to get the docutils tab size, as there doesn't appear to be any other way
+	app.setup_extension("sphinx_toolbox.tweaks.tabsize")
+
+	app.setup_extension("sphinx_toolbox.more_autosummary")
 
 	app.add_autodocumenter(AttrsDocumenter)
 
