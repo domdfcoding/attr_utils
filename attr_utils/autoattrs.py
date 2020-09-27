@@ -93,7 +93,7 @@ from sphinx.ext.autodoc import ClassDocumenter, Documenter
 from sphinx.pycode import ModuleAnalyzer
 from sphinx_toolbox import __version__
 from sphinx_toolbox.more_autosummary import PatchedAutoSummClassDocumenter
-from sphinx_toolbox.utils import flag, Param, parse_parameters, unknown_module_warning
+from sphinx_toolbox.utils import Param, flag, parse_parameters, unknown_module_warning
 
 # this package
 from attr_utils.docstrings import add_attrs_doc
@@ -223,7 +223,6 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 		# set sourcename and add content from attribute documentation
 		sourcename = self.get_sourcename()
-
 
 		parameter_docs = []
 		params, pre_output, post_output = self._get_docstring()
