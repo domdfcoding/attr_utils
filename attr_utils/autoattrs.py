@@ -93,7 +93,7 @@ from sphinx.ext.autodoc import ClassDocumenter, Documenter
 from sphinx.pycode import ModuleAnalyzer
 from sphinx_toolbox import __version__
 from sphinx_toolbox.more_autosummary import PatchedAutoSummClassDocumenter
-from sphinx_toolbox.utils import flag, parse_parameters, unknown_module_warning
+from sphinx_toolbox.utils import flag, Param, parse_parameters, unknown_module_warning
 
 # this package
 from attr_utils.docstrings import add_attrs_doc
@@ -152,6 +152,31 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 		Documenter.add_content(self, more_content, True)
 
+		# set sourcename and add content from attribute documentation
+		sourcename = self.get_sourcename()
+
+		params, pre_output, post_output = self._get_docstring()
+
+		self.add_line('', sourcename)
+		for line in list(self.process_doc([pre_output])):
+			self.add_line(line, sourcename)
+		self.add_line('', sourcename)
+
+	def _get_docstring(self) -> Tuple[Dict[str, Param], List[str], List[str]]:
+		"""
+		Returns params, pre_output, post_output
+		"""
+
+		# Size varies depending on docutils config
+		tab_size = self.env.app.config.docutils_tab_width  # type: ignore
+
+		if self.object.__doc__:
+			docstring = dedent(self.object.__doc__).expandtabs(tab_size).split("\n")
+		else:
+			docstring = []
+
+		return parse_parameters(docstring, tab_size=tab_size)
+
 	def import_object(self, raiseerror: bool = False) -> bool:
 		"""
 		Import the object given by ``self.modname`` and ``self.objpath`` and set
@@ -199,16 +224,9 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		# set sourcename and add content from attribute documentation
 		sourcename = self.get_sourcename()
 
-		# Size varies depending on docutils config
-		tab_size = self.env.app.config.docutils_tab_width  # type: ignore
-
-		if self.object.__doc__:
-			docstring = dedent(self.object.__doc__).expandtabs(tab_size).split("\n")
-		else:
-			docstring = []
 
 		parameter_docs = []
-		params, pre_output, post_output = parse_parameters(docstring, tab_size=tab_size)
+		params, pre_output, post_output = self._get_docstring()
 		all_docs = {}
 
 		for field in (a.name for a in attr.fields(self.object) if a.init):
@@ -227,7 +245,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 			all_docs[field] = ''.join(doc).strip()
 
 		self.add_line('', sourcename)
-		for line in list(self.process_doc([[*pre_output, *parameter_docs, '', '', *post_output]])):
+		for line in list(self.process_doc([[*parameter_docs, '', '', *post_output]])):
 			self.add_line(line, sourcename)
 		self.add_line('', sourcename)
 
