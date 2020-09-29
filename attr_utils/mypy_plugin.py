@@ -4,7 +4,9 @@
 """
 Plugin for `mypy <https://github.com/python/mypy>`_ which adds support for attr_utils.
 
-To use this plugin add the following to your
+.. versionadded:: 0.4.0
+
+To use this plugin, add the following to your
 `mypy configuration file <https://mypy.readthedocs.io/en/stable/config_file.html>`_:
 
 .. code-block:: ini
