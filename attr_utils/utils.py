@@ -44,3 +44,5 @@ class AttrsClass(Protocol):
 
 	#: Special attribute used internally by attrs.
 	__attrs_attrs__: Tuple[Attribute, ...]
+
+	__name__: str

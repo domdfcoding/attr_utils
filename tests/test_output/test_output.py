@@ -22,3 +22,9 @@ def test_html_output(page: BeautifulSoup, file_regression: FileRegressionFixture
 @pytest.mark.parametrize("page", ["autoattrs.html"], indirect=True)
 def test_html_output_autoattrs(page: BeautifulSoup, file_regression: FileRegressionFixture):
 	check_html_regression(page, file_regression)
+
+
+@pytest.mark.skipif(condition=sys.version_info[:2] > (3, 6), reason="Output differs in Python 3.6")
+@pytest.mark.parametrize("page", ["autoattrs.html"], indirect=True)
+def test_html_output_autoattrs_36(page: BeautifulSoup, file_regression: FileRegressionFixture):
+	check_html_regression(page, file_regression)

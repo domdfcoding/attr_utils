@@ -3,7 +3,7 @@ This example is based on real code.
 """
 
 # stdlib
-from typing import Any, Dict, List, Sequence, Tuple
+from typing import Any, Dict, List, Sequence, Tuple, Union, overload
 
 # 3rd party
 import attr
@@ -11,8 +11,12 @@ from domdf_python_tools.utils import strtobool
 
 # this package
 from attr_utils.annotations import attrib
+from attr_utils.pprinter import pretty_repr
+from attr_utils.serialise import serde
 
 
+@pretty_repr
+@serde
 @attr.s(slots=True)
 class Device:
 	"""
@@ -47,3 +51,22 @@ class Device:
 			default=attr.Factory(list),
 			annotation=Sequence[Dict[str, Any]],
 			)
+
+	@overload
+	def __getitem__(self, item: int) -> str:
+		...
+
+	@overload
+	def __getitem__(self, item: slice) -> List[str]:
+		...
+
+	def __getitem__(self, item: Union[int, slice]) -> Union[str, List[str]]:
+		"""
+		Return the item with the given index.
+
+		:param item:
+
+		:rtype:
+
+		.. versionadded:: 1.2.3
+		"""
