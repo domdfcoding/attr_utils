@@ -45,17 +45,19 @@ for more information.
 #  Licensed under the terms of the MIT license.
 #
 
+# stdlib
+from typing import Callable, List, MutableMapping, Optional
 
-from typing import MutableMapping, Optional, Callable, List
-
-from mypy.plugin import Plugin, ClassDefContext, SemanticAnalyzerPluginInterface
+# 3rd party
+from mypy.nodes import ARG_POS, MDEF, Argument, Block, ClassDef, FuncDef, PassStmt, SymbolTableNode, Var
+from mypy.plugin import ClassDefContext, Plugin, SemanticAnalyzerPluginInterface
 from mypy.plugins.common import add_method_to_class
-from mypy.types import NoneType, AnyType, TypeOfAny, Instance, Type, CallableType, TypeVarDef, ProperType, TypeType
-from mypy.nodes import FuncDef, Argument, ARG_POS, Var, Block, PassStmt, SymbolTableNode, MDEF, ClassDef
 from mypy.semanal_shared import set_callable_name
+from mypy.types import AnyType, CallableType, Instance, Type, TypeOfAny, TypeType, TypeVarDef
 from mypy.typevars import fill_typevars
 from mypy.util import get_unique_redefinition_name
 
+__all__ = ["attr_utils_serialise_serde", "AttrUtilsPlugin", "add_classmethod_to_class", "plugin"]
 
 #: Registry mapping decorator full names to the callable that handles the methods added by the decorator.
 decorator_registry: MutableMapping[str, Callable[[ClassDefContext], None]] = {}
@@ -100,8 +102,8 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext):
 				args=[Argument(Var('d', mapping_str_any_type), mapping_str_any_type, None, ARG_POS)],
 				return_type=decorated_class_instance,
 				cls_type=TypeType(decorated_class_instance),
-				# cls_type=Instance(type_type.node, []),
 				)
+
 
 #
 # def attr__make_attrs(cls_def_ctx: ClassDefContext):
@@ -122,7 +124,6 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext):
 # 	# 			Var("__attrs_attrs__", Instance(list_.node, [attribute])),  # type: ignore
 # 	# 			plugin_generated=True,
 # 	# 			)
-
 
 decorator_registry["attr_utils.serialise.serde"] = attr_utils_serialise_serde
 # decorator_registry["attr._make.attrs"] = attr__make_attrs
@@ -154,7 +155,7 @@ def add_classmethod_to_class(
 		return_type: Type,
 		cls_type: Optional[Type] = None,
 		tvar_def: Optional[TypeVarDef] = None,
-) -> None:
+		) -> None:
 	"""
 	Adds a new classmethod to a class definition.
 	"""
