@@ -50,7 +50,11 @@ def test_device():
 			1000,
 			"Television",
 			DeviceType.RC,
-			{"make": "Samsung", "smart": True, "ports": Counter([Port.HDMI, Port.HDMI, Port.HDMI, Port.VGA])},
+			{
+					"make": "Samsung",
+					"smart": True,
+					"ports": Counter([Port.HDMI, Port.HDMI, Port.HDMI, Port.VGA]),
+					},  # type: ignore
 			)
 
 	assert repr(d) == dedent(

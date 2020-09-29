@@ -42,14 +42,12 @@ The following functions are available:
 # stdlib
 import enum
 import sys
-from typing import TypeVar
+from typing import Type, TypeVar
 
 # 3rd party
+import attr
 import prettyprinter  # type: ignore
 from prettyprinter.prettyprinter import _BASE_DISPATCH, pretty_dispatch, register_pretty  # type: ignore
-
-# this package
-from attr_utils.utils import AttrsClass
 
 __all__ = ["pretty_enum", "pretty_repr"]
 
@@ -74,7 +72,7 @@ def is_registered(type, *, check_superclasses=False, check_deferred=True, regist
 # Resolve deferred names and prevent them being used again.
 prettyprinter.is_registered(type(_T), check_superclasses=True, check_deferred=True, register_deferred=True)
 prettyprinter.is_registered = is_registered
-sys.modules["prettyprinter.prettyprinter"].is_registered = is_registered
+sys.modules["prettyprinter.prettyprinter"].is_registered = is_registered  # type: ignore
 
 
 @register_pretty(enum.EnumMeta)
@@ -90,7 +88,7 @@ def pretty_enum(value, ctx) -> str:
 	return repr(value)
 
 
-def pretty_repr(obj: AttrsClass):
+def pretty_repr(obj: Type):
 	"""
 	Add a pretty-printed ``__repr__`` function to the decorated attrs class.
 
@@ -110,7 +108,7 @@ def pretty_repr(obj: AttrsClass):
 	:param obj:
 	"""
 
-	if isinstance(obj, AttrsClass):
+	if attr.has(obj):
 
 		def __repr__(self) -> str:
 			return prettyprinter.pformat(self)

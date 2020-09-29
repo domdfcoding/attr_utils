@@ -1,7 +1,7 @@
 # stdlib
 from collections import Counter
 from enum import IntEnum
-from typing import Any, Dict, Mapping, MutableMapping
+from typing import Any, Dict, Mapping, MutableMapping, no_type_check
 
 # 3rd party
 import attr
@@ -59,44 +59,48 @@ def test_device():
 			1000,
 			"Television",
 			DeviceType.RC,
-			{"make": "Samsung", "smart": True, "ports": Counter([Port.HDMI, Port.HDMI, Port.HDMI, Port.VGA])},
+			{
+					"make": "Samsung",
+					"smart": True,
+					"ports": Counter([Port.HDMI, Port.HDMI, Port.HDMI, Port.VGA]),
+					},  # type: ignore
 			)
 
-	assert d.to_dict() == {
-			"device_id": 1000,
-			"display_name": 'Television',
-			"device_type": DeviceType.RC,
-			"configuration": {
-					'make': 'Samsung',
-					'smart': True,
-					'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
-					},
-			}
+	assert d.to_dict() == {  # type: ignore
+		"device_id": 1000,
+		"display_name": 'Television',
+		"device_type": DeviceType.RC,
+		"configuration": {
+		'make': 'Samsung',
+		'smart': True,
+		'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
+		},
+		}
 
-	assert Device.from_dict({
-			"device_id": 1000,
-			"display_name": 'Television',
-			"device_type": DeviceType.RC,
-			"configuration": {
-					'make': 'Samsung',
-					'smart': True,
-					'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
-					},
-			}) == d
+	assert Device.from_dict({  # type: ignore
+		"device_id": 1000,
+		"display_name": 'Television',
+		"device_type": DeviceType.RC,
+		"configuration": {
+		'make': 'Samsung',
+		'smart': True,
+		'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
+		},
+		}) == d
 
 	assert isinstance(
-			Device.from_dict({
-					"device_id": 1000,
-					"display_name": 'Television',
-					"device_type": DeviceType.RC,
-					"configuration": {
-							'make': 'Samsung',
-							'smart': True,
-							'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
-							},
-					}),
-			Device
-			)
+		Device.from_dict({  # type: ignore
+		"device_id": 1000,
+		"display_name": 'Television',
+		"device_type": DeviceType.RC,
+		"configuration": {
+		'make': 'Samsung',
+		'smart': True,
+		'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
+		},
+		}),
+		Device
+		)
 
 
 def test_enhanced_device():
@@ -105,7 +109,11 @@ def test_enhanced_device():
 			1000,
 			"Television",
 			DeviceType.RC,
-			{"make": "Samsung", "smart": True, "ports": Counter([Port.HDMI, Port.HDMI, Port.HDMI, Port.VGA])},
+			{
+					"make": "Samsung",
+					"smart": True,
+					"ports": Counter([Port.HDMI, Port.HDMI, Port.HDMI, Port.VGA]),
+					},  # type: ignore
 			)
 
 	assert attr.asdict(e) == {
@@ -120,46 +128,47 @@ def test_enhanced_device():
 			"warp_drive": "Engaged!"
 			}
 
-	assert e.to_dict() == {
-			"device_id": 1000,
-			"display_name": 'Television',
-			"device_type": DeviceType.RC,
-			"configuration": {
-					'make': 'Samsung',
-					'smart': True,
-					'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
-					},
-			"warp_drive": "Engaged!"
-			}
+	assert e.to_dict() == {  # type: ignore
+		"device_id": 1000,
+		"display_name": 'Television',
+		"device_type": DeviceType.RC,
+		"configuration": {
+		'make': 'Samsung',
+		'smart': True,
+		'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
+		},
+		"warp_drive": "Engaged!"
+		}
 
-	assert EnhancedDevice.from_dict({
-			"device_id": 1000,
-			"display_name": 'Television',
-			"device_type": DeviceType.RC,
-			"configuration": {
-					'make': 'Samsung',
-					'smart': True,
-					'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
-					},
-			"warp_drive": "Engaged!"
-			}) == e
+	assert EnhancedDevice.from_dict({  # type: ignore
+		"device_id": 1000,
+		"display_name": 'Television',
+		"device_type": DeviceType.RC,
+		"configuration": {
+		'make': 'Samsung',
+		'smart': True,
+		'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
+		},
+		"warp_drive": "Engaged!"
+		}) == e
 
 	assert isinstance(
-			EnhancedDevice.from_dict({
-					"device_id": 1000,
-					"display_name": 'Television',
-					"device_type": DeviceType.RC,
-					"configuration": {
-							'make': 'Samsung',
-							'smart': True,
-							'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
-							},
-					"warp_drive": "Engaged!"
-					}),
-			EnhancedDevice
-			)
+		EnhancedDevice.from_dict({  # type: ignore
+		"device_id": 1000,
+		"display_name": 'Television',
+		"device_type": DeviceType.RC,
+		"configuration": {
+		'make': 'Samsung',
+		'smart': True,
+		'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
+		},
+		"warp_drive": "Engaged!"
+		}),
+		EnhancedDevice
+		)
 
 
+@no_type_check
 def test_dunders():
 	assert Device.to_dict.__module__ == "tests.test_serialise"
 	assert Device.to_dict.__name__ == "to_dict"

@@ -81,20 +81,28 @@ __all__ = ["serde"]
 
 
 @overload
-def serde(cls: Type[AttrsClass], from_key: str = ..., to_key: str = ...) -> Type[AttrsClass]:
+def serde(
+		cls: Type,
+		from_key: str = ...,
+		to_key: str = ...,
+		) -> Type[AttrsClass]:
 	...  # pragma: no cover
 
 
 @overload
-def serde(cls: None = None,
-			from_key: str = ...,
-			to_key: str = ...) -> Callable[[Type[AttrsClass]], Type[AttrsClass]]:
+def serde(
+		cls: None = None,
+		from_key: str = ...,
+		to_key: str = ...,
+		) -> Callable[[Type[AttrsClass]], Type[AttrsClass]]:
 	...  # pragma: no cover
 
 
-def serde(cls: Optional[Type[AttrsClass]] = None,
-			from_key: str = "from",
-			to_key: str = "to") -> Union[Type[AttrsClass], Callable[[Type[AttrsClass]], Type[AttrsClass]]]:
+def serde(
+		cls: Optional[Type[AttrsClass]] = None,
+		from_key: str = "from",
+		to_key: str = "to",
+		) -> Union[Type[AttrsClass], Callable[[Type[AttrsClass]], Type[AttrsClass]]]:
 	r"""
 	Decorator to add serialisation and deserialisation capabilities to attrs classes.
 
