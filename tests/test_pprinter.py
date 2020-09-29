@@ -41,7 +41,7 @@ class Device:
 	device_type: DeviceType = attr.ib(converter=DeviceType)
 
 	#: Key: value mapping of configuration options.
-	configuration: Dict[str, Any] = attr.ib(converter=dict, default=attr.Factory(dict))
+	configuration: Dict[str, Any] = attr.ib(default=attr.Factory(dict))
 
 
 def test_device():
@@ -54,7 +54,7 @@ def test_device():
 					"make": "Samsung",
 					"smart": True,
 					"ports": Counter([Port.HDMI, Port.HDMI, Port.HDMI, Port.VGA]),
-					},  # type: ignore
+					},
 			)
 
 	assert repr(d) == dedent(
