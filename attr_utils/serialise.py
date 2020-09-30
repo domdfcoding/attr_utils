@@ -198,7 +198,7 @@ def serde(
 		from_dict.__module__ = cls.__module__
 		cls.from_dict = classmethod(from_dict)  # type: ignore
 
-		to_dict.__doc__ = f"Returns a dictionary containing the contents of the :class:`~.{cls.__name__}`."
+		to_dict.__doc__ = f"Returns a dictionary containing the contents of the :class:`~.{cls.__name__}` object."
 		to_dict.__qualname__ = f"{cls.__name__}.to_dict"
 		to_dict.__module__ = cls.__module__
 		cls.to_dict = to_dict  # type: ignore
