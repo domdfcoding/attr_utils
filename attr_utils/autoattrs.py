@@ -263,6 +263,15 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		if hasattr(self, "add_autosummary"):
 			self.add_autosummary()
 
+		# import functools
+		#
+		# for documenter in documenters:
+		# 	documenter[0].parse_name()
+		# 	if documenter[0].objpath[-1] in all_docs:
+		# 		def get_doc(encoding: str = None, ignore: int = None, doc: str = '') -> List[List[str]]:
+		# 			return [[doc]]
+		# 		documenter[0].get_doc = functools.partial(get_doc, doc=all_docs[documenter[0].objpath[-1]])
+
 		return documenters
 
 	def filter_members(
