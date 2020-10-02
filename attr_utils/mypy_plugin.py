@@ -51,11 +51,11 @@ for more information.
 from typing import Callable, List, MutableMapping, Optional
 
 # 3rd party
-from mypy.nodes import ARG_POS, MDEF, Argument, Block, ClassDef, FuncDef, PassStmt, SymbolTableNode, Var
+from mypy.nodes import ARG_OPT, ARG_POS, MDEF, Argument, Block, ClassDef, FuncDef, PassStmt, SymbolTableNode, Var
 from mypy.plugin import ClassDefContext, Plugin, SemanticAnalyzerPluginInterface
 from mypy.plugins.common import add_method_to_class
 from mypy.semanal_shared import set_callable_name
-from mypy.types import AnyType, CallableType, Instance, Type, TypeOfAny, TypeType, TypeVarDef
+from mypy.types import AnyType, CallableType, Instance, NoneType, Type, TypeOfAny, TypeType, TypeVarDef
 from mypy.typevars import fill_typevars
 from mypy.util import get_unique_redefinition_name
 
@@ -92,7 +92,7 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext):
 				api=cls_def_ctx.api,
 				cls=cls_def_ctx.cls,
 				name="to_dict",
-				args=[],
+				args=[Argument(Var('convert_values', NoneType()), NoneType(), None, ARG_OPT)],
 				return_type=mutable_mapping_str_any_type,
 				)
 
