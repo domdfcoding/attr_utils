@@ -102,6 +102,25 @@ def test_device():
 			)
 
 
+def test_collection_types():
+
+	class MagicMapping(dict):
+		pass
+
+	d = Device(
+			1000,
+			"Television",
+			DeviceType.RC,
+			MagicMapping(
+					make="Samsung",
+					smart=True,
+					ports=Counter([Port.HDMI, Port.HDMI, Port.HDMI, Port.VGA]),
+					),
+			)
+
+	assert isinstance(d.to_dict()["configuration"], MagicMapping)
+
+
 def test_enhanced_device():
 	e = EnhancedDevice(
 			1000,
@@ -171,7 +190,7 @@ def test_dunders():
 	assert Device.to_dict.__module__ == "tests.test_serialise"
 	assert Device.to_dict.__name__ == "to_dict"
 	assert Device.to_dict.__qualname__ == "Device.to_dict"
-	assert Device.to_dict.__annotations__ == {"return": MutableMapping[str, Any]}
+	assert Device.to_dict.__annotations__ == {"convert_values": bool, "return": MutableMapping[str, Any]}
 
 	assert Device.from_dict.__module__ == "tests.test_serialise"
 	assert Device.from_dict.__name__ == "from_dict"
@@ -181,7 +200,7 @@ def test_dunders():
 	assert EnhancedDevice.to_dict.__module__ == "tests.test_serialise"
 	assert EnhancedDevice.to_dict.__name__ == "to_dict"
 	assert EnhancedDevice.to_dict.__qualname__ == "Device.to_dict"
-	assert EnhancedDevice.to_dict.__annotations__ == {"return": MutableMapping[str, Any]}
+	assert EnhancedDevice.to_dict.__annotations__ == {"convert_values": bool, "return": MutableMapping[str, Any]}
 
 	assert EnhancedDevice.from_dict.__module__ == "tests.test_serialise"
 	assert EnhancedDevice.from_dict.__name__ == "from_dict"

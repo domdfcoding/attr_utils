@@ -1187,6 +1187,17 @@
            <span class="sig-paren">
             (
            </span>
+           <em class="sig-param">
+            <span class="n">
+             convert_values
+            </span>
+            <span class="o">
+             =
+            </span>
+            <span class="default_value">
+             False
+            </span>
+           </em>
            <span class="sig-paren">
             )
            </span>
@@ -1208,9 +1219,28 @@
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Return type
+             Parameters
             </dt>
             <dd class="field-odd">
+             <p>
+              <strong>
+               convert_values
+              </strong>
+              (
+              <code class="xref py py-class docutils literal notranslate">
+               <span class="pre">
+                bool
+               </span>
+              </code>
+              ) – Recurse into other attrs classes, and convert tuples, sets etc. into lists.
+This may be required to later construct a new class from the dictionary if the class
+uses complex converter functions.
+             </p>
+            </dd>
+            <dt class="field-even">
+             Return type
+            </dt>
+            <dd class="field-even">
              <p>
               <code class="xref py py-class docutils literal notranslate">
                <span class="pre">

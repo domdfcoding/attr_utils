@@ -49,7 +49,7 @@ import attr
 import prettyprinter  # type: ignore
 from prettyprinter.prettyprinter import _BASE_DISPATCH, pretty_dispatch, register_pretty  # type: ignore
 
-__all__ = ["pretty_enum", "pretty_repr"]
+__all__ = ["pretty_enum", "pretty_repr", "register_pretty"]
 
 _T = TypeVar("_T")
 

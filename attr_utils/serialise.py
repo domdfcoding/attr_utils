@@ -153,11 +153,22 @@ def serde(
 		:param d: The dictionary
 		:type d: :class:`~typing.Mapping`\[:class:`str`, :py:obj:`~typing.Any`\]
 
-	.. py:method:: to_dict():
+	.. py:method:: to_dict(convert_values=False):
 
 		Returns a dictionary containing the contents of the class.
 
+		:param convert_values: Recurse into other attrs classes, and convert tuples, sets etc.
+			into lists. This may be required to later construct a new class from the
+			dictionary if the class uses complex converter functions.
+		:type convert_values: :class:`bool`
+
 		:rtype: :class:`~typing.MutableMapping`\[:class:`str`, :py:obj:`~typing.Any`\]
+
+		.. versionchanged:: 0.5.0
+
+			By default values are left unchanged. In version 0.4.0 these were converted
+			to basic Python types, which may be undesirable. The original behaviour can be
+			restored using the ``convert_values`` parameter.
 
 	"""
 
@@ -171,7 +182,7 @@ def serde(
 				from_fields,
 				)))
 
-		def to_dict(self) -> MutableMapping[str, Any]:
+		def to_dict(self, convert_values: bool = False) -> MutableMapping[str, Any]:
 			to_fields = pipe(
 					fields(self.__class__),
 					map(lambda a: (a, get_in([to_key], a.metadata))),
@@ -179,7 +190,11 @@ def serde(
 					list,
 					)
 
-			d = asdict(self)
+			if convert_values:
+				d = asdict(self)
+			else:
+				d = {a.name: getattr(self, a.name) for a in fields(self.__class__)}
+
 			if not to_fields:
 				return d
 
@@ -198,7 +213,13 @@ def serde(
 		from_dict.__module__ = cls.__module__
 		cls.from_dict = classmethod(from_dict)  # type: ignore
 
-		to_dict.__doc__ = f"Returns a dictionary containing the contents of the :class:`~.{cls.__name__}` object."
+		to_dict.__doc__ = f"""
+Returns a dictionary containing the contents of the :class:`~.{cls.__name__}` object.
+
+:param convert_values: Recurse into other attrs classes, and convert tuples, sets etc. into lists.
+	This may be required to later construct a new class from the dictionary if the class
+	uses complex converter functions.
+"""
 		to_dict.__qualname__ = f"{cls.__name__}.to_dict"
 		to_dict.__module__ = cls.__module__
 		cls.to_dict = to_dict  # type: ignore
