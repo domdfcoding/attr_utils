@@ -4,6 +4,7 @@ pytest>=6.0.0
 pytest-benchmark>=3.2.3
 pytest-cov>=2.8.1
 pytest-randomly>=3.3.1
+sdjson>=0.3.0
 snapshottest>=0.6.0
 sphinx-toolbox[testing]>=0.4.0
 sphobjinv>=2.0.1

@@ -5,7 +5,9 @@ from typing import Any, Mapping, MutableMapping, no_type_check
 
 # 3rd party
 import attr
-from typing_extensions import Literal
+import sdjson
+from sdjson import register_encoder
+from typing_extensions import Literal, Protocol, runtime_checkable
 
 # this package
 from attr_utils.serialise import serde
@@ -51,6 +53,10 @@ class EnhancedDevice(Device):
 	"""
 
 	warp_drive: Literal["Engaged!"] = attr.ib(default="Engaged!")
+
+
+class MagicMapping(dict):
+	pass
 
 
 def test_device():
@@ -103,9 +109,6 @@ def test_device():
 
 
 def test_collection_types():
-
-	class MagicMapping(dict):
-		pass
 
 	d = Device(
 			1000,
@@ -206,3 +209,51 @@ def test_dunders():
 	assert EnhancedDevice.from_dict.__name__ == "from_dict"
 	assert EnhancedDevice.from_dict.__qualname__ == "Device.from_dict"
 	assert EnhancedDevice.from_dict.__annotations__ == {"d": Mapping[str, Any]}
+
+
+@runtime_checkable
+class HasToDict(Protocol):
+
+	def to_dict(self):
+		...
+
+
+@register_encoder(HasToDict)
+def serialise_attrs(obj: HasToDict):
+	return obj.to_dict()
+
+
+def test_sdjson():
+	d = Device(
+			1000,
+			"Television",
+			DeviceType.RC,
+			MagicMapping(
+					make="Samsung",
+					smart=True,
+					ports=Counter([Port.HDMI, Port.HDMI, Port.HDMI, Port.VGA]),
+					),
+			)
+
+	assert sdjson.dumps(
+			d, indent=2
+			) == """{
+  "device_id": 1000,
+  "display_name": "Television",
+  "device_type": 1,
+  "configuration": {
+    "make": "Samsung",
+    "smart": true,
+    "ports": {
+      "1": 3,
+      "2": 1
+    }
+  }
+}"""
+
+	loaded_device = Device.from_dict(sdjson.loads(sdjson.dumps(d)))
+	# the Counter won't be equal because the enum's have become disassociated
+	assert loaded_device.device_id == d.device_id
+	assert loaded_device.display_name == d.display_name
+	assert loaded_device.configuration["make"] == d.configuration["make"]
+	assert loaded_device.configuration["smart"] == d.configuration["smart"]
