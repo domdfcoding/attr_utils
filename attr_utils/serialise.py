@@ -216,9 +216,7 @@ def serde(
 		to_dict.__doc__ = f"""
 Returns a dictionary containing the contents of the :class:`~.{cls.__name__}` object.
 
-:param convert_values: Recurse into other attrs classes, and convert tuples, sets etc. into lists.
-	This may be required to later construct a new class from the dictionary if the class
-	uses complex converter functions.
+:param convert_values: Recursively convert values into dictionaries, lists etc. as appropriate.
 """
 		to_dict.__qualname__ = f"{cls.__name__}.to_dict"
 		to_dict.__module__ = cls.__module__
