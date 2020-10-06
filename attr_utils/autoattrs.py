@@ -140,7 +140,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		:param parent:
 		"""
 
-		return attr.has(member)
+		return attr.has(member) and isinstance(member, type)
 
 	def add_content(self, more_content: Any, no_docstring: bool = False) -> None:  # type: ignore
 		"""
