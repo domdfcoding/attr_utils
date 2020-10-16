@@ -76,6 +76,7 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext):
 
 	# https://gitter.im/python/typing?at=5e078653eac8d1511e737d8c
 	str_type = cls_def_ctx.api.named_type("__builtins__.str")
+	bool_type = cls_def_ctx.api.named_type("__builtins__.bool")
 	implicit_any = AnyType(TypeOfAny.special_form)
 	mapping = cls_def_ctx.api.lookup_fully_qualified_or_none('typing.Mapping')
 	mutable_mapping = cls_def_ctx.api.lookup_fully_qualified_or_none('typing.MutableMapping')
@@ -92,7 +93,7 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext):
 				api=cls_def_ctx.api,
 				cls=cls_def_ctx.cls,
 				name="to_dict",
-				args=[Argument(Var('convert_values', NoneType()), NoneType(), None, ARG_OPT)],
+				args=[Argument(Var('convert_values', bool_type), bool_type, None, ARG_OPT)],
 				return_type=mutable_mapping_str_any_type,
 				)
 
