@@ -184,7 +184,10 @@ def test_dunders():
 	assert Device.to_dict.__module__ == "tests.test_serialise"
 	assert Device.to_dict.__name__ == "to_dict"
 	assert Device.to_dict.__qualname__ == "Device.to_dict"
-	assert Device.to_dict.__annotations__ == {"convert_values": bool, "return": MutableMapping[str, Any]}
+	assert Device.to_dict.__annotations__ == {
+			"convert_values": bool,
+			"return": MutableMapping[str, Any],
+			}
 
 	assert Device.from_dict.__module__ == "tests.test_serialise"
 	assert Device.from_dict.__name__ == "from_dict"
@@ -194,7 +197,10 @@ def test_dunders():
 	assert EnhancedDevice.to_dict.__module__ == "tests.test_serialise"
 	assert EnhancedDevice.to_dict.__name__ == "to_dict"
 	assert EnhancedDevice.to_dict.__qualname__ == "Device.to_dict"
-	assert EnhancedDevice.to_dict.__annotations__ == {"convert_values": bool, "return": MutableMapping[str, Any]}
+	assert EnhancedDevice.to_dict.__annotations__ == {
+			"convert_values": bool,
+			"return": MutableMapping[str, Any],
+			}
 
 	assert EnhancedDevice.from_dict.__module__ == "tests.test_serialise"
 	assert EnhancedDevice.from_dict.__name__ == "from_dict"

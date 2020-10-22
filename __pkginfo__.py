@@ -17,22 +17,9 @@ import pathlib
 __all__ = [
 		"__copyright__",
 		"__version__",
-		"modname",
-		"pypi_name",
-		"__license__",
-		"__author__",
-		"short_desc",
-		"author",
-		"author_email",
-		"github_username",
-		"web",
-		"github_url",
 		"repo_root",
 		"install_requires",
 		"extras_require",
-		"project_urls",
-
-		"import_name",
 		]
 
 __copyright__ = """
@@ -40,23 +27,9 @@ __copyright__ = """
 """
 
 __version__ = "0.5.4"
-modname = "attr_utils"
-pypi_name = "attr_utils"
-import_name = "attr_utils"
-__license__ = "MIT License"
-short_desc = 'Utilities to augment attrs.'
-__author__ = author = 'Dominic Davis-Foster'
-author_email = 'dominic@davis-foster.co.uk'
-github_username = "domdfcoding"
-web = github_url = "https://github.com/domdfcoding/attr_utils"
+
 repo_root = pathlib.Path(__file__).parent
 install_requires = (repo_root / "requirements.txt").read_text(encoding="utf-8").split('\n')
-extras_require = {'sphinx': ['sphinx>=3.0.3', 'sphinx_toolbox>=1.4.0'], 'all': ['sphinx>=3.0.3', 'sphinx_toolbox>=1.4.0']}
-
-
-
-project_urls = {
-		"Documentation": "https://attr_utils.readthedocs.io",
-		"Issue Tracker": f"{github_url}/issues",
-		"Source Code": github_url,
+extras_require = {
+		'sphinx': ['sphinx>=3.0.3', 'sphinx_toolbox>=1.4.0'], 'all': ['sphinx>=3.0.3', 'sphinx_toolbox>=1.4.0']
 		}

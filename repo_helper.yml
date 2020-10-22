@@ -26,7 +26,6 @@ travis_pypi_secure: "OvrT09tqNOgpF6SalBpv8fjA3fxSaMKR6xAUCX1jzShKRcMjqgcLb2S8wZ+
 
 exclude_files:
   - tox
-  - setup_cfg
 
 tox_testenv_extras: sphinx
 
@@ -37,3 +36,6 @@ extra_sphinx_extensions:
 sphinx_conf_epilogue:
   - set_type_checking_flag = True
   - "intersphinx_mapping['sphinx_toolbox'] = ('https://sphinx-toolbox.readthedocs.io/en/latest/', None)"
+
+mypy_plugins:
+  - attr_utils.mypy_plugin
