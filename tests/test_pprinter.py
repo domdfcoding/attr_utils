@@ -57,8 +57,7 @@ def test_device():
 					},
 			)
 
-	assert repr(d) == dedent(
-			"""tests.test_pprinter.Device(
+	expected = """tests.test_pprinter.Device(
 	device_id=1000,
 	display_name='Television',
 	device_type=<DeviceType.RC: 1>,
@@ -68,7 +67,7 @@ def test_device():
 		'ports': collections.Counter({<Port.HDMI: 1>: 3, <Port.VGA: 2>: 1})
 	}
 )"""
-			).expandtabs(4)
+	assert repr(d) == dedent(expected).expandtabs(4)
 
 
 def test_dunders():

@@ -73,39 +73,28 @@ def test_device():
 
 	assert d.to_dict() == {
 			"device_id": 1000,
-			"display_name": 'Television',
+			"display_name": "Television",
 			"device_type": DeviceType.RC,
 			"configuration": {
-					'make': 'Samsung',
-					'smart': True,
-					'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
+					"make": "Samsung",
+					"smart": True,
+					"ports": Counter({Port.HDMI: 3, Port.VGA: 1}),
 					},
 			}
 
-	assert Device.from_dict({
+	device = Device.from_dict({
 			"device_id": 1000,
-			"display_name": 'Television',
+			"display_name": "Television",
 			"device_type": DeviceType.RC,
 			"configuration": {
-					'make': 'Samsung',
-					'smart': True,
-					'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
+					"make": "Samsung",
+					"smart": True,
+					"ports": Counter({Port.HDMI: 3, Port.VGA: 1}),
 					},
-			}) == d
+			})
 
-	assert isinstance(
-			Device.from_dict({
-					"device_id": 1000,
-					"display_name": 'Television',
-					"device_type": DeviceType.RC,
-					"configuration": {
-							'make': 'Samsung',
-							'smart': True,
-							'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
-							},
-					}),
-			Device
-			)
+	assert device == d
+	assert isinstance(device, Device)
 
 
 def test_collection_types():
@@ -138,53 +127,55 @@ def test_enhanced_device():
 
 	assert attr.asdict(e) == {
 			"device_id": 1000,
-			"display_name": 'Television',
+			"display_name": "Television",
 			"device_type": DeviceType.RC,
 			"configuration": {
-					'make': 'Samsung',
-					'smart': True,
-					'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
+					"make": "Samsung",
+					"smart": True,
+					"ports": Counter({Port.HDMI: 3, Port.VGA: 1}),
 					},
-			"warp_drive": "Engaged!"
+			"warp_drive": "Engaged!",
 			}
 
 	assert e.to_dict() == {
 			"device_id": 1000,
-			"display_name": 'Television',
+			"display_name": "Television",
 			"device_type": DeviceType.RC,
 			"configuration": {
-					'make': 'Samsung',
-					'smart': True,
-					'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
+					"make": "Samsung",
+					"smart": True,
+					"ports": Counter({Port.HDMI: 3, Port.VGA: 1}),
 					},
-			"warp_drive": "Engaged!"
+			"warp_drive": "Engaged!",
 			}
 
-	assert EnhancedDevice.from_dict({
-			"device_id": 1000,
-			"display_name": 'Television',
-			"device_type": DeviceType.RC,
-			"configuration": {
-					'make': 'Samsung',
-					'smart': True,
-					'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
-					},
-			"warp_drive": "Engaged!"
-			}) == e
+	assert (
+			EnhancedDevice.from_dict({
+					"device_id": 1000,
+					"display_name": "Television",
+					"device_type": DeviceType.RC,
+					"configuration": {
+							"make": "Samsung",
+							"smart": True,
+							"ports": Counter({Port.HDMI: 3, Port.VGA: 1}),
+							},
+					"warp_drive": "Engaged!",
+					}) == e
+			)
 
 	assert isinstance(
 			EnhancedDevice.from_dict({
 					"device_id": 1000,
-					"display_name": 'Television',
+					"display_name": "Television",
 					"device_type": DeviceType.RC,
 					"configuration": {
-							'make': 'Samsung',
-							'smart': True,
-							'ports': Counter({Port.HDMI: 3, Port.VGA: 1}),
+							"make": "Samsung",
+							"smart": True,
+							"ports": Counter({Port.HDMI: 3, Port.VGA: 1}),
 							},
-					"warp_drive": "Engaged!"
+					"warp_drive": "Engaged!",
 					}),
-			EnhancedDevice
+			EnhancedDevice,
 			)
 
 
@@ -235,9 +226,7 @@ def test_sdjson():
 					),
 			)
 
-	assert sdjson.dumps(
-			d, indent=2
-			) == """{
+	expected = """{
   "device_id": 1000,
   "display_name": "Television",
   "device_type": 1,
@@ -250,6 +239,8 @@ def test_sdjson():
     }
   }
 }"""
+
+	assert sdjson.dumps(d, indent=2) == expected
 
 	loaded_device = Device.from_dict(sdjson.loads(sdjson.dumps(d)))
 	# the Counter won't be equal because the enum's have become disassociated

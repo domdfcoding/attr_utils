@@ -5,7 +5,7 @@ from attr import attrib, attrs
 from attr_utils.serialise import serde
 
 person_dict = {"contact": {"personal": {"name": "John"}, "phone": "555-112233"}}
-city_dict = {"name": "Tel-Aviv", 'zipcode': "6100000"}
+city_dict = {"name": "Tel-Aviv", "zipcode": "6100000"}
 
 name_path = ["contact", "personal", "name"]
 phone_path = ["contact", "phone"]
@@ -57,7 +57,7 @@ def test_ser(snapshot):
 
 def test_ser_with_default_values(snapshot):
 	p_dict = City(name="Tel-Aviv", zipcode="6100000").to_dict()
-	snapshot.assert_match({"name": p_dict.get('name'), "zipcode": p_dict.get('zipcode')})
+	snapshot.assert_match({"name": p_dict.get("name"), "zipcode": p_dict.get("zipcode")})
 
 
 def test_quirky_object(snapshot):
