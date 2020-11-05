@@ -11,7 +11,7 @@ phone_path = ["contact", "phone"]
 
 @serde
 @attrs
-class Person(object):
+class Person:
 	name = attrib(metadata={"to": name_path, "from": name_path})
 	phone = attrib(metadata={"to": phone_path, "from": phone_path})
 
@@ -43,7 +43,7 @@ def test_deser_baseline(benchmark):
 
 	def baseline():
 		Person(
-				name=person_dict["contact"]["personal"]["name"],
+				name=person_dict["contact"]["personal"]["name"],  # type: ignore
 				phone=person_dict["contact"]["phone"],
 				)
 

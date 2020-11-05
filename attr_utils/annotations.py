@@ -185,7 +185,7 @@ def attrib(
 		hash=None,
 		init=True,
 		metadata=None,
-		annotation: Union[Type, object] = attr.NOTHING,  # type: ignore
+		annotation: Union[Type, object] = attr.NOTHING,
 		converter=None,
 		factory=None,
 		kw_only=False,

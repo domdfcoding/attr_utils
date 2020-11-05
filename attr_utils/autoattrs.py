@@ -168,7 +168,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		"""
 
 		# Size varies depending on docutils config
-		tab_size = self.env.app.config.docutils_tab_width  # type: ignore
+		tab_size = self.env.app.config.docutils_tab_width
 
 		if self.object.__doc__:
 			docstring = dedent(self.object.__doc__).expandtabs(tab_size).split("\n")

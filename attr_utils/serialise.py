@@ -63,10 +63,7 @@ API Reference
 #
 
 # stdlib
-from typing import Any, Callable, Mapping, MutableMapping, Optional, Type, Union, overload
-
-# this package
-from attr_utils.utils import AttrsClass
+from typing import TYPE_CHECKING, Any, Callable, Mapping, MutableMapping, Optional, Type, Union, overload
 
 try:
 	# 3rd party
@@ -78,6 +75,12 @@ except ImportError:
 from attr import asdict, fields
 
 __all__ = ["serde"]
+
+if TYPE_CHECKING:
+	AttrsClass = Any
+else:
+	# this package
+	from attr_utils.utils import AttrsClass
 
 
 @overload
@@ -177,10 +180,10 @@ def serde(
 		def from_dict(cls, d: Mapping[str, Any]):
 			from_fields = list(map(lambda a: (a, get_in([from_key], a.metadata, [a.name])), fields(cls)))
 
-			return cls(**dict(map(  # type: ignore
-				lambda f: (f[0].name, get_in(f[1], d, f[0].default)),
-				from_fields,
-				)))
+			return cls(**dict(map(
+					lambda f: (f[0].name, get_in(f[1], d, f[0].default)),
+					from_fields,
+					)))
 
 		def to_dict(self, convert_values: bool = False) -> MutableMapping[str, Any]:
 			to_fields = pipe(
@@ -211,7 +214,7 @@ def serde(
 		"""
 		from_dict.__qualname__ = f"{cls.__name__}.from_dict"
 		from_dict.__module__ = cls.__module__
-		cls.from_dict = classmethod(from_dict)  # type: ignore
+		cls.from_dict = classmethod(from_dict)
 
 		to_dict.__doc__ = f"""
 Returns a dictionary containing the contents of the :class:`~.{cls.__name__}` object.
@@ -220,7 +223,7 @@ Returns a dictionary containing the contents of the :class:`~.{cls.__name__}` ob
 """
 		to_dict.__qualname__ = f"{cls.__name__}.to_dict"
 		to_dict.__module__ = cls.__module__
-		cls.to_dict = to_dict  # type: ignore
+		cls.to_dict = to_dict
 
 		return cls
 
