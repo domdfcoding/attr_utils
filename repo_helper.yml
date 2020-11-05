@@ -40,3 +40,7 @@ sphinx_conf_epilogue:
 
 mypy_plugins:
   - attr_utils.mypy_plugin
+
+classifiers:
+ - 'Intended Audience :: Developers'
+ - 'Topic :: Software Development :: Libraries :: Python Modules'
