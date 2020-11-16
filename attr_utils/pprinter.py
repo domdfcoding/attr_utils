@@ -58,7 +58,7 @@ prettyprinter.install_extras(["attrs"])
 
 def is_registered(type, *, check_superclasses=False, check_deferred=True, register_deferred=True):
 	if not check_deferred and register_deferred:
-		raise ValueError('register_deferred may not be True when check_deferred is False')
+		raise ValueError("register_deferred may not be True when check_deferred is False")
 
 	if type in pretty_dispatch.registry:
 		return True

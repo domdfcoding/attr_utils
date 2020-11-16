@@ -192,7 +192,7 @@ def test_dunders():
 	assert Device.from_dict.__module__ == "tests.test_serialise"
 	assert Device.from_dict.__name__ == "from_dict"
 	assert Device.from_dict.__qualname__ == "Device.from_dict"
-	assert Device.from_dict.__annotations__ == {"d": Mapping[str, Any]}
+	assert Device.from_dict.__annotations__ == {'d': Mapping[str, Any]}
 
 	assert EnhancedDevice.to_dict.__module__ == "tests.test_serialise"
 	assert EnhancedDevice.to_dict.__name__ == "to_dict"
@@ -205,7 +205,7 @@ def test_dunders():
 	assert EnhancedDevice.from_dict.__module__ == "tests.test_serialise"
 	assert EnhancedDevice.from_dict.__name__ == "from_dict"
 	assert EnhancedDevice.from_dict.__qualname__ == "Device.from_dict"
-	assert EnhancedDevice.from_dict.__annotations__ == {"d": Mapping[str, Any]}
+	assert EnhancedDevice.from_dict.__annotations__ == {'d': Mapping[str, Any]}
 
 
 @runtime_checkable

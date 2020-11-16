@@ -146,7 +146,7 @@ def add_init_annotations(obj: Callable) -> Callable:
 	attrs = attr.fields(obj)  # type: ignore
 
 	for a in attrs:
-		arg_name = a.name.lstrip("_")
+		arg_name = a.name.lstrip('_')
 
 		if a.init is True and a.type is not None:
 			if a.converter is None:
@@ -276,7 +276,7 @@ def setup(app: "Sphinx") -> Dict[str, Any]:
 
 def parse_occupations(occupations: Iterable[str]) -> Iterable[str]:  # pragma: no cover
 	if isinstance(occupations, str):
-		return [x.strip() for x in occupations.split(",")]
+		return [x.strip() for x in occupations.split(',')]
 	else:
 		return [str(x) for x in occupations]
 

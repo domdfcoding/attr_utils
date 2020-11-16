@@ -171,7 +171,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		tab_size = self.env.app.config.docutils_tab_width
 
 		if self.object.__doc__:
-			docstring = dedent(self.object.__doc__).expandtabs(tab_size).split("\n")
+			docstring = dedent(self.object.__doc__).expandtabs(tab_size).split('\n')
 		else:
 			docstring = []
 
@@ -240,7 +240,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 				doc = member_docstrings[field]
 
 			field_entry = [f":param {field}:", *doc]
-			parameter_docs.append(" ".join(field_entry))
+			parameter_docs.append(' '.join(field_entry))
 			all_docs[field] = ''.join(doc).strip()
 
 		self.add_line('', sourcename)
