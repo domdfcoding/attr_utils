@@ -51,13 +51,24 @@ for more information.
 from typing import Callable, List, MutableMapping, Optional
 
 # 3rd party
-from mypy.nodes import ARG_OPT, ARG_POS, MDEF, Argument, Block, ClassDef, FuncDef, PassStmt, SymbolTableNode, Var
-from mypy.plugin import ClassDefContext, Plugin, SemanticAnalyzerPluginInterface
-from mypy.plugins.common import add_method_to_class
-from mypy.semanal_shared import set_callable_name
-from mypy.types import AnyType, CallableType, Instance, NoneType, Type, TypeOfAny, TypeType, TypeVarDef
-from mypy.typevars import fill_typevars
-from mypy.util import get_unique_redefinition_name
+from mypy.nodes import (  # nodep
+		ARG_OPT,
+		ARG_POS,
+		MDEF,
+		Argument,
+		Block,
+		ClassDef,
+		FuncDef,
+		PassStmt,
+		SymbolTableNode,
+		Var
+		)
+from mypy.plugin import ClassDefContext, Plugin, SemanticAnalyzerPluginInterface  # nodep
+from mypy.plugins.common import add_method_to_class  # nodep
+from mypy.semanal_shared import set_callable_name  # nodep
+from mypy.types import AnyType, CallableType, Instance, Type, TypeOfAny, TypeType, TypeVarDef  # nodep
+from mypy.typevars import fill_typevars  # nodep
+from mypy.util import get_unique_redefinition_name  # nodep
 
 __all__ = ["attr_utils_serialise_serde", "AttrUtilsPlugin", "add_classmethod_to_class", "plugin"]
 
@@ -78,8 +89,8 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext):
 	str_type = cls_def_ctx.api.named_type("__builtins__.str")
 	bool_type = cls_def_ctx.api.named_type("__builtins__.bool")
 	implicit_any = AnyType(TypeOfAny.special_form)
-	mapping = cls_def_ctx.api.lookup_fully_qualified_or_none('typing.Mapping')
-	mutable_mapping = cls_def_ctx.api.lookup_fully_qualified_or_none('typing.MutableMapping')
+	mapping = cls_def_ctx.api.lookup_fully_qualified_or_none("typing.Mapping")
+	mutable_mapping = cls_def_ctx.api.lookup_fully_qualified_or_none("typing.MutableMapping")
 	mapping_str_any_type = Instance(mapping.node, [str_type, implicit_any])  # type: ignore
 	mutable_mapping_str_any_type = Instance(mutable_mapping.node, [str_type, implicit_any])  # type: ignore
 	# # maybe_mapping_str_any = UnionType.make_union([typ, NoneType()])(mapping_str_any_type)
@@ -93,7 +104,7 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext):
 				api=cls_def_ctx.api,
 				cls=cls_def_ctx.cls,
 				name="to_dict",
-				args=[Argument(Var('convert_values', bool_type), bool_type, None, ARG_OPT)],
+				args=[Argument(Var("convert_values", bool_type), bool_type, None, ARG_OPT)],
 				return_type=mutable_mapping_str_any_type,
 				)
 
@@ -172,12 +183,12 @@ def add_classmethod_to_class(
 			cls.defs.body.remove(sym.node)
 
 	cls_type = cls_type or fill_typevars(info)
-	function_type = api.named_type('__builtins__.function')
+	function_type = api.named_type("__builtins__.function")
 
-	args = [Argument(Var('cls'), cls_type, None, ARG_POS)] + args
+	args = [Argument(Var("cls"), cls_type, None, ARG_POS)] + args
 	arg_types, arg_names, arg_kinds = [], [], []
 	for arg in args:
-		assert arg.type_annotation, 'All arguments must be fully typed.'
+		assert arg.type_annotation, "All arguments must be fully typed."
 		arg_types.append(arg.type_annotation)
 		arg_names.append(arg.variable.name)
 		arg_kinds.append(arg.kind)

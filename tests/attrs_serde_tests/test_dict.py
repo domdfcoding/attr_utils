@@ -13,7 +13,7 @@ phone_path = ["contact", "phone"]
 
 @serde
 @attrs
-class Person(object):
+class Person:
 	name = attrib(metadata={"to": name_path, "from": name_path})
 	phone = attrib(metadata={"to": phone_path, "from": phone_path})
 
@@ -27,14 +27,14 @@ class Contact(Person):
 
 @serde
 @attrs
-class City(object):
+class City:
 	name = attrib()
 	zipcode = attrib()
 
 
 @serde(from_key="get", to_key="set")
 @attrs
-class GetSet(object):
+class GetSet:
 	name = attrib(metadata={"set": ["nameeee"], "get": ["name"]})
 
 	phone = attrib(metadata={"set": ["phoneeee"], "get": ["phone"]})

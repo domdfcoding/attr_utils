@@ -88,12 +88,12 @@ from typing import Any, Dict, List, MutableMapping, Optional, Tuple, Type
 
 # 3rd party
 import attr
-from sphinx.application import Sphinx
-from sphinx.ext.autodoc import ClassDocumenter, Documenter
-from sphinx.pycode import ModuleAnalyzer
-from sphinx_toolbox import __version__
-from sphinx_toolbox.more_autosummary import PatchedAutoSummClassDocumenter
-from sphinx_toolbox.utils import Param, flag, parse_parameters, unknown_module_warning
+from sphinx.application import Sphinx  # nodep
+from sphinx.ext.autodoc import ClassDocumenter, Documenter  # nodep
+from sphinx.pycode import ModuleAnalyzer  # nodep
+from sphinx_toolbox import __version__  # nodep
+from sphinx_toolbox.more_autosummary import PatchedAutoSummClassDocumenter  # nodep
+from sphinx_toolbox.utils import Param, flag, parse_parameters, unknown_module_warning  # nodep
 
 # this package
 from attr_utils.docstrings import add_attrs_doc
@@ -171,7 +171,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		tab_size = self.env.app.config.docutils_tab_width
 
 		if self.object.__doc__:
-			docstring = dedent(self.object.__doc__).expandtabs(tab_size).split("\n")
+			docstring = dedent(self.object.__doc__).expandtabs(tab_size).split('\n')
 		else:
 			docstring = []
 
@@ -240,7 +240,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 				doc = member_docstrings[field]
 
 			field_entry = [f":param {field}:", *doc]
-			parameter_docs.append(" ".join(field_entry))
+			parameter_docs.append(' '.join(field_entry))
 			all_docs[field] = ''.join(doc).strip()
 
 		self.add_line('', sourcename)
