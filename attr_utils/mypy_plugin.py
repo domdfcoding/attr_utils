@@ -51,13 +51,24 @@ for more information.
 from typing import Callable, List, MutableMapping, Optional
 
 # 3rd party
-from mypy.nodes import ARG_OPT, ARG_POS, MDEF, Argument, Block, ClassDef, FuncDef, PassStmt, SymbolTableNode, Var
-from mypy.plugin import ClassDefContext, Plugin, SemanticAnalyzerPluginInterface
-from mypy.plugins.common import add_method_to_class
-from mypy.semanal_shared import set_callable_name
-from mypy.types import AnyType, CallableType, Instance, NoneType, Type, TypeOfAny, TypeType, TypeVarDef
-from mypy.typevars import fill_typevars
-from mypy.util import get_unique_redefinition_name
+from mypy.nodes import (  # nodep
+		ARG_OPT,
+		ARG_POS,
+		MDEF,
+		Argument,
+		Block,
+		ClassDef,
+		FuncDef,
+		PassStmt,
+		SymbolTableNode,
+		Var
+		)
+from mypy.plugin import ClassDefContext, Plugin, SemanticAnalyzerPluginInterface  # nodep
+from mypy.plugins.common import add_method_to_class  # nodep
+from mypy.semanal_shared import set_callable_name  # nodep
+from mypy.types import AnyType, CallableType, Instance, Type, TypeOfAny, TypeType, TypeVarDef  # nodep
+from mypy.typevars import fill_typevars  # nodep
+from mypy.util import get_unique_redefinition_name  # nodep
 
 __all__ = ["attr_utils_serialise_serde", "AttrUtilsPlugin", "add_classmethod_to_class", "plugin"]
 

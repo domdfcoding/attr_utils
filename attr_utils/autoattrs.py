@@ -88,12 +88,12 @@ from typing import Any, Dict, List, MutableMapping, Optional, Tuple, Type
 
 # 3rd party
 import attr
-from sphinx.application import Sphinx
-from sphinx.ext.autodoc import ClassDocumenter, Documenter
-from sphinx.pycode import ModuleAnalyzer
-from sphinx_toolbox import __version__
-from sphinx_toolbox.more_autosummary import PatchedAutoSummClassDocumenter
-from sphinx_toolbox.utils import Param, flag, parse_parameters, unknown_module_warning
+from sphinx.application import Sphinx  # nodep
+from sphinx.ext.autodoc import ClassDocumenter, Documenter  # nodep
+from sphinx.pycode import ModuleAnalyzer  # nodep
+from sphinx_toolbox import __version__  # nodep
+from sphinx_toolbox.more_autosummary import PatchedAutoSummClassDocumenter  # nodep
+from sphinx_toolbox.utils import Param, flag, parse_parameters, unknown_module_warning  # nodep
 
 # this package
 from attr_utils.docstrings import add_attrs_doc

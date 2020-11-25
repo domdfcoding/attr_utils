@@ -257,7 +257,7 @@ def setup(app: "Sphinx") -> Dict[str, Any]:
 	"""
 
 	# 3rd party
-	from sphinx_toolbox.more_autodoc.typehints import docstring_hooks
+	from sphinx_toolbox.more_autodoc.typehints import docstring_hooks  # nodep
 
 	docstring_hooks.append((attr_docstring_hook, 50))
 
