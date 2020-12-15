@@ -54,9 +54,9 @@ def add_attrs_doc(obj: Type) -> Type:
 
 	new_docstrings = {
 			**base_new_docstrings,
-			"__repr__": repr_doc_template.format(obj.__name__),
-			"__setstate__": pickle_state_template.format(attrs_docstring),
-			"__getstate__": pickle_state_template.format(attrs_docstring),
+			"__repr__": repr_doc_template.format(name=obj.__name__),
+			"__setstate__": pickle_state_template.format(doc=attrs_docstring),
+			"__getstate__": pickle_state_template.format(doc=attrs_docstring),
 			}
 
 	if hasattr(obj, "__ne__"):

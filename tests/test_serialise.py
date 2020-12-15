@@ -1,7 +1,8 @@
 # stdlib
+import sys
 from collections import Counter
 from enum import IntEnum
-from typing import Any, Mapping, MutableMapping, no_type_check
+from typing import Any, Mapping, MutableMapping, get_type_hints, no_type_check
 
 # 3rd party
 import attr
@@ -181,31 +182,45 @@ def test_enhanced_device():
 
 @no_type_check
 def test_dunders():
-	assert Device.to_dict.__module__ == "tests.test_serialise"
-	assert Device.to_dict.__name__ == "to_dict"
-	assert Device.to_dict.__qualname__ == "Device.to_dict"
-	assert Device.to_dict.__annotations__ == {
+	from_dict_annotations = {'d': Mapping[str, Any]}
+	to_dict_annotations = {
 			"convert_values": bool,
 			"return": MutableMapping[str, Any],
 			}
+
+	if sys.version_info >= (3, 10):
+		from_dict_annotations_pep563 = {'d': "Mapping[str, Any]"}
+		to_dict_annotations_pep563 = {
+				"convert_values": "bool",
+				"return": "MutableMapping[str, Any]",
+				}
+	else:
+		from_dict_annotations_pep563 = from_dict_annotations
+		to_dict_annotations_pep563 = to_dict_annotations
+
+	assert Device.to_dict.__module__ == "tests.test_serialise"
+	assert Device.to_dict.__name__ == "to_dict"
+	assert Device.to_dict.__qualname__ == "Device.to_dict"
+	assert Device.to_dict.__annotations__ == to_dict_annotations_pep563
+	assert get_type_hints(Device.to_dict) == to_dict_annotations
 
 	assert Device.from_dict.__module__ == "tests.test_serialise"
 	assert Device.from_dict.__name__ == "from_dict"
 	assert Device.from_dict.__qualname__ == "Device.from_dict"
-	assert Device.from_dict.__annotations__ == {'d': Mapping[str, Any]}
+	assert Device.from_dict.__annotations__ == from_dict_annotations_pep563
+	assert get_type_hints(Device.from_dict) == from_dict_annotations
 
 	assert EnhancedDevice.to_dict.__module__ == "tests.test_serialise"
 	assert EnhancedDevice.to_dict.__name__ == "to_dict"
 	assert EnhancedDevice.to_dict.__qualname__ == "Device.to_dict"
-	assert EnhancedDevice.to_dict.__annotations__ == {
-			"convert_values": bool,
-			"return": MutableMapping[str, Any],
-			}
+	assert EnhancedDevice.to_dict.__annotations__ == to_dict_annotations_pep563
+	assert get_type_hints(EnhancedDevice.to_dict) == to_dict_annotations
 
 	assert EnhancedDevice.from_dict.__module__ == "tests.test_serialise"
 	assert EnhancedDevice.from_dict.__name__ == "from_dict"
 	assert EnhancedDevice.from_dict.__qualname__ == "Device.from_dict"
-	assert EnhancedDevice.from_dict.__annotations__ == {'d': Mapping[str, Any]}
+	assert EnhancedDevice.from_dict.__annotations__ == from_dict_annotations_pep563
+	assert get_type_hints(EnhancedDevice.from_dict) == from_dict_annotations
 
 
 @runtime_checkable

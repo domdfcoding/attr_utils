@@ -1,8 +1,9 @@
 # stdlib
+import sys
 from collections import Counter
 from enum import IntEnum
 from textwrap import dedent
-from typing import Any, Dict
+from typing import Any, Dict, get_type_hints
 
 # 3rd party
 import attr
@@ -74,4 +75,10 @@ def test_dunders():
 	assert Device.__repr__.__module__ == "tests.test_pprinter"
 	assert Device.__repr__.__name__ == "__repr__"
 	assert Device.__repr__.__qualname__ == "Device.__repr__"
-	assert Device.__repr__.__annotations__ == {"return": str}
+
+	if sys.version_info >= (3, 10):
+		assert Device.__repr__.__annotations__ == {"return": "str"}
+	else:
+		assert Device.__repr__.__annotations__ == {"return": str}
+
+	assert get_type_hints(Device.__repr__) == {"return": str}
