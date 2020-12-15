@@ -9,7 +9,9 @@ version: '0.5.4'
 license: 'MIT'
 short_desc: 'Utilities to augment attrs.'
 
-enable_conda: False
+conda_channels:
+ - domdfcoding
+ - conda-forge
 
 python_versions:
   - 3.6
@@ -22,7 +24,6 @@ extras_require:
   sphinx:
     - "sphinx>=3.0.3"
     - "sphinx_toolbox>=1.4.0"
-
 
 tox_testenv_extras: sphinx
 
