@@ -152,10 +152,9 @@ class AttrUtilsPlugin(Plugin):
 
 	def get_class_decorator_hook(self, fullname: str) -> Optional[Callable[[ClassDefContext], None]]:
 		"""
-		Allows mypy to handle decorators that add extra methods to classes
+		Allows mypy to handle decorators that add extra methods to classes.
 
 		:param fullname: The full name of the decorator.
-		:return:
 		"""
 
 		return decorator_registry.get(fullname, None)

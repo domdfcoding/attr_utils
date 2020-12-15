@@ -56,7 +56,13 @@ _T = TypeVar("_T")
 prettyprinter.install_extras(["attrs"])
 
 
-def is_registered(type, *, check_superclasses=False, check_deferred=True, register_deferred=True):
+def is_registered(
+		type,  # noqa: A002  # pylint: disable=redefined-builtin
+		*,
+		check_superclasses: bool = False,
+		check_deferred: bool = True,
+		register_deferred: bool = True,
+		):
 	if not check_deferred and register_deferred:
 		raise ValueError("register_deferred may not be True when check_deferred is False")
 

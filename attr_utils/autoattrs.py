@@ -117,8 +117,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 	.. versionchanged:: 0.3.0
 
 		Added support for `autodocsumm <https://github.com/Chilipp/autodocsumm>`_.
-
-	"""
+	"""  # noqa: D400
 
 	objtype = "attrs"
 	directivetype = "class"
@@ -127,7 +126,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 			**PatchedAutoSummClassDocumenter.option_spec,
 			"no-init-attribs": flag,
 			}
-	object: Type[AttrsClass]
+	object: Type[AttrsClass]  # noqa: A003  # pylint: disable=redefined-builtin
 
 	@classmethod
 	def can_document_member(cls, member: Any, membername: str, isattr: bool, parent: Any) -> bool:
@@ -164,7 +163,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 	def _get_docstring(self) -> Tuple[Dict[str, Param], List[str], List[str]]:
 		"""
-		Returns params, pre_output, post_output
+		Returns params, pre_output, post_output.
 		"""
 
 		# Size varies depending on docutils config
@@ -179,8 +178,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 	def import_object(self, raiseerror: bool = False) -> bool:
 		"""
-		Import the object given by ``self.modname`` and ``self.objpath`` and set
-		it as ``self.object``.
+		Import the object given by ``self.modname`` and ``self.objpath`` and set it as ``self.object``.
 
 		If the object is an `attrs <https://www.attrs.org/>`__ class
 		:func:`attr_utils.docstrings.add_attrs_doc` will be called.
@@ -285,9 +283,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 		:param members:
 		:param want_all:
-
-		:return:
-		"""
+		"""  # noqa: D400
 
 		attrib_names = (a.name for a in attr.fields(self.object) if a.init)
 

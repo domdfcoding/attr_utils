@@ -181,14 +181,14 @@ def add_init_annotations(obj: Callable) -> Callable:
 def attrib(
 		default=attr.NOTHING,
 		validator=None,
-		repr=True,
-		hash=None,
+		repr: bool = True,  # noqa: A002  # pylint: disable=redefined-builtin
+		hash=None,  # noqa: A002  # pylint: disable=redefined-builtin
 		init=True,
 		metadata=None,
 		annotation: Union[Type, object] = attr.NOTHING,
 		converter=None,
 		factory=None,
-		kw_only=False,
+		kw_only: bool = False,
 		eq=None,
 		order=None,
 		**kwargs,
@@ -203,7 +203,7 @@ def attrib(
 	See the documentation for :func:`attr.ib` for descriptions of the other arguments.
 
 	.. versionadded:: 0.2.0
-	"""
+	"""  # noqa: D400
 
 	if annotation is not attr.NOTHING:
 		if metadata is None:
