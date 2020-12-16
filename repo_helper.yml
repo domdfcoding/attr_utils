@@ -46,3 +46,9 @@ tox_unmanaged:
   - tox
   - envlists
   - testenv
+
+keywords:
+ - attrs
+ - serde
+ - sphinx
+ - documentation

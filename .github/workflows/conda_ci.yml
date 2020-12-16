@@ -32,9 +32,7 @@ jobs:
           $CONDA/bin/conda install conda-build
 
           $CONDA/bin/conda config --add channels domdfcoding
-
           $CONDA/bin/conda config --add channels conda-forge
-
 
       - name: "Build and install package"
         run: |
