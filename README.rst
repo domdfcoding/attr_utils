@@ -91,7 +91,7 @@ attr_utils
 .. |language| image:: https://img.shields.io/github/languages/top/domdfcoding/attr_utils
 	:alt: GitHub top language
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/domdfcoding/attr_utils/v0.5.4
+.. |commits-since| image:: https://img.shields.io/github/commits-since/domdfcoding/attr_utils/v0.5.5
 	:target: https://github.com/domdfcoding/attr_utils/pulse
 	:alt: GitHub commits since tagged version
 
