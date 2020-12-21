@@ -22,7 +22,7 @@ python_versions:
 
 extras_require:
   sphinx:
-    - "sphinx>=3.0.3"
+    - "sphinx>=3.0.3,<3.4.0"
     - "sphinx_toolbox>=1.4.0"
 
 tox_testenv_extras: sphinx
