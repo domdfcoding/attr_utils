@@ -54,3 +54,6 @@ third_party_version_matrix:
   - 20.1
   - 20.2
   - latest
+
+tox_unmanaged:
+ - pytest
