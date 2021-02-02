@@ -27,7 +27,7 @@
 #
 
 # stdlib
-from http import HTTPStatus
+from pickle import PicklingError
 from typing import Any, Dict, NamedTuple, Sequence, Tuple
 
 # 3rd party
@@ -93,7 +93,10 @@ def app_params(
 
 @pytest.fixture()
 def page(app, request) -> BeautifulSoup:
-	app.build(force_all=True)
+	try:
+		app.build(force_all=True)
+	except PicklingError:
+		app.build(force_all=True)
 
 	pagename = request.param
 	c = (app.outdir / pagename).read_text()
