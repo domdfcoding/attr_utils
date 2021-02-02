@@ -8,9 +8,9 @@ from pytest_regressions.file_regression import FileRegressionFixture  # type: ig
 from sphinx_toolbox.testing import check_html_regression
 
 
-def test_build(app):
-	app.build()
-	app.build()
+def test_build(patched_app):
+	patched_app.build()
+	patched_app.build()
 
 
 @pytest.mark.parametrize("page", ["annotations.html", "docstrings.html"], indirect=True)
