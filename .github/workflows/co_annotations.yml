@@ -20,9 +20,11 @@ jobs:
       - name: Build Python co_annotations 🐍
         run: |
           git clone https://github.com/larryhastings/co_annotations
+          cd co_annotations
           ./configure
           make
           make install
+          cd ..
 
       - name: Install dependencies 🔧
         run: |
