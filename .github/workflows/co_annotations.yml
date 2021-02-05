@@ -1,0 +1,38 @@
+# Run tests on Python 3.10 with co_annotations future import
+---
+name: co_annotations
+
+on:
+  push:
+
+jobs:
+  tests:
+    name: "ubuntu-20.04 / co_annotations"
+    runs-on: "ubuntu-20.04"
+
+    strategy:
+      fail-fast: False
+
+    steps:
+      - name: Checkout 🛎️
+        uses: "actions/checkout@v2"
+
+      - name: Build Python co_annotations 🐍
+        run: |
+          git clone https://github.com/larryhastings/co_annotations
+          ./configure
+          make
+          make install
+
+      - name: Install dependencies 🔧
+        run: |
+          python -VV
+          python -m site
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --upgrade tox virtualenv
+          python -m pip install --upgrade coverage_pyver_pragma domdf_python_tools
+
+      - name: "Run Tests for Python "
+        run: |
+          python co_annotations.py
+          python -m tox -e "py310-dev-attrs{19.3,20.1,20.2,latest},build"
