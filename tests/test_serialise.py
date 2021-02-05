@@ -226,8 +226,7 @@ def test_dunders():
 @runtime_checkable
 class HasToDict(Protocol):
 
-	def to_dict(self):
-		...
+	def to_dict(self): ...
 
 
 @register_encoder(HasToDict)

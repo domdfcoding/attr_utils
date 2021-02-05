@@ -53,12 +53,10 @@ class Device:
 			)
 
 	@overload
-	def __getitem__(self, item: int) -> str:
-		...
+	def __getitem__(self, item: int) -> str: ...
 
 	@overload
-	def __getitem__(self, item: slice) -> List[str]:
-		...
+	def __getitem__(self, item: slice) -> List[str]: ...
 
 	def __getitem__(self, item: Union[int, slice]) -> Union[str, List[str]]:
 		"""
