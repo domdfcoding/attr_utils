@@ -1,4 +1,5 @@
 # stdlib
+import __future__
 import sys
 from collections import Counter
 from enum import IntEnum
@@ -76,7 +77,7 @@ def test_dunders():
 	assert Device.__repr__.__name__ == "__repr__"
 	assert Device.__repr__.__qualname__ == "Device.__repr__"
 
-	if sys.version_info >= (3, 10):
+	if sys.version_info >= (3, 10) and not hasattr(__future__, "co_annotations"):
 		assert Device.__repr__.__annotations__ == {"return": "str"}
 	else:
 		assert Device.__repr__.__annotations__ == {"return": str}

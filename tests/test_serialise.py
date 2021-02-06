@@ -12,6 +12,7 @@ from typing_extensions import Literal, Protocol, runtime_checkable
 
 # this package
 from attr_utils.serialise import serde
+import __future__
 
 
 class DeviceType(IntEnum):
@@ -188,7 +189,7 @@ def test_dunders():
 			"return": MutableMapping[str, Any],
 			}
 
-	if sys.version_info >= (3, 10):
+	if sys.version_info >= (3, 10) and not hasattr(__future__, "co_annotations"):
 		from_dict_annotations_pep563 = {'d': "Mapping[str, Any]"}
 		to_dict_annotations_pep563 = {
 				"convert_values": "bool",
