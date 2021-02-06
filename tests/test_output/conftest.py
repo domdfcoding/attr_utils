@@ -48,50 +48,50 @@ def rootdir():
 	(rdir / "test-root").maybe_make(parents=True)
 	return path(rdir)
 
-
-class AppParams(NamedTuple):
-	args: Sequence[Any]
-	kwargs: Dict[str, Any]
-
-
-@pytest.fixture()
-def app_params(
-		request: Any,
-		test_params: Dict,
-		sphinx_test_tempdir: path,
-		rootdir: path,
-		) -> Tuple[Sequence, Dict]:
-	"""
-	parameters that is specified by 'pytest.mark.sphinx' for
-	sphinx.application.Sphinx initialization
-	"""
-
-	# ##### process pytest.mark.sphinx
-
-	markers = request.node.iter_markers("sphinx")
-	pargs = {}
-	kwargs: Dict[str, Any] = {}
-
-	if markers is not None:
-		# to avoid stacking positional args
-		for info in reversed(list(markers)):
-			for i, a in enumerate(info.args):
-				pargs[i] = a
-			kwargs.update(info.kwargs)
-
-	args = [pargs[i] for i in sorted(pargs.keys())]
-
-	# ##### prepare Application params
-
-	testroot = "root"
-	kwargs["srcdir"] = srcdir = sphinx_test_tempdir / kwargs.get("srcdir", testroot)
-
-	# special support for sphinx/tests
-	if rootdir and not srcdir.exists():
-		testroot_path = rootdir / ("test-" + testroot)
-		testroot_path.copytree(srcdir)
-
-	return AppParams(args, kwargs)
+#
+# class AppParams(NamedTuple):
+# 	args: Sequence[Any]
+# 	kwargs: Dict[str, Any]
+#
+#
+# @pytest.fixture()
+# def app_params(
+# 		request: Any,
+# 		test_params: Dict,
+# 		sphinx_test_tempdir: path,
+# 		rootdir: path,
+# 		) -> Tuple[Sequence, Dict]:
+# 	"""
+# 	parameters that is specified by 'pytest.mark.sphinx' for
+# 	sphinx.application.Sphinx initialization
+# 	"""
+#
+# 	# ##### process pytest.mark.sphinx
+#
+# 	markers = request.node.iter_markers("sphinx")
+# 	pargs = {}
+# 	kwargs: Dict[str, Any] = {}
+#
+# 	if markers is not None:
+# 		# to avoid stacking positional args
+# 		for info in reversed(list(markers)):
+# 			for i, a in enumerate(info.args):
+# 				pargs[i] = a
+# 			kwargs.update(info.kwargs)
+#
+# 	args = [pargs[i] for i in sorted(pargs.keys())]
+#
+# 	# ##### prepare Application params
+#
+# 	testroot = "root"
+# 	kwargs["srcdir"] = srcdir = sphinx_test_tempdir / kwargs.get("srcdir", testroot)
+#
+# 	# special support for sphinx/tests
+# 	if rootdir and not srcdir.exists():
+# 		testroot_path = rootdir / ("test-" + testroot)
+# 		testroot_path.copytree(srcdir)
+#
+# 	return AppParams(args, kwargs)
 
 
 @pytest.fixture()

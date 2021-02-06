@@ -5,7 +5,6 @@ from typing import Any, Dict, List, Tuple
 import attr
 
 # this package
-from attr_utils.annotations import add_init_annotations
 from attr_utils.docstrings import add_attrs_doc
 
 
