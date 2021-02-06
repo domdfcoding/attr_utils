@@ -57,3 +57,5 @@ third_party_version_matrix:
 
 tox_unmanaged:
  - pytest
+
+min_coverage: 95
