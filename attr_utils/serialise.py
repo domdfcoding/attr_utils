@@ -88,7 +88,7 @@ def serde(
 		cls: Type,
 		from_key: str = ...,
 		to_key: str = ...,
-		) -> Type[AttrsClass]: ...  # pragma: no cover
+		) -> Type[AttrsClass]: ...
 
 
 @overload
@@ -96,7 +96,7 @@ def serde(
 		cls: None = None,
 		from_key: str = ...,
 		to_key: str = ...,
-		) -> Callable[[Type[AttrsClass]], Type[AttrsClass]]: ...  # pragma: no cover
+		) -> Callable[[Type[AttrsClass]], Type[AttrsClass]]: ...
 
 
 def serde(

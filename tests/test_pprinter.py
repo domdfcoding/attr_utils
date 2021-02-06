@@ -1,5 +1,6 @@
-# stdlib
 import __future__
+
+# stdlib
 import sys
 from collections import Counter
 from enum import IntEnum

@@ -1,3 +1,5 @@
+import __future__
+
 # stdlib
 import sys
 from collections import Counter
@@ -12,7 +14,6 @@ from typing_extensions import Literal, Protocol, runtime_checkable
 
 # this package
 from attr_utils.serialise import serde
-import __future__
 
 
 class DeviceType(IntEnum):
