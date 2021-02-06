@@ -1,3 +1,4 @@
+# 3rd party
 from domdf_python_tools.paths import PathPlus
 
 for file in PathPlus("tests").rglob("**/*.py"):
