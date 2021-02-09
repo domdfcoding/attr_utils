@@ -20,7 +20,7 @@ python_versions:
  - '3.9'
  - 3.10-dev
  - pypy3
- - rustpython
+
 extras_require:
   sphinx:
    - "sphinx>=3.0.3,<3.4.0"
