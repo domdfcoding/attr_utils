@@ -1,4 +1,4 @@
-# Configuration for 'repo_helper' (https://github.com/domdfcoding/repo_helper
+# Configuration for 'repo_helper' (https://github.com/domdfcoding/repo_helper)
 ---
 modname: 'attr_utils'
 copyright_years: 2020-2021
@@ -14,29 +14,30 @@ conda_channels:
  - conda-forge
 
 python_versions:
-  - 3.6
-  - 3.7
-  - 3.8
-  - 3.9
-  - 3.10-dev
-
+ - '3.6'
+ - '3.7'
+ - '3.8'
+ - '3.9'
+ - 3.10-dev
+ - pypy3
+ - rustpython
 extras_require:
   sphinx:
-    - "sphinx>=3.0.3,<3.4.0"
-    - "sphinx_toolbox>=1.4.0"
+   - "sphinx>=3.0.3,<3.4.0"
+   - "sphinx_toolbox>=1.4.0"
 
 tox_testenv_extras: sphinx
 
 extra_sphinx_extensions:
-  - attr_utils.annotations
-  - attr_utils.autoattrs
+ - attr_utils.annotations
+ - attr_utils.autoattrs
 
 sphinx_conf_epilogue:
-  - set_type_checking_flag = True
-  - "intersphinx_mapping['sphinx_toolbox'] = ('https://sphinx-toolbox.readthedocs.io/en/latest/', None)"
+ - set_type_checking_flag = True
+ - "intersphinx_mapping['sphinx_toolbox'] = ('https://sphinx-toolbox.readthedocs.io/en/latest/', None)"
 
 mypy_plugins:
-  - attr_utils.mypy_plugin
+ - attr_utils.mypy_plugin
 
 classifiers:
  - 'Intended Audience :: Developers'
@@ -49,11 +50,11 @@ keywords:
  - documentation
 
 third_party_version_matrix:
- attrs:
-  - 19.3
-  - 20.1
-  - 20.2
-  - latest
+  attrs:
+   - 19.3
+   - 20.1
+   - 20.2
+   - latest
 
 tox_unmanaged:
  - pytest
