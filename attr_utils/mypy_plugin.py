@@ -43,7 +43,7 @@ for more information.
 #
 #  Also based on mypy
 #  https://github.com/python/mypy
-#  Copyright (c) 2015-2019 Jukka Lehtosalo and contributor
+#  Copyright (c) 2015-2019 Jukka Lehtosalo and contributors
 #  Licensed under the terms of the MIT license.
 #
 

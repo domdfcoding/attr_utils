@@ -3,4 +3,3 @@
 =============================
 
 .. automodule:: attr_utils.pprinter
-	:no-autosummary:

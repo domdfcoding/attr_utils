@@ -133,5 +133,8 @@ autodoc_default_options = {
 		"exclude-members": ','.join(autodoc_exclude_members),
 		}
 
-set_type_checking_flag = True
+# 3rd party
+import attr_utils
+
+attr_utils._docs = True
 intersphinx_mapping["sphinx_toolbox"] = ("https://sphinx-toolbox.readthedocs.io/en/latest/", None)

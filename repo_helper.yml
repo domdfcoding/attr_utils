@@ -10,7 +10,6 @@ license: 'MIT'
 short_desc: 'Utilities to augment attrs.'
 
 conda_channels:
- - domdfcoding
  - conda-forge
 
 python_versions:
@@ -33,7 +32,8 @@ extra_sphinx_extensions:
  - attr_utils.autoattrs
 
 sphinx_conf_epilogue:
- - set_type_checking_flag = True
+ - import attr_utils
+ - attr_utils._docs = True
  - "intersphinx_mapping['sphinx_toolbox'] = ('https://sphinx-toolbox.readthedocs.io/en/latest/', None)"
 
 mypy_plugins:

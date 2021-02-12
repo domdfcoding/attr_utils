@@ -42,18 +42,75 @@ The following functions are available:
 # stdlib
 import enum
 import sys
-from typing import Type, TypeVar
+from typing import Any, Callable, Optional, Type, TypeVar, Union
 
 # 3rd party
 import attr
 import prettyprinter  # type: ignore
-from prettyprinter.prettyprinter import _BASE_DISPATCH, pretty_dispatch, register_pretty  # type: ignore
+from prettyprinter.prettyprinter import _BASE_DISPATCH, pretty_dispatch  # type: ignore
+from typing_extensions import Protocol, runtime_checkable
 
-__all__ = ["pretty_enum", "pretty_repr", "register_pretty"]
+__all__ = ["pretty_enum", "pretty_repr", "register_pretty", "PrettyFormatter", "_PF"]
 
 _T = TypeVar("_T")
+_PF = TypeVar("_PF", bound="PrettyFormatter")
 
 prettyprinter.install_extras(["attrs"])
+
+
+@runtime_checkable
+class PrettyFormatter(Protocol):
+	"""
+	:class:`typing.Protocol` representing the pretty formatting functions decorated by :func:`register_pretty`.
+
+	.. versionadded:: 0.6.0
+	"""
+
+	def __call__(self, value: Any, ctx: Any) -> str:
+		"""
+		Call the function.
+
+		:param value: The value to pretty print.
+		:param ctx: The context.
+		"""
+
+		raise NotImplementedError
+
+
+def register_pretty(
+		type: Union[Type, str, None] = None,
+		predicate: Optional[Callable[[Any], bool]] = None,
+		) -> Callable[[_PF], _PF]:
+	"""
+	Returns a decorator that registers the decorated function
+	as the pretty printer for instances of ``type``.
+
+	:param type: The type to register the pretty printer for,
+		or a :class:`str` to indicate the module and name, e.g. ``'collections.Counter'``.
+
+	:param predicate: A predicate function that takes one argument
+		and returns a boolean indicating if the value should be handled
+		by the registered pretty printer.
+
+	Only one of ``type`` and ``predicate`` may be supplied,
+	and therefore ``predicate`` will only be called for unregistered types.
+
+	:rtype:
+
+	Here's an example of the pretty printer for :class:`collections.OrderedDict`:
+
+	.. code-block:: python
+
+		from collections import OrderedDict
+		from attr_utils.pprinter import register_pretty
+		from prettyprinter import pretty_call
+
+		@register_pretty(OrderedDict)
+		def pretty_orderreddict(value, ctx):
+			return pretty_call(ctx, OrderedDict, list(value.items()))
+	"""
+
+	return prettyprinter.prettyprinter.register_pretty(type=type, predicate=predicate)
 
 
 def is_registered(

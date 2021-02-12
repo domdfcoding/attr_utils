@@ -122,9 +122,9 @@ import attr
 from typing_inspect import get_origin  # type: ignore
 
 # this package
-from attr_utils import __version__
+import attr_utils
 
-if TYPE_CHECKING:
+if TYPE_CHECKING or attr_utils._docs:
 	# 3rd party
 	from sphinx.application import Sphinx
 
@@ -264,7 +264,7 @@ def setup(app: "Sphinx") -> Dict[str, Any]:
 	app.setup_extension("sphinx_toolbox.more_autodoc.typehints")
 
 	return {
-			"version": __version__,
+			"version": attr_utils.__version__,
 			"parallel_read_safe": True,
 			}
 
