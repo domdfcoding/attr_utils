@@ -43,6 +43,7 @@ known_third_party = [
     "pytest_benchmark",
     "pytest_cov",
     "pytest_mypy_plugins",
+    "pytest_mypy_plugins_shim",
     "pytest_randomly",
     "pytest_rerunfailures",
     "pytest_timeout",
