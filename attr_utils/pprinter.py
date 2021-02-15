@@ -78,7 +78,7 @@ class PrettyFormatter(Protocol):
 
 
 def register_pretty(
-		type: Union[Type, str, None] = None,
+		type: Union[Type, str, None] = None,  # noqa: A002  # pylint: disable=redefined-builtin
 		predicate: Optional[Callable[[Any], bool]] = None,
 		) -> Callable[[_PF], _PF]:
 	"""
@@ -108,7 +108,7 @@ def register_pretty(
 		@register_pretty(OrderedDict)
 		def pretty_orderreddict(value, ctx):
 			return pretty_call(ctx, OrderedDict, list(value.items()))
-	"""
+	"""  # noqa: D400
 
 	return prettyprinter.prettyprinter.register_pretty(type=type, predicate=predicate)
 
