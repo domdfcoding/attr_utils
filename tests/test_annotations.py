@@ -1,4 +1,5 @@
 # stdlib
+import sys
 from typing import Any, Callable, Dict, List, Tuple, get_type_hints
 
 # 3rd party
@@ -28,23 +29,36 @@ def test_add_init_annotations():
 
 	add_init_annotations(SomeClass)
 
-	# print(SomeClass.__init__.__annotations__)
-	assert SomeClass.__init__.__annotations__ == {
-			"return": None,
-			"a_string": str,
-			"custom_converter": List[Dict[str, Any]],
-			"untyped": Tuple[str, int, float],
-			"no_converter": Callable[[str], None],
-			}
+	if sys.version_info < (3, 10):
+		# print(SomeClass.__init__.__annotations__)
+		assert SomeClass.__init__.__annotations__ == {
+				"return": None,
+				"a_string": str,
+				"custom_converter": List[Dict[str, Any]],
+				"untyped": Tuple[str, int, float],
+				"no_converter": Callable[[str], None],
+				}
+
+	else:
+		# print(SomeClass.__init__.__annotations__)
+		assert SomeClass.__init__.__annotations__ == {
+				"return": None,
+				"a_string": str,
+				"custom_converter": List[Dict[str, Any]],
+				"untyped": "Tuple[str, int, float]",
+				"no_converter": "Callable[[str], None]",
+				}
 
 	# print(typing.get_type_hints(SomeClass.__init__))
-	assert get_type_hints(SomeClass.__init__) == {
-			"return": type(None),
-			"a_string": str,
-			"custom_converter": List[Dict[str, Any]],
-			"untyped": Tuple[str, int, float],
-			"no_converter": Callable[[str], None],
-			}
+	assert get_type_hints(
+			SomeClass.__init__, globalns=globals()
+			) == {
+					"return": type(None),
+					"a_string": str,
+					"custom_converter": List[Dict[str, Any]],
+					"untyped": Tuple[str, int, float],
+					"no_converter": Callable[[str], None],
+					}
 
 
 def test_add_init_annotations_not_attrs_class():
