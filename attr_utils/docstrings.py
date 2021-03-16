@@ -28,10 +28,12 @@ Add better docstrings to attrs generated functions.
 
 # stdlib
 import re
+from types import MethodType
 from typing import Optional, Pattern, Type
 
 # 3rd party
-from domdf_python_tools.doctools import PYPY, base_new_docstrings, prettify_docstrings
+from domdf_python_tools.compat import PYPY37, PYPY
+from domdf_python_tools.doctools import base_new_docstrings, prettify_docstrings
 from domdf_python_tools.typing import MethodDescriptorType, MethodWrapperType, WrapperDescriptorType
 
 __all__ = ["add_attrs_doc"]
@@ -79,8 +81,20 @@ def add_attrs_doc(obj: Type) -> Type:
 
 		attribute = getattr(obj, attr_name)
 
-		if not PYPY and isinstance(attribute, (WrapperDescriptorType, MethodDescriptorType, MethodWrapperType)):
-			continue
+		if not PYPY and isinstance(
+				attribute,
+				(WrapperDescriptorType, MethodDescriptorType, MethodWrapperType, MethodType),
+				):
+			continue  # pragma: no cover (!PyPy)
+		elif PYPY and isinstance(attribute, MethodType):
+			continue  # pragma: no cover
+		elif PYPY37:  # pragma: no cover (not (PyPy and py37))
+			if attribute is getattr(object, attr_name, None):
+				continue
+			elif attribute is getattr(float, attr_name, None):
+				continue
+			elif attribute is getattr(str, attr_name, None):
+				continue
 
 		if attribute is None:
 			continue
