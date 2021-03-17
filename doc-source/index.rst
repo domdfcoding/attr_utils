@@ -105,7 +105,7 @@ attr_utils
 		:alt: GitHub top language
 
 	.. |commits-since| github-shield::
-		:commits-since: v0.5.5
+		:commits-since: v0.5.6
 		:alt: GitHub commits since tagged version
 
 	.. |commits-latest| github-shield::
