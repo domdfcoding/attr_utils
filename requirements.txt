@@ -1,5 +1,5 @@
 attrs>=19.3.0
-domdf-python-tools>=0.8.1
+domdf-python-tools>=2.7.0
 prettyprinter==0.18.0
 toolz>=0.11.1
 typing-extensions>=3.7.4.3
