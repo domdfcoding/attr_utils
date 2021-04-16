@@ -126,7 +126,7 @@ import attr_utils
 
 if sys.version_info > (3, 7):  # pragma: no cover (<py37)
 	# 3rd party
-	from typing_extensions import get_origin  # type: ignore
+	from typing_extensions import get_origin
 else:  # pragma: no cover (py37+)
 	# 3rd party
 	from typing_inspect import get_origin  # type: ignore
