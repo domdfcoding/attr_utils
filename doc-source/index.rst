@@ -135,6 +135,14 @@ Installation
 
 .. end installation
 
+.. attention::
+
+	In v0.6.0 and above the :mod:`pprinter` module requires the ``pprint`` extra to be installed:
+
+	.. prompt::
+
+		python -m pip install attr-utils[pprint]
+
 
 | ``attr_utils`` provides both utility functions and two Sphinx extensions: :mod:`attr_utils.annotations` and :mod:`attr_utils.autoattrs`.
 | Enable the extensions by adding the following to the ``extensions`` variable in your ``conf.py``:
