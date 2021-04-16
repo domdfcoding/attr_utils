@@ -18,7 +18,7 @@ The following functions are available:
 
 """
 #
-#  Copyright © 2020 Dominic Davis-Foster <dominic@davis-foster.co.uk>
+#  Copyright © 2020-2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -49,9 +49,15 @@ from typing import Any, Callable, Optional, Type, TypeVar, Union
 
 # 3rd party
 import attr
-import prettyprinter  # type: ignore  # nodep
-from prettyprinter.prettyprinter import _BASE_DISPATCH, pretty_dispatch  # type: ignore  # nodep
 from typing_extensions import Protocol, runtime_checkable
+
+try:
+	# 3rd party
+	import prettyprinter  # type: ignore  # nodep
+	from prettyprinter.prettyprinter import _BASE_DISPATCH, pretty_dispatch  # type: ignore  # nodep
+except ImportError as e:
+	exc = type(e)(f"Could not import 'prettyprinter'. Perhaps you need to install 'attr_utils[pprint]'?\n\n{e}")
+	raise exc.with_traceback(e.__traceback__) from None
 
 __all__ = ["pretty_enum", "pretty_repr", "register_pretty", "PrettyFormatter", "_PF"]
 
