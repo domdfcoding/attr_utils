@@ -9,6 +9,9 @@ A Sphinx directive for documenting `attrs <https://www.attrs.org/>`_ classes.
 	Due to changes in the :mod:`typing` module :mod:`~attr_utils.autoattrs` is only officially supported on
 	Python 3.7 and above.
 
+.. extras-require:: sphinx
+	:pyproject:
+
 .. rst:directive:: autoattrs
 
 	Autodoc directive to document an `attrs <https://www.attrs.org/>`_ class.

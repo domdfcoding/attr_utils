@@ -137,3 +137,4 @@ import attr_utils
 
 attr_utils._docs = True
 intersphinx_mapping["sphinx_toolbox"] = ("https://sphinx-toolbox.readthedocs.io/en/latest/", None)
+__import__("sys").path.append(os.path.abspath(".."))
