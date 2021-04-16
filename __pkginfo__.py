@@ -16,7 +16,7 @@ __all__ = [
 		"extras_require",
 		]
 
-__version__ = "0.5.6"
+__version__ = "0.6.0"
 extras_require = {
 		"pprint": ["prettyprinter==0.18.0"],
 		"sphinx": ["sphinx<3.4.0,>=3.0.3", "sphinx-toolbox>=1.4.0"],
