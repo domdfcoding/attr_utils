@@ -24,11 +24,13 @@ python_versions:
  - pypy37
 
 extras_require:
+  pprint:
+   - prettyprinter==0.18.0
   sphinx:
    - "sphinx>=3.0.3,<3.4.0"
    - "sphinx_toolbox>=1.4.0"
 
-tox_testenv_extras: sphinx
+tox_testenv_extras: all
 
 extra_sphinx_extensions:
  - attr_utils.annotations
