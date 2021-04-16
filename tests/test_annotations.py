@@ -1,3 +1,5 @@
+import __future__
+
 # stdlib
 import sys
 from typing import Any, Callable, Dict, List, Tuple, get_type_hints
@@ -29,7 +31,7 @@ def test_add_init_annotations():
 
 	add_init_annotations(SomeClass)
 
-	if sys.version_info < (3, 10):
+	if sys.version_info < (3, 10) or hasattr(__future__, "co_annotations"):
 		# print(SomeClass.__init__.__annotations__)
 		assert SomeClass.__init__.__annotations__ == {
 				"return": None,
