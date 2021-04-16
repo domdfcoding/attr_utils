@@ -55,7 +55,7 @@ try:
 	# 3rd party
 	import prettyprinter  # type: ignore  # nodep
 	from prettyprinter.prettyprinter import _BASE_DISPATCH, pretty_dispatch  # type: ignore  # nodep
-except ImportError as e:
+except ImportError as e:  # pragma: no cover
 	exc = type(e)(f"Could not import 'prettyprinter'. Perhaps you need to install 'attr_utils[pprint]'?\n\n{e}")
 	raise exc.with_traceback(e.__traceback__) from None
 
