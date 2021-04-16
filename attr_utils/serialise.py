@@ -67,9 +67,9 @@ from typing import TYPE_CHECKING, Any, Callable, Mapping, MutableMapping, Option
 
 try:
 	# 3rd party
-	from cytoolz.curried import filter, get_in, map, pipe, reduce, update_in  # type: ignore
+	from cytoolz import curried  # type: ignore
 except ImportError:
-	from toolz.curried import get_in, update_in, reduce, pipe, map, filter  # type: ignore
+	from toolz import curried  # type: ignore
 
 # 3rd party
 from attr import asdict, fields
@@ -176,18 +176,18 @@ def serde(
 	def serde_with_class(cls: Type[AttrsClass]) -> Type[AttrsClass]:
 
 		def from_dict(cls, d: Mapping[str, Any]):
-			from_fields = list(map(lambda a: (a, get_in([from_key], a.metadata, [a.name])), fields(cls)))
+			from_fields = list(map(lambda a: (a, curried.get_in([from_key], a.metadata, [a.name])), fields(cls)))
 
 			return cls(**dict(map(
-					lambda f: (f[0].name, get_in(f[1], d, f[0].default)),
+					lambda f: (f[0].name, curried.get_in(f[1], d, f[0].default)),
 					from_fields,
 					)))
 
 		def to_dict(self, convert_values: bool = False) -> MutableMapping[str, Any]:
-			to_fields = pipe(
+			to_fields = curried.pipe(
 					fields(self.__class__),
-					map(lambda a: (a, get_in([to_key], a.metadata))),
-					filter(lambda f: f[1]),
+					curried.map(lambda a: (a, curried.get_in([to_key], a.metadata))),
+					curried.filter(lambda f: f[1]),
 					list,
 					)
 
@@ -199,8 +199,8 @@ def serde(
 			if not to_fields:
 				return d
 
-			return reduce(
-					lambda acc, f: update_in(acc, f[1], lambda _: d[f[0].name]),
+			return curried.reduce(
+					lambda acc, f: curried.update_in(acc, f[1], lambda _: d[f[0].name]),
 					to_fields,
 					{},
 					)
