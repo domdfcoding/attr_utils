@@ -4,12 +4,15 @@
 r"""
 Pretty printing functions.
 
-This module monkeypatches `PrettyPrinter <https://prettyprinter.readthedocs.io>`_
+This module monkeypatches `prettyprinter <https://prettyprinter.readthedocs.io>`_
 to disable a potentially undesirable behaviour of its singledispatch feature,
 where deferred types took precedence over resoled types.
 
 It also changes the pretty print output for an :class:`enum.Enum` to be the same as the
 :class:`~enum.Enum`\'s ``__repr__``.
+
+.. extras-require:: pprint
+	:pyproject:
 
 The following functions are available:
 
@@ -46,8 +49,8 @@ from typing import Any, Callable, Optional, Type, TypeVar, Union
 
 # 3rd party
 import attr
-import prettyprinter  # type: ignore
-from prettyprinter.prettyprinter import _BASE_DISPATCH, pretty_dispatch  # type: ignore
+import prettyprinter  # type: ignore  # nodep
+from prettyprinter.prettyprinter import _BASE_DISPATCH, pretty_dispatch  # type: ignore  # nodep
 from typing_extensions import Protocol, runtime_checkable
 
 __all__ = ["pretty_enum", "pretty_repr", "register_pretty", "PrettyFormatter", "_PF"]

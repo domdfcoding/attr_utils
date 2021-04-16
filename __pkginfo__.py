@@ -30,6 +30,7 @@ __version__ = "0.5.6"
 repo_root = pathlib.Path(__file__).parent
 install_requires = (repo_root / "requirements.txt").read_text(encoding="utf-8").split('\n')
 extras_require = {
+		"pprint": ["prettyprinter==0.18.0"],
 		"sphinx": ["sphinx<3.4.0,>=3.0.3", "sphinx-toolbox>=1.4.0"],
-		"all": ["sphinx<3.4.0,>=3.0.3", "sphinx-toolbox>=1.4.0"]
+		"all": ["prettyprinter==0.18.0", "sphinx<3.4.0,>=3.0.3", "sphinx-toolbox>=1.4.0"]
 		}
