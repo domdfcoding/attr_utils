@@ -2,4 +2,4 @@ attrs>=19.3.0
 domdf-python-tools>=2.7.0
 toolz>=0.11.1
 typing-extensions>=3.7.4.3
-typing-inspect>=0.6.0
+typing-inspect>=0.6.0; python_version == "3.6"

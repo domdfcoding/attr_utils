@@ -115,14 +115,21 @@ API Reference
 
 # stdlib
 import inspect
+import sys
 from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional, Type, Union
 
 # 3rd party
 import attr
-from typing_inspect import get_origin  # type: ignore
 
 # this package
 import attr_utils
+
+if sys.version_info > (3, 7):  # pragma: no cover (<py37)
+	# 3rd party
+	from typing_extensions import get_origin  # type: ignore
+else:  # pragma: no cover (py37+)
+	# 3rd party
+	from typing_inspect import get_origin  # type: ignore
 
 if TYPE_CHECKING or attr_utils._docs:
 	# 3rd party
