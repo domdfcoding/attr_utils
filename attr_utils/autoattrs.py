@@ -2,19 +2,25 @@
 #
 #  autoattrs.py
 """
-A Sphinx directive for documenting `attrs <https://www.attrs.org/>`_ classes.
+A Sphinx directive for documenting attrs_ classes.
+
+.. _attrs: https://www.attrs.org/en/stable/
+
+.. versionadded:: 0.1.0
+
 
 .. attention::
 
-	Due to changes in the :mod:`typing` module :mod:`~attr_utils.autoattrs` is only officially supported on
-	Python 3.7 and above.
+	Due to changes in the :mod:`typing` module :mod:`~attr_utils.autoattrs`
+	is only officially supported on Python 3.7 and above.
 
 .. extras-require:: sphinx
 	:pyproject:
 
+
 .. rst:directive:: autoattrs
 
-	Autodoc directive to document an `attrs <https://www.attrs.org/>`_ class.
+	Autodoc directive to document an `attrs <https://www.attrs.org/>`__ class.
 
 	It behaves much like :rst:dir:`autoclass`. It can be used directly or as part of :rst:dir:`automodule`.
 
@@ -32,11 +38,11 @@ A Sphinx directive for documenting `attrs <https://www.attrs.org/>`_ classes.
 
 		This option cannot be used as part of :rst:dir:`automodule`.
 
-
-.. versionadded:: 0.1.0
+API Reference
+---------------
 """
 #
-#  Copyright © 2020 Dominic Davis-Foster <dominic@davis-foster.co.uk>
+#  Copyright © 2020-2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -96,7 +102,7 @@ from sphinx.ext.autodoc import ClassDocumenter, Documenter  # nodep
 from sphinx.pycode import ModuleAnalyzer  # nodep
 from sphinx_toolbox import __version__  # nodep
 from sphinx_toolbox.more_autosummary import PatchedAutoSummClassDocumenter  # nodep
-from sphinx_toolbox.utils import Param, flag, parse_parameters, unknown_module_warning  # nodep
+from sphinx_toolbox.utils import Param, SphinxExtMetadata, flag, parse_parameters, unknown_module_warning  # nodep
 
 # this package
 from attr_utils.docstrings import add_attrs_doc
@@ -110,16 +116,12 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 	Sphinx autodoc :class:`~sphinx.ext.autodoc.Documenter`
 	for documenting `attrs <https://www.attrs.org/>`__ classes.
 
-	.. versionadded:: 0.1.0
-
 	.. versionchanged:: 0.3.0
 
-		Parameters for ``__init__`` can be documented either in the class docstring or for the attribute.
-		The class docstring has priority.
-
-	.. versionchanged:: 0.3.0
-
-		Added support for `autodocsumm <https://github.com/Chilipp/autodocsumm>`_.
+		* Parameters for ``__init__`` can be documented either in the class docstring
+		  or alongside the attribute.
+		  The class docstring has priority.
+		* Added support for `autodocsumm <https://github.com/Chilipp/autodocsumm>`_.
 	"""  # noqa: D400
 
 	objtype = "attrs"
@@ -189,9 +191,12 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		:param raiseerror:
 
 		:return: :py:obj:`True` if successful, :py:obj:`False` if an error occurred.
+
+		.. clearpage::
 		"""
 
 		ret = super().import_object(raiseerror)
+
 		if attr.has(self.object):
 			self.object = add_attrs_doc(self.object)
 
@@ -339,13 +344,11 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 				)
 
 
-def setup(app: Sphinx) -> Dict[str, Any]:
+def setup(app: Sphinx) -> SphinxExtMetadata:
 	"""
 	Setup :mod:`attr_utils.autoattrs`.
 
 	:param app:
-
-	.. versionadded:: 0.1.0
 	"""
 
 	# Hack to get the docutils tab size, as there doesn't appear to be any other way

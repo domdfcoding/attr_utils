@@ -14,8 +14,6 @@ It also changes the pretty print output for an :class:`enum.Enum` to be the same
 .. extras-require:: pprint
 	:pyproject:
 
-The following functions are available:
-
 """
 #
 #  Copyright © 2020-2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
@@ -59,7 +57,7 @@ except ImportError as e:  # pragma: no cover
 	exc = type(e)(f"Could not import 'prettyprinter'. Perhaps you need to install 'attr_utils[pprint]'?\n\n{e}")
 	raise exc.with_traceback(e.__traceback__) from None
 
-__all__ = ["pretty_enum", "pretty_repr", "register_pretty", "PrettyFormatter", "_PF"]
+__all__ = ["pretty_repr", "register_pretty", "PrettyFormatter", "_PF"]
 
 _T = TypeVar("_T")
 _PF = TypeVar("_PF", bound="PrettyFormatter")
@@ -162,7 +160,7 @@ def pretty_enum(value, ctx) -> str:
 
 def pretty_repr(obj: Type):
 	"""
-	Add a pretty-printed ``__repr__`` function to the decorated attrs class.
+	Add a pretty-printing ``__repr__`` function to the decorated attrs class.
 
 	.. code-block:: python
 

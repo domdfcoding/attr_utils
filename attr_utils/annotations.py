@@ -140,7 +140,7 @@ __all__ = ["add_init_annotations", "attrib", "attr_docstring_hook", "setup"]
 
 def add_init_annotations(obj: Callable) -> Callable:
 	"""
-	Add type annotations to the ``__init__`` of an attrs_ class.
+	Add type annotations to the ``__init__`` method of an attrs_ class.
 
 	.. _attrs: https://www.attrs.org/en/stable/
 	"""
@@ -204,7 +204,7 @@ def attrib(
 	Wrapper around :func:`attr.ib` which supports the ``annotation``
 	keyword argument for use by :func:`~.add_init_annotations`.
 
-	:param metadata: The type to add to ``__init__.__annotations__``, if different from
+	:param annotation: The type to add to ``__init__.__annotations__``, if different from
 		that the type taken as input to the converter function or the type hint of the attribute.
 
 	See the documentation for :func:`attr.ib` for descriptions of the other arguments.

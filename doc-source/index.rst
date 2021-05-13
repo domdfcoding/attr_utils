@@ -143,6 +143,8 @@ Installation
 
 		python -m pip install attr-utils[pprint]
 
+Overview
+-----------------
 
 | ``attr_utils`` provides both utility functions and two Sphinx extensions: :mod:`attr_utils.annotations` and :mod:`attr_utils.autoattrs`.
 | Enable the extensions by adding the following to the ``extensions`` variable in your ``conf.py``:
@@ -155,25 +157,31 @@ Installation
 	attr_utils.annotations
 
 
+Contents
+---------------
+
+.. html-section::
+
 .. toctree::
 	:hidden:
 
 	Home<self>
-	demo
 
 .. toctree::
 	:maxdepth: 3
-	:caption: API Reference
 	:glob:
 
+	demo
 	api/*
 
-.. toctree::
-	:maxdepth: 3
-	:caption: Contributing
+.. sidebar-links::
+	:caption: Links
+	:github:
+	:pypi: attr_utils
 
-	contributing
+	Contributing Guide <https://contributing-to-sphinx-toolbox.readthedocs.io/en/latest/>
 	Source
+
 
 .. start links
 
@@ -181,6 +189,6 @@ Installation
 
 	View the :ref:`Function Index <genindex>` or browse the `Source Code <_modules/index.html>`__.
 
-	`Browse the GitHub Repository <https://github.com/domdfcoding/attr_utils>`__
+	:github:repo:`Browse the GitHub Repository <domdfcoding/attr_utils>`
 
 .. end links

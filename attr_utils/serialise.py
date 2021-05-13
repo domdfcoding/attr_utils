@@ -151,7 +151,7 @@ def serde(
 
 		Construct an instance of the class from a dictionary.
 
-		:param d: The dictionary
+		:param d: The dictionary.
 		:type d: :class:`~typing.Mapping`\[:class:`str`, :py:obj:`~typing.Any`\]
 
 	.. py:method:: to_dict(convert_values=False):
@@ -208,7 +208,7 @@ def serde(
 		from_dict.__doc__ = f"""
 		Construct an instance of :class:`~.{cls.__name__}` from a dictionary.
 
-		:param d: The dictionary
+		:param d: The dictionary.
 		"""
 		from_dict.__qualname__ = f"{cls.__name__}.from_dict"
 		from_dict.__module__ = cls.__module__

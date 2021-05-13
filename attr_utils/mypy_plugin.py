@@ -78,7 +78,7 @@ decorator_registry: MutableMapping[str, Callable[[ClassDefContext], None]] = {}
 
 def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext):
 	"""
-	Handles :func:attr_utils.serialise.serde`.
+	Handles :func:`attr_utils.serialise.serde`.
 
 	:param cls_def_ctx:
 	"""
@@ -148,6 +148,9 @@ decorator_registry["attr_utils.serialise.serde"] = attr_utils_serialise_serde
 class AttrUtilsPlugin(Plugin):
 	"""
 	Plugin for `mypy <https://github.com/python/mypy>`_ which adds support for attr_utils.
+
+	.. autoclasssumm::
+		:sections:
 	"""
 
 	def get_class_decorator_hook(self, fullname: str) -> Optional[Callable[[ClassDefContext], None]]:

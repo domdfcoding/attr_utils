@@ -5,92 +5,19 @@
 # stdlib
 import os
 import re
+import sys
 
 # 3rd party
 from sphinx_pyproject import SphinxConfig
 
-config = SphinxConfig()
+sys.path.append('.')
 
-github_username = "domdfcoding"
-github_repository = "attr_utils"
-author = "Dominic Davis-Foster"
-project = "attr-utils"
-copyright = "2020-2021 Dominic Davis-Foster"
-language = "en"
-package_root = "attr_utils"
-extensions = [
-		"sphinx_toolbox",
-		"sphinx_toolbox.more_autodoc",
-		"sphinx_toolbox.more_autosummary",
-		"sphinx_toolbox.documentation_summary",
-		"sphinx_toolbox.tweaks.param_dash",
-		"sphinx_toolbox.tweaks.latex_toc",
-		"sphinx.ext.intersphinx",
-		"sphinx.ext.mathjax",
-		"sphinxcontrib.httpdomain",
-		"sphinxcontrib.extras_require",
-		"sphinx.ext.todo",
-		"sphinxemoji.sphinxemoji",
-		"notfound.extension",
-		"sphinx_copybutton",
-		"sphinxcontrib.default_values",
-		"sphinxcontrib.toctree_plus",
-		"sphinx_debuginfo",
-		"seed_intersphinx_mapping",
-		"attr_utils.annotations",
-		"attr_utils.autoattrs",
-		]
-sphinxemoji_style = "twemoji"
-gitstamp_fmt = "%d %b %Y"
-templates_path = ["_templates"]
-html_static_path = ["_static"]
-source_suffix = ".rst"
-master_doc = "index"
-suppress_warnings = ["image.nonlocal_uri"]
-pygments_style = "default"
-html_theme = "domdf_sphinx_theme"
-html_theme_path = ["../.."]
-html_show_sourcelink = True
-toctree_plus_types = [
-		"class",
-		"confval",
-		"data",
-		"directive",
-		"enum",
-		"exception",
-		"flag",
-		"function",
-		"method",
-		"namedtuple",
-		"protocol",
-		"role",
-		"typeddict",
-		]
-add_module_names = False
-hide_none_rtype = True
-all_typevars = True
-overloads_location = "bottom"
-documentation_summary = "Utilities to augment attrs."
-autodoc_exclude_members = [
-		"__dict__",
-		"__class__",
-		"__dir__",
-		"__weakref__",
-		"__module__",
-		"__annotations__",
-		"__orig_bases__",
-		"__parameters__",
-		"__subclasshook__",
-		"__init_subclass__",
-		"__attrs_attrs__",
-		"__init__",
-		"__new__",
-		"__getnewargs__",
-		"__abstractmethods__",
-		"__hash__",
-		]
+config = SphinxConfig(globalns=globals())
+project = config["project"]
+author = config["author"]
+documentation_summary = config.description
 
-github_url = f"https://github.com/{github_username}/{github_repository}"
+github_url = "https://github.com/{github_username}/{github_repository}".format_map(config)
 
 rst_prolog = f""".. |pkgname| replace:: attr_utils
 .. |pkgname2| replace:: ``attr_utils``
@@ -122,15 +49,25 @@ latex_documents = [("index", f'{slug}.tex', project, author, "manual")]
 man_pages = [("index", slug, project, [author], 1)]
 texinfo_documents = [("index", slug, project, author, slug, project, "Miscellaneous")]
 
-toctree_plus_types = set(toctree_plus_types)
+toctree_plus_types = set(config["toctree_plus_types"])
 
 autodoc_default_options = {
 		"members": None,  # Include all members (methods).
 		"special-members": None,
 		"autosummary": None,
 		"show-inheritance": None,
-		"exclude-members": ','.join(autodoc_exclude_members),
+		"exclude-members": ','.join(config["autodoc_exclude_members"]),
 		}
+
+latex_elements = {}
+
+
+def setup(app):
+	# 3rd party
+	from sphinx_toolbox.latex import better_header_layout
+
+	app.connect("config-inited", lambda app, config: better_header_layout(config))
+
 
 # 3rd party
 import attr_utils

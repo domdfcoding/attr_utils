@@ -36,6 +36,8 @@ tox_testenv_extras: all
 extra_sphinx_extensions:
  - attr_utils.annotations
  - attr_utils.autoattrs
+ - html_section
+ - fixed_version_change
 
 sphinx_conf_epilogue:
  - import attr_utils
@@ -65,3 +67,6 @@ third_party_version_matrix:
 
 tox_unmanaged:
  - pytest
+
+exclude_files:
+ - contributing
