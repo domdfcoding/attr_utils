@@ -9,6 +9,7 @@ from typing import Any, Mapping, MutableMapping, get_type_hints, no_type_check
 # 3rd party
 import attr
 import sdjson
+from coincidence import PEP_563
 from sdjson import register_encoder
 from typing_extensions import Literal, Protocol, runtime_checkable
 
@@ -190,7 +191,7 @@ def test_dunders():
 			"return": MutableMapping[str, Any],
 			}
 
-	if sys.version_info >= (3, 10) and not hasattr(__future__, "co_annotations"):
+	if PEP_563 and not hasattr(__future__, "co_annotations"):
 		from_dict_annotations_pep563 = {'d': "Mapping[str, Any]"}
 		to_dict_annotations_pep563 = {
 				"convert_values": "bool",

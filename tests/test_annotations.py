@@ -1,11 +1,11 @@
 import __future__
 
 # stdlib
-import sys
 from typing import Any, Callable, Dict, List, Tuple, get_type_hints
 
 # 3rd party
 import attr
+from coincidence import PEP_563
 
 # this package
 from attr_utils.annotations import add_init_annotations
@@ -31,7 +31,7 @@ def test_add_init_annotations():
 
 	add_init_annotations(SomeClass)
 
-	if sys.version_info < (3, 10) or hasattr(__future__, "co_annotations"):
+	if not PEP_563 or hasattr(__future__, "co_annotations"):
 		# print(SomeClass.__init__.__annotations__)
 		assert SomeClass.__init__.__annotations__ == {
 				"return": None,

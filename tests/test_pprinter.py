@@ -9,6 +9,7 @@ from typing import Any, Dict, get_type_hints
 
 # 3rd party
 import attr
+from coincidence import PEP_563
 
 # this package
 from attr_utils.pprinter import pretty_repr
@@ -60,7 +61,19 @@ def test_device():
 					},
 			)
 
-	expected = """tests.test_pprinter.Device(
+	if sys.version_info >= (3, 10):
+		expected = """tests.test_pprinter.Device(
+	device_id=1000,
+	display_name='Television',
+	device_type=DeviceType.RC,
+	configuration={
+		'make': 'Samsung',
+		'smart': True,
+		'ports': collections.Counter({Port.HDMI: 3, Port.VGA: 1})
+	}
+)"""
+	else:
+		expected = """tests.test_pprinter.Device(
 	device_id=1000,
 	display_name='Television',
 	device_type=<DeviceType.RC: 1>,
@@ -78,7 +91,7 @@ def test_dunders():
 	assert Device.__repr__.__name__ == "__repr__"
 	assert Device.__repr__.__qualname__ == "Device.__repr__"
 
-	if sys.version_info >= (3, 10) and not hasattr(__future__, "co_annotations"):
+	if PEP_563 and not hasattr(__future__, "co_annotations"):
 		assert Device.__repr__.__annotations__ == {"return": "str"}
 	else:
 		assert Device.__repr__.__annotations__ == {"return": str}

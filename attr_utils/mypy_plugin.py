@@ -151,7 +151,7 @@ class AttrUtilsPlugin(Plugin):
 
 	.. autoclasssumm::
 		:sections:
-	"""
+	"""  # noqa: RST303
 
 	def get_class_decorator_hook(self, fullname: str) -> Optional[Callable[[ClassDefContext], None]]:
 		"""
