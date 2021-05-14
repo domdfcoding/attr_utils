@@ -115,3 +115,9 @@ autodoc_exclude_members = [
     "__abstractmethods__",
     "__hash__",
 ]
+
+[tool.dep_checker]
+allowed_unused = [ "toolz",]
+
+[tool.dep_checker.name_mapping]
+attrs = "attr"
