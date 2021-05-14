@@ -149,3 +149,11 @@ To install with ``conda``:
 		$ conda install attr_utils
 
 .. end installation
+
+.. attention::
+
+	In v0.6.0 and above the ``pprinter`` module requires the ``pprint`` extra to be installed:
+
+	.. code-block:: bash
+
+		$ python -m pip install attr-utils[pprint]
