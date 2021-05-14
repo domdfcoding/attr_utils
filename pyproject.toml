@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "attr_utils"
-version = "0.6.0"
+version = "0.6.1"
 description = "Utilities to augment attrs."
 readme = "README.rst"
 keywords = [ "attrs", "documentation", "serde", "sphinx",]
