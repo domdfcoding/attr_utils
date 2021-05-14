@@ -74,7 +74,7 @@ Examples
 		:tab-width: 4
 		:pyobject: AttrsClass
 
-The ``parse_occupations`` looks like:
+The ``parse_occupations`` function looks like:
 
 	.. literalinclude:: ../../attr_utils/annotations.py
 		:tab-width: 4
