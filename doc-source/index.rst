@@ -137,7 +137,7 @@ Installation
 
 .. attention::
 
-	In v0.6.0 and above the :mod:`pprinter` module requires the ``pprint`` extra to be installed:
+	In v0.6.0 and above the :mod:`~.pprinter` module requires the ``pprint`` extra to be installed:
 
 	.. prompt::
 
