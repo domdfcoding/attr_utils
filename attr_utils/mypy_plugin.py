@@ -6,16 +6,18 @@ Plugin for `mypy <https://github.com/python/mypy>`_ which adds support for attr_
 
 .. versionadded:: 0.4.0
 
-To use this plugin, add the following to your
-`mypy configuration file <https://mypy.readthedocs.io/en/stable/config_file.html>`_:
+.. compound::
 
-.. code-block:: ini
+	To use this plugin, add the following to your
+	`mypy configuration file <https://mypy.readthedocs.io/en/stable/config_file.html>`_:
 
-	[mypy]
-	plugins=attr_utils.mypy_plugin
+		.. code-block:: ini
 
-See https://mypy.readthedocs.io/en/stable/extending_mypy.html#configuring-mypy-to-use-plugins
-for more information.
+			[mypy]
+			plugins=attr_utils.mypy_plugin
+
+	See https://mypy.readthedocs.io/en/stable/extending_mypy.html#configuring-mypy-to-use-plugins
+	for more information.
 """
 #
 #  Copyright © 2020 Dominic Davis-Foster <dominic@davis-foster.co.uk>
@@ -147,10 +149,10 @@ decorator_registry["attr_utils.serialise.serde"] = attr_utils_serialise_serde
 
 class AttrUtilsPlugin(Plugin):
 	"""
-	Plugin for `mypy <https://github.com/python/mypy>`_ which adds support for attr_utils.
+	Plugin for `mypy <https://github.com/python/mypy>`_ which adds support for ``attr_utils``.
 
-	.. autoclasssumm::
-		:sections:
+	.. autoclasssumm:: AttrUtilsPlugin
+		:autosummary-sections: ;;
 	"""  # noqa: RST303
 
 	def get_class_decorator_hook(self, fullname: str) -> Optional[Callable[[ClassDefContext], None]]:
@@ -174,7 +176,16 @@ def add_classmethod_to_class(
 		) -> None:
 	"""
 	Adds a new classmethod to a class definition.
+
+	:param api:
+	:param cls:
+	:param name:
+	:param args:
+	:param return_type:
+	:param cls_type:
+	:param tvar_def:
 	"""
+
 	info = cls.info
 
 	# First remove any previously generated methods with the same name

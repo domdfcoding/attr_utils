@@ -145,6 +145,8 @@ def serde(
 
 	:rtype:
 
+	.. latex:vspace:: 20px
+
 	Classes decorated with :deco:`~attr_utils.serialise.serde` will have two new methods added:
 
 	.. py:classmethod:: from_dict(d)

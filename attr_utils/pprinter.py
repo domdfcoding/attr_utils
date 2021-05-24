@@ -14,6 +14,16 @@ It also changes the pretty print output for an :class:`enum.Enum` to be the same
 .. extras-require:: pprint
 	:pyproject:
 
+.. autosummary-widths:: 4/16
+
+.. automodulesumm:: attr_utils.pprinter
+	:autosummary-sections: Classes ;; Data
+
+.. autosummary-widths:: 7/16
+	:html: 3/10
+
+.. automodulesumm:: attr_utils.pprinter
+	:autosummary-sections: Functions
 """
 #
 #  Copyright © 2020-2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
@@ -71,6 +81,7 @@ class PrettyFormatter(Protocol):
 	:class:`typing.Protocol` representing the pretty formatting functions decorated by :func:`register_pretty`.
 
 	.. versionadded:: 0.6.0
+	.. latex:vspace:: 10px
 	"""
 
 	def __call__(self, value: Any, ctx: Any) -> str:

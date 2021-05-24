@@ -2,7 +2,7 @@
 #
 #  autoattrs.py
 """
-A Sphinx directive for documenting attrs_ classes.
+Sphinx directive for documenting attrs_ classes.
 
 .. _attrs: https://www.attrs.org/en/stable/
 
@@ -38,8 +38,13 @@ A Sphinx directive for documenting attrs_ classes.
 
 		This option cannot be used as part of :rst:dir:`automodule`.
 
+
+.. latex:clearpage::
+
 API Reference
 ---------------
+
+.. latex:vspace:: -20px
 """
 #
 #  Copyright © 2020-2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
@@ -122,6 +127,9 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		  or alongside the attribute.
 		  The class docstring has priority.
 		* Added support for `autodocsumm <https://github.com/Chilipp/autodocsumm>`_.
+
+	.. autosummary-widths:: 29/64
+		:html: 4/10
 	"""  # noqa: D400
 
 	objtype = "attrs"
@@ -142,6 +150,10 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		:param membername:
 		:param isattr:
 		:param parent:
+
+		:rtype:
+
+		.. latex:clearpage::
 		"""
 
 		return attr.has(member) and isinstance(member, type)
@@ -191,8 +203,6 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		:param raiseerror:
 
 		:return: :py:obj:`True` if successful, :py:obj:`False` if an error occurred.
-
-		.. clearpage::
 		"""
 
 		ret = super().import_object(raiseerror)
@@ -325,6 +335,8 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		:param check_module: If :py:obj:`True`, only generate if the object is defined
 			in the module name it is imported from.
 		:param all_members: If :py:obj:`True`, document all members.
+
+		.. latex:vspace:: -6px
 		"""
 
 		if not self.parse_name():  # pragma: no cover

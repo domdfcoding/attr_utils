@@ -42,6 +42,7 @@ Examples
 **Library Usage:**
 
 .. code-block:: python
+	:linenos:
 
 	def my_converter(arg: List[Dict[str, Any]]):
 		return arg
@@ -56,7 +57,10 @@ Examples
 		a_string: str = attr.ib(converter=str)
 		custom_converter: Any = attr.ib(converter=my_converter)
 		untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)
-		annotated: List[str] = attr.ib(converter=list, metadata={"annotation": Sequence[str]})
+		annotated: List[str] = attr.ib(
+			converter=list,
+			metadata={"annotation": Sequence[str]},
+		)
 
 	add_attrs_annotations(SomeClass)
 
@@ -70,15 +74,15 @@ Examples
 
 **Sphinx documentation**:
 
-	.. literalinclude:: ../../attr_utils/annotations.py
-		:tab-width: 4
-		:pyobject: AttrsClass
+.. literalinclude:: ../../attr_utils/annotations.py
+	:tab-width: 4
+	:pyobject: AttrsClass
 
 The ``parse_occupations`` function looks like:
 
-	.. literalinclude:: ../../attr_utils/annotations.py
-		:tab-width: 4
-		:pyobject: parse_occupations
+.. literalinclude:: ../../attr_utils/annotations.py
+	:tab-width: 4
+	:pyobject: parse_occupations
 
 The Sphinx output looks like:
 
@@ -90,9 +94,9 @@ The Sphinx output looks like:
 API Reference
 ---------------
 
-"""
+"""  # noqa: RST399
 #
-#  Copyright © 2020 Dominic Davis-Foster <dominic@davis-foster.co.uk>
+#  Copyright © 2020-2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
@@ -116,7 +120,7 @@ API Reference
 # stdlib
 import inspect
 import sys
-from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional, Type, Union
+from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional, Type, TypeVar, Union
 
 # 3rd party
 import attr
@@ -134,11 +138,15 @@ else:  # pragma: no cover (py37+)
 if TYPE_CHECKING or attr_utils._docs:
 	# 3rd party
 	from sphinx.application import Sphinx
+	from sphinx_toolbox.utils import SphinxExtMetadata
 
-__all__ = ["add_init_annotations", "attrib", "attr_docstring_hook", "setup"]
+__all__ = ["attrib", "_A", "_C", "add_init_annotations", "attr_docstring_hook", "setup"]
+
+_A = TypeVar("_A", bound=Any)
+_C = TypeVar("_C", bound=Callable)
 
 
-def add_init_annotations(obj: Callable) -> Callable:
+def add_init_annotations(obj: _C) -> _C:
 	"""
 	Add type annotations to the ``__init__`` method of an attrs_ class.
 
@@ -200,16 +208,27 @@ def attrib(
 		order=None,
 		**kwargs,
 		):
-	"""
+	r"""
 	Wrapper around :func:`attr.ib` which supports the ``annotation``
 	keyword argument for use by :func:`~.add_init_annotations`.
 
-	:param annotation: The type to add to ``__init__.__annotations__``, if different from
+	.. versionadded:: 0.2.0
+
+	:param default:
+	:param validator:
+	:param repr:
+	:param hash:
+	:param init:
+	:param metadata:
+	:param annotation: The type to add to ``__init__.__annotations__``, if different to
 		that the type taken as input to the converter function or the type hint of the attribute.
+	:param converter:
+	:param factory:
+	:param kw_only:
+	:param eq:
+	:param order:
 
 	See the documentation for :func:`attr.ib` for descriptions of the other arguments.
-
-	.. versionadded:: 0.2.0
 	"""  # noqa: D400
 
 	if annotation is not attr.NOTHING:
@@ -234,7 +253,7 @@ def attrib(
 			)
 
 
-def attr_docstring_hook(obj: Any) -> Any:
+def attr_docstring_hook(obj: _A) -> _A:
 	"""
 	Hook for :mod:`sphinx_toolbox.more_autodoc.typehints` to add annotations to the ``__init__`` of
 	attrs_ classes.
@@ -252,15 +271,13 @@ def attr_docstring_hook(obj: Any) -> Any:
 	return obj
 
 
-def setup(app: "Sphinx") -> Dict[str, Any]:
+def setup(app: "Sphinx") -> "SphinxExtMetadata":
 	"""
 	Sphinx extension to populate ``__init__.__annotations__`` for attrs_ classes.
 
 	.. _attrs: https://www.attrs.org/en/stable/
 
 	:param app:
-
-	:return:
 	"""
 
 	# 3rd party
@@ -281,7 +298,10 @@ def setup(app: "Sphinx") -> Dict[str, Any]:
 ################################
 
 
-def parse_occupations(occupations: Iterable[str]) -> Iterable[str]:  # pragma: no cover
+def parse_occupations(  # pragma: no cover
+		occupations: Iterable[str],
+		) -> Iterable[str]:
+
 	if isinstance(occupations, str):
 		return [x.strip() for x in occupations.split(',')]
 	else:

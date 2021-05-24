@@ -10,6 +10,9 @@ This example shows the output from :mod:`attr_utils.annotations` and :mod:`attr_
 	:linenos:
 	:tab-width: 4
 
+.. latex:vspace:: 10px
+
 .. rest-example::
 
 	.. autoattrs:: demo.Device
+		:autosummary:

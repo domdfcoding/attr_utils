@@ -3,3 +3,4 @@
 =============================
 
 .. automodule:: attr_utils.serialise
+	:no-autosummary:
