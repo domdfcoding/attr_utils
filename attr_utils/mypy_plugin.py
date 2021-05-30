@@ -20,11 +20,13 @@ Plugin for `mypy <https://github.com/python/mypy>`_ which adds support for attr_
 	for more information.
 
 .. autosummary-widths:: 7/16
+	:html: 2/10
 
 .. automodulesumm:: attr_utils.mypy_plugin
 	:autosummary-sections: Classes
 
 .. autosummary-widths:: 1/2
+	:html: 4/10
 
 .. automodulesumm:: attr_utils.mypy_plugin
 	:autosummary-sections: Functions
