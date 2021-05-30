@@ -5,6 +5,7 @@ attr_utils
 .. start short_desc
 
 .. documentation-summary::
+	:meta:
 
 .. end short_desc
 
@@ -146,8 +147,9 @@ Installation
 Overview
 -----------------
 
-| ``attr_utils`` provides both utility functions and two Sphinx extensions: :mod:`attr_utils.annotations` and :mod:`attr_utils.autoattrs`.
-| Enable the extensions by adding the following to the ``extensions`` variable in your ``conf.py``:
+``attr_utils`` provides both utility functions and two Sphinx extensions: :mod:`attr_utils.annotations` and :mod:`attr_utils.autoattrs`.
+
+Enable the extensions by adding the following to the ``extensions`` variable in your ``conf.py``:
 
 .. extensions:: attr_utils.autoattrs
 	:no-preamble:

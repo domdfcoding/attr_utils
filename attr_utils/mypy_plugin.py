@@ -18,6 +18,16 @@ Plugin for `mypy <https://github.com/python/mypy>`_ which adds support for attr_
 
 	See https://mypy.readthedocs.io/en/stable/extending_mypy.html#configuring-mypy-to-use-plugins
 	for more information.
+
+.. autosummary-widths:: 7/16
+
+.. automodulesumm:: attr_utils.mypy_plugin
+	:autosummary-sections: Classes
+
+.. autosummary-widths:: 1/2
+
+.. automodulesumm:: attr_utils.mypy_plugin
+	:autosummary-sections: Functions
 """
 #
 #  Copyright © 2020 Dominic Davis-Foster <dominic@davis-foster.co.uk>
@@ -149,7 +159,7 @@ decorator_registry["attr_utils.serialise.serde"] = attr_utils_serialise_serde
 
 class AttrUtilsPlugin(Plugin):
 	"""
-	Plugin for `mypy <https://github.com/python/mypy>`_ which adds support for ``attr_utils``.
+	Plugin for :github:repo:`mypy <python/mypy>` which adds support for ``attr_utils``.
 
 	.. autoclasssumm:: AttrUtilsPlugin
 		:autosummary-sections: ;;
