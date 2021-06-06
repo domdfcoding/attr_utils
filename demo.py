@@ -29,14 +29,20 @@ class Device:
 	#: The display name for the device.
 	display_name: str = attr.ib(converter=str)
 
-	#: Flag to indicate the device is an RC Device. If :py:obj:`False` the device is an SCIC.
 	rc_device: bool = attr.ib(converter=strtobool)
+	"""
+	Flag to indicate the device is an RC Device.
+	If :py:obj:`False` the device is an SCIC.
+	"""
 
 	#: List of key: value mappings for configuration options.
-	configuration: List[Dict[str, Any]] = attr.ib(converter=list, default=attr.Factory(list))
+	configuration: List[Dict[str, Any]] = attr.ib(converter=list, factory=list)
 
 	#: Alternative form of ``configuration``.
-	configuration2: Tuple[Dict[str, Any]] = attr.ib(converter=tuple, default=attr.Factory(list))
+	configuration2: Tuple[Dict[str, Any]] = attr.ib(
+			converter=tuple,
+			default=attr.Factory(tuple),
+			)
 
 	#: Alternative form of ``configuration``.
 	configuration3: List[Dict[str, Any]] = attr.ib(
@@ -48,7 +54,7 @@ class Device:
 	#: Alternative form of ``configuration``.
 	configuration4: List[Dict[str, Any]] = attrib(
 			converter=list,
-			default=attr.Factory(list),
+			factory=list,
 			annotation=Sequence[Dict[str, Any]],
 			)
 
