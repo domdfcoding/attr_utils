@@ -9,6 +9,7 @@ version: '0.6.1'
 license: 'MIT'
 short_desc: 'Utilities to augment attrs.'
 
+use_whey: true
 min_coverage: 95
 python_deploy_version: 3.7
 

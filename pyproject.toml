@@ -1,6 +1,6 @@
 [build-system]
-requires = [ "setuptools>=40.6.0", "wheel>=0.34.2",]
-build-backend = "setuptools.build_meta"
+requires = [ "whey",]
+build-backend = "whey"
 
 [project]
 name = "attr_utils"
@@ -26,8 +26,8 @@ Documentation = "https://attr_utils.readthedocs.io/en/latest"
 
 [project.optional-dependencies]
 pprint = [ "prettyprinter==0.18.0",]
-sphinx = [ "sphinx<3.4.0,>=3.0.3", "sphinx-toolbox>=1.4.0",]
-all = [ "prettyprinter==0.18.0", "sphinx<3.4.0,>=3.0.3", "sphinx-toolbox>=1.4.0",]
+sphinx = [ "sphinx<3.4.0,>=3.0.3", "sphinx-toolbox>=1.9.0",]
+all = [ "prettyprinter==0.18.0", "sphinx<3.4.0,>=3.0.3", "sphinx-toolbox>=1.9.0",]
 
 [tool.mkrecipe]
 conda-channels = [ "conda-forge", "domdfcoding",]
@@ -117,6 +117,17 @@ autodoc_exclude_members = [
 
 [tool.dep_checker]
 allowed_unused = [ "toolz",]
+
+[tool.whey]
+base-classifiers = [
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+python-versions = [ "3.6", "3.7", "3.8", "3.9",]
+python-implementations = [ "CPython", "PyPy",]
+platforms = [ "Windows", "macOS", "Linux",]
+license-key = "MIT"
 
 [tool.dep_checker.name_mapping]
 attrs = "attr"
