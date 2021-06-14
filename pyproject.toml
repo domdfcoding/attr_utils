@@ -26,8 +26,8 @@ Documentation = "https://attr_utils.readthedocs.io/en/latest"
 
 [project.optional-dependencies]
 pprint = [ "prettyprinter==0.18.0",]
-sphinx = [ "sphinx<3.4.0,>=3.0.3", "sphinx-toolbox>=1.4.0",]
-all = [ "prettyprinter==0.18.0", "sphinx<3.4.0,>=3.0.3", "sphinx-toolbox>=1.4.0",]
+sphinx = [ "sphinx<3.4.0,>=3.2.0", "sphinx-toolbox>=2.12.1",]
+all = [ "prettyprinter==0.18.0", "sphinx<3.4.0,>=3.2.0", "sphinx-toolbox>=2.12.1",]
 
 [tool.mkrecipe]
 conda-channels = [ "conda-forge", "domdfcoding",]
