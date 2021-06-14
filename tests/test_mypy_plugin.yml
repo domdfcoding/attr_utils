@@ -11,8 +11,8 @@
     for key, value in F(42).to_dict().items():
         print(key, value)
 
-    reveal_type(F(42).to_dict())  # N: Revealed type is 'typing.MutableMapping[builtins.str, Any]'
-    reveal_type(F(42).to_dict()["foo"])  # N: Revealed type is 'Any'
+    reveal_type(F(42).to_dict())  # N: Revealed type is "typing.MutableMapping[builtins.str, Any]"
+    reveal_type(F(42).to_dict()["foo"])  # N: Revealed type is "Any"
 
     f = F.from_dict({"foo": 666})
-    reveal_type(f)  # N: Revealed type is 'main.F'
+    reveal_type(f)  # N: Revealed type is "main.F"
