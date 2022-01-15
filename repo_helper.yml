@@ -37,7 +37,6 @@ tox_testenv_extras: all
 extra_sphinx_extensions:
  - attr_utils.annotations
  - attr_utils.autoattrs
- - sphinx_toolbox_experimental.html_section
  - sphinx_toolbox_experimental.autosummary_widths
 
 sphinx_conf_epilogue:

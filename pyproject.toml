@@ -52,7 +52,6 @@ extensions = [
     "sphinx_toolbox.tweaks.latex_toc",
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
-    "sphinxcontrib.httpdomain",
     "sphinxcontrib.extras_require",
     "sphinx.ext.todo",
     "sphinxemoji.sphinxemoji",
@@ -61,10 +60,11 @@ extensions = [
     "sphinxcontrib.default_values",
     "sphinxcontrib.toctree_plus",
     "sphinx_debuginfo",
+    "sphinx_licenseinfo",
     "seed_intersphinx_mapping",
+    "html_section",
     "attr_utils.annotations",
     "attr_utils.autoattrs",
-    "sphinx_toolbox_experimental.html_section",
     "sphinx_toolbox_experimental.autosummary_widths",
 ]
 sphinxemoji_style = "twemoji"
@@ -96,6 +96,7 @@ add_module_names = false
 hide_none_rtype = true
 all_typevars = true
 overloads_location = "bottom"
+html_codeblock_linenos_style = "table"
 autodoc_exclude_members = [
     "__dict__",
     "__class__",

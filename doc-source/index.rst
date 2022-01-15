@@ -60,7 +60,8 @@ attr_utils
 		:workflow: mypy
 		:alt: mypy status
 
-	.. |requires| requires-io-shield::
+	.. |requires| image:: https://dependency-dash.herokuapp.com/github/domdfcoding/attr_utils/badge.svg
+		:target: https://dependency-dash.herokuapp.com/github/domdfcoding/attr_utils/
 		:alt: Requirements Status
 
 	.. |coveralls| coveralls-shield::
@@ -113,7 +114,7 @@ attr_utils
 		:last-commit:
 		:alt: GitHub last commit
 
-	.. |maintained| maintained-shield:: 2021
+	.. |maintained| maintained-shield:: 2022
 		:alt: Maintenance
 
 	.. |pypi-downloads| pypi-shield::
@@ -175,14 +176,14 @@ Contents
 
 	demo
 	api/*
+	contributing
+	Source
+	license
 
 .. sidebar-links::
 	:caption: Links
 	:github:
 	:pypi: attr_utils
-
-	Contributing Guide <https://contributing-to-sphinx-toolbox.readthedocs.io/en/latest/>
-	Source
 
 
 .. start links

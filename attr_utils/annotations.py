@@ -255,8 +255,8 @@ def attrib(
 
 def attr_docstring_hook(obj: _A) -> _A:
 	"""
-	Hook for :mod:`sphinx_toolbox.more_autodoc.typehints` to add annotations to the ``__init__`` of
-	attrs_ classes.
+	Hook for :mod:`sphinx_toolbox.more_autodoc.typehints` to add annotations to the ``__init__`` method
+	of attrs_ classes.
 
 	.. _attrs: https://www.attrs.org/en/stable/
 
