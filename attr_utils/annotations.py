@@ -120,7 +120,7 @@ API Reference
 # stdlib
 import inspect
 import sys
-from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional, Type, TypeVar, Union, cast
 
 # 3rd party
 import attr
@@ -261,12 +261,12 @@ def attr_docstring_hook(obj: _A) -> _A:
 	.. _attrs: https://www.attrs.org/en/stable/
 
 	:param obj: The object being documented.
-	"""  # noqa D400
+	"""  # noqa: D400
 
 	if callable(obj):
 
 		if inspect.isclass(obj):
-			obj = add_init_annotations(obj)
+			obj = cast(_A, add_init_annotations(obj))
 
 	return obj
 

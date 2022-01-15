@@ -28,7 +28,7 @@
 
 # stdlib
 from types import MethodType
-from typing import Any, Dict, Iterable, NamedTuple, Sequence, Tuple
+from typing import Iterable, Optional
 
 # 3rd party
 import pytest
@@ -97,7 +97,12 @@ def rootdir():
 @pytest.fixture()
 def patched_app(app, monkeypatch):
 
-	def build(self, docnames: Iterable[str], summary: str = None, method: str = "update") -> None:  # NOQA
+	def build(
+			self,
+			docnames: Iterable[str],
+			summary: Optional[str] = None,
+			method: str = "update",
+			) -> None:
 
 		# while reading, collect all warnings from docutils
 		with logging.pending_warnings():

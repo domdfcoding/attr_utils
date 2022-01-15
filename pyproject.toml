@@ -125,10 +125,22 @@ base-classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
 ]
-python-versions = [ "3.6", "3.7", "3.8", "3.9",]
+python-versions = [ "3.6", "3.7", "3.8", "3.9", "3.10",]
 python-implementations = [ "CPython", "PyPy",]
 platforms = [ "Windows", "macOS", "Linux",]
 license-key = "MIT"
+
+[tool.mypy]
+python_version = "3.6"
+namespace_packages = true
+check_untyped_defs = true
+warn_unused_ignores = true
+no_implicit_optional = true
+show_error_codes = true
+plugins = [ "attr_utils.mypy_plugin",]
+
+[tool.snippet-fmt]
+directives = [ "code-block",]
 
 [tool.dep_checker.name_mapping]
 attrs = "attr"

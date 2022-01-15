@@ -12,6 +12,8 @@ short_desc: 'Utilities to augment attrs.'
 use_whey: true
 min_coverage: 95
 python_deploy_version: 3.7
+tox_testenv_extras: all
+standalone_contrib_guide: true
 
 conda_channels:
  - conda-forge
@@ -21,7 +23,8 @@ python_versions:
  - 3.7
  - 3.8
  - 3.9
- - 3.10-dev
+ - "3.10"
+ - 3.11-dev
  - pypy36
  - pypy37
 
@@ -31,8 +34,6 @@ extras_require:
   sphinx:
    - "sphinx>=3.2.0,<3.4.0"
    - "sphinx_toolbox>=2.12.1"
-
-tox_testenv_extras: all
 
 extra_sphinx_extensions:
  - attr_utils.annotations
@@ -62,11 +63,19 @@ third_party_version_matrix:
   attrs:
    - 19.3
    - 20.3
-   - 21.2
+   - 21.4
 #   - latest
+  mypy:
+   - "0.900"
+   - "0.910"
+   - "0.921"
+   - "0.931"
+
 
 tox_unmanaged:
  - pytest
+ - tox
+ - envlists
 
-exclude_files:
- - contributing
+additional_ignore:
+ - setup.cfg

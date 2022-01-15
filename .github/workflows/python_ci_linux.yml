@@ -15,19 +15,20 @@ jobs:
     runs-on: "ubuntu-20.04"
     continue-on-error: ${{ matrix.config.experimental }}
     env:
-      USING_COVERAGE: '3.6,3.7,3.8,3.9,3.10.0-beta.2,pypy-3.6,pypy-3.7'
+      USING_COVERAGE: '3.6,3.7,3.8,3.9,3.10,3.11.0-alpha.3,pypy-3.6,pypy-3.7'
 
     strategy:
       fail-fast: False
       matrix:
         config:
-          - {python-version: "3.6", testenvs: "py36-attrs{19.3,20.3,21.2},build", experimental: False}
-          - {python-version: "3.7", testenvs: "py37-attrs{19.3,20.3,21.2},build", experimental: False}
-          - {python-version: "3.8", testenvs: "py38-attrs{19.3,20.3,21.2},build", experimental: False}
-          - {python-version: "3.9", testenvs: "py39-attrs{19.3,20.3,21.2},build", experimental: False}
-          - {python-version: "3.10.0-beta.2", testenvs: "py310-dev-attrs{19.3,20.3,21.2},build", experimental: True}
-          - {python-version: "pypy-3.6", testenvs: "pypy36-attrs{19.3,20.3,21.2},build", experimental: False}
-          - {python-version: "pypy-3.7", testenvs: "pypy37-attrs{19.3,20.3,21.2},build", experimental: True}
+          - {python-version: "3.6", testenvs: "py36-attrs{19.3,20.3,21.4},build", experimental: False}
+          - {python-version: "3.7", testenvs: "py37-attrs{19.3,20.3,21.4},build", experimental: False}
+          - {python-version: "3.8", testenvs: "py38-attrs{19.3,20.3,21.4},build", experimental: False}
+          - {python-version: "3.9", testenvs: "py39-attrs{19.3,20.3,21.4},build", experimental: False}
+          - {python-version: "3.10", testenvs: "py310-attrs{19.3,20.3,21.4},build", experimental: False}
+          - {python-version: "3.11.0-alpha.3", testenvs: "py311-dev-attrs{19.3,20.3,21.4},build", experimental: True}
+          - {python-version: "pypy-3.6", testenvs: "pypy36-attrs{19.3,20.3,21.4},build", experimental: False}
+          - {python-version: "pypy-3.7", testenvs: "pypy37-attrs{19.3,20.3,21.4},build", experimental: True}
 
     steps:
       - name: Checkout 🛎️

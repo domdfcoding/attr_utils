@@ -56,7 +56,7 @@ def add_attrs_doc(obj: _T) -> _T:
 	:param obj: The class to improve the docstrings for.
 	"""
 
-	obj = prettify_docstrings(obj)  # type: ignore
+	obj = prettify_docstrings(obj)
 
 	new_docstrings = {
 			**base_new_docstrings,

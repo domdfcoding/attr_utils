@@ -62,7 +62,7 @@ Plugin for `mypy <https://github.com/python/mypy>`_ which adds support for attr_
 #
 
 # stdlib
-from typing import Callable, List, MutableMapping, Optional
+from typing import Any, Callable, List, MutableMapping, Optional
 
 # 3rd party
 from mypy.nodes import (  # nodep
@@ -80,14 +80,18 @@ from mypy.nodes import (  # nodep
 from mypy.plugin import ClassDefContext, Plugin, SemanticAnalyzerPluginInterface  # nodep
 from mypy.plugins.common import add_method_to_class  # nodep
 from mypy.semanal_shared import set_callable_name  # nodep
-from mypy.types import AnyType, CallableType, Instance, Type, TypeOfAny, TypeType, TypeVarDef  # nodep
+from mypy.types import AnyType, CallableType, Instance, Type, TypeOfAny, TypeType  # nodep
 from mypy.typevars import fill_typevars  # nodep
 from mypy.util import get_unique_redefinition_name  # nodep
+from mypy.version import __version__ as mypy_version  # nodep
 
 __all__ = ["attr_utils_serialise_serde", "AttrUtilsPlugin", "add_classmethod_to_class", "plugin"]
 
 #: Registry mapping decorator full names to the callable that handles the methods added by the decorator.
 decorator_registry: MutableMapping[str, Callable[[ClassDefContext], None]] = {}
+
+# ref: https://github.com/python/mypy/pull/11332
+_builtins = "builtins" if mypy_version > "0.930" else "__builtins__"
 
 
 def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext):
@@ -100,8 +104,8 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext):
 	info = cls_def_ctx.cls.info
 
 	# https://gitter.im/python/typing?at=5e078653eac8d1511e737d8c
-	str_type = cls_def_ctx.api.named_type("__builtins__.str")
-	bool_type = cls_def_ctx.api.named_type("__builtins__.bool")
+	str_type = cls_def_ctx.api.named_type(f"{_builtins}.str")
+	bool_type = cls_def_ctx.api.named_type(f"{_builtins}.bool")
 	implicit_any = AnyType(TypeOfAny.special_form)
 	mapping = cls_def_ctx.api.lookup_fully_qualified_or_none("typing.Mapping")
 	mutable_mapping = cls_def_ctx.api.lookup_fully_qualified_or_none("typing.MutableMapping")
@@ -165,7 +169,7 @@ class AttrUtilsPlugin(Plugin):
 
 	.. autoclasssumm:: AttrUtilsPlugin
 		:autosummary-sections: ;;
-	"""  # noqa: RST303
+	"""
 
 	def get_class_decorator_hook(self, fullname: str) -> Optional[Callable[[ClassDefContext], None]]:
 		"""
@@ -184,7 +188,7 @@ def add_classmethod_to_class(
 		args: List[Argument],
 		return_type: Type,
 		cls_type: Optional[Type] = None,
-		tvar_def: Optional[TypeVarDef] = None,
+		tvar_def: Optional[Any] = None,
 		) -> None:
 	"""
 	Adds a new classmethod to a class definition.
@@ -208,7 +212,7 @@ def add_classmethod_to_class(
 			cls.defs.body.remove(sym.node)
 
 	cls_type = cls_type or fill_typevars(info)
-	function_type = api.named_type("__builtins__.function")
+	function_type = api.named_type(f"{_builtins}.function")
 
 	args = [Argument(Var("cls"), cls_type, None, ARG_POS)] + args
 	arg_types, arg_names, arg_kinds = [], [], []
