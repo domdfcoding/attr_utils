@@ -4,6 +4,12 @@ name: macOS
 
 on:
   push:
+    branches-ignore:
+      - 'repo-helper-update'
+      - 'pre-commit-ci-update-config'
+      - 'imgbot'
+
+  pull_request:
 
 permissions:
   actions: write
