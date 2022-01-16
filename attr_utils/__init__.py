@@ -29,7 +29,7 @@ Utilities to augment attrs.
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2020 Dominic Davis-Foster"
 __license__: str = "MIT License"
-__version__: str = "0.6.1"
+__version__: str = "0.7.0"
 __email__: str = "dominic@davis-foster.co.uk"
 
 _docs = False
