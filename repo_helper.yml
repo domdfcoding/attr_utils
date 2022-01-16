@@ -27,6 +27,7 @@ python_versions:
  - 3.11-dev
  - pypy36
  - pypy37
+ - pypy38
 
 extras_require:
   pprint:

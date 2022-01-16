@@ -30,6 +30,7 @@ Add better docstrings to attrs_ generated functions.
 
 # stdlib
 import re
+import sys
 from types import MethodType
 from typing import Optional, Pattern, Type, TypeVar
 
@@ -92,7 +93,7 @@ def add_attrs_doc(obj: _T) -> _T:
 			continue  # pragma: no cover (!PyPy)
 		elif PYPY and isinstance(attribute, MethodType):
 			continue  # pragma: no cover
-		elif PYPY37:  # pragma: no cover (not (PyPy and py37))
+		elif PYPY and sys.version_info >= (3, 7):  # pragma: no cover (not (PyPy and py37+))
 			if attribute is getattr(object, attr_name, None):
 				continue
 			elif attribute is getattr(float, attr_name, None):
