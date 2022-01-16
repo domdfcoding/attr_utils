@@ -71,7 +71,6 @@ third_party_version_matrix:
    - "0.921"
    - "0.931"
 
-
 tox_unmanaged:
  - pytest
  - tox
