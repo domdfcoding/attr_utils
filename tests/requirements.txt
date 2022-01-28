@@ -15,5 +15,5 @@ pytest-randomly>=3.7.0
 pytest-timeout>=1.4.2
 sdjson>=0.3.0
 snapshottest>=0.6.0
-sphinx-toolbox[testing]>=2.0.4
+sphinx-toolbox[testing]>=2.16.0
 sphobjinv>=2.0.1

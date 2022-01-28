@@ -4,6 +4,6 @@ __all__ = ["extras_require"]
 
 extras_require = {
 		"pprint": ["prettyprinter==0.18.0"],
-		"sphinx": ["sphinx<3.4.0,>=3.2.0", "sphinx-toolbox>=2.12.1"],
-		"all": ["prettyprinter==0.18.0", "sphinx<3.4.0,>=3.2.0", "sphinx-toolbox>=2.12.1"]
+		"sphinx": ["sphinx<3.4.0,>=3.2.0", "sphinx-toolbox>=2.16.0"],
+		"all": ["prettyprinter==0.18.0", "sphinx<3.4.0,>=3.2.0", "sphinx-toolbox>=2.16.0"]
 		}

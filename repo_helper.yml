@@ -34,7 +34,7 @@ extras_require:
    - prettyprinter==0.18.0
   sphinx:
    - "sphinx>=3.2.0,<3.4.0"
-   - "sphinx_toolbox>=2.12.1"
+   - "sphinx_toolbox>=2.16.0"
 
 extra_sphinx_extensions:
  - attr_utils.annotations
