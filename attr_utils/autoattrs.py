@@ -97,12 +97,14 @@ API Reference
 #
 
 # stdlib
+import warnings
 from textwrap import dedent
 from typing import Any, Dict, List, MutableMapping, Optional, Tuple, Type
 
 # 3rd party
 import attr
 from sphinx.application import Sphinx  # nodep
+from sphinx.deprecation import RemovedInSphinx50Warning
 from sphinx.ext.autodoc import ClassDocumenter, Documenter  # nodep
 from sphinx.pycode import ModuleAnalyzer  # nodep
 from sphinx_toolbox import __version__  # nodep
@@ -166,7 +168,10 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		:param no_docstring:
 		"""
 
-		Documenter.add_content(self, more_content, True)
+		with warnings.catch_warnings():
+			# TODO: work out what to do about this
+			warnings.simplefilter("ignore", RemovedInSphinx50Warning)
+			Documenter.add_content(self, more_content, True)
 
 		# set sourcename and add content from attribute documentation
 		sourcename = self.get_sourcename()
