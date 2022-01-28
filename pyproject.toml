@@ -138,6 +138,7 @@ warn_unused_ignores = true
 no_implicit_optional = true
 show_error_codes = true
 plugins = [ "attr_utils.mypy_plugin",]
+incremental = false
 
 [tool.snippet-fmt]
 directives = [ "code-block",]
