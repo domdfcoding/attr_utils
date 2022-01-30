@@ -104,7 +104,7 @@ from typing import Any, Dict, List, MutableMapping, Optional, Tuple, Type
 # 3rd party
 import attr
 from sphinx.application import Sphinx  # nodep
-from sphinx.deprecation import RemovedInSphinx50Warning
+from sphinx.deprecation import RemovedInSphinx50Warning  # nodep
 from sphinx.ext.autodoc import ClassDocumenter, Documenter  # nodep
 from sphinx.pycode import ModuleAnalyzer  # nodep
 from sphinx_toolbox import __version__  # nodep
