@@ -4,8 +4,6 @@ coverage-pyver-pragma>=0.2.1
 domdf-python-tools[testing]>=2.0.1
 importlib-metadata>=3.6.0
 iniconfig!=1.1.0,>=1.0.1
-jinja2<3.0.0
-markupsafe<2.0.0
 pytest>=6.0.0
 pytest-benchmark>=3.2.3
 pytest-cov>=2.8.1
