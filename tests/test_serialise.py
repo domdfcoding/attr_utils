@@ -1,7 +1,6 @@
 import __future__
 
 # stdlib
-import sys
 from collections import Counter
 from enum import IntEnum
 from typing import Any, Mapping, MutableMapping, get_type_hints, no_type_check

@@ -102,7 +102,7 @@ def patched_app(app, monkeypatch):
 			docnames: Iterable[str],
 			summary: Optional[str] = None,
 			method: str = "update",
-			) -> None:
+			) -> None:  # NOQA
 
 		# while reading, collect all warnings from docutils
 		with logging.pending_warnings():
