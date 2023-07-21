@@ -33,7 +33,7 @@ attr_utils
 		  - |license| |language| |requires|
 
 	.. |docs| rtfd-shield::
-		:project: attr_utils
+		:project: attr-utils
 		:alt: Documentation Build Status
 
 	.. |docs_check| actions-shield::
@@ -60,8 +60,8 @@ attr_utils
 		:workflow: mypy
 		:alt: mypy status
 
-	.. |requires| image:: https://dependency-dash.herokuapp.com/github/domdfcoding/attr_utils/badge.svg
-		:target: https://dependency-dash.herokuapp.com/github/domdfcoding/attr_utils/
+	.. |requires| image:: https://dependency-dash.repo-helper.uk/github/domdfcoding/attr_utils/badge.svg
+		:target: https://dependency-dash.repo-helper.uk/github/domdfcoding/attr_utils/
 		:alt: Requirements Status
 
 	.. |coveralls| coveralls-shield::
@@ -114,7 +114,7 @@ attr_utils
 		:last-commit:
 		:alt: GitHub last commit
 
-	.. |maintained| maintained-shield:: 2022
+	.. |maintained| maintained-shield:: 2023
 		:alt: Maintenance
 
 	.. |pypi-downloads| pypi-shield::
