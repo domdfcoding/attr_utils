@@ -30,8 +30,8 @@ attr_utils
 	* - Other
 	  - |license| |language| |requires|
 
-.. |docs| image:: https://img.shields.io/readthedocs/attr_utils/latest?logo=read-the-docs
-	:target: https://attr_utils.readthedocs.io/en/latest
+.. |docs| image:: https://img.shields.io/readthedocs/attr-utils/latest?logo=read-the-docs
+	:target: https://attr-utils.readthedocs.io/en/latest
 	:alt: Documentation Build Status
 
 .. |docs_check| image:: https://github.com/domdfcoding/attr_utils/workflows/Docs%20Check/badge.svg
@@ -58,8 +58,8 @@ attr_utils
 	:target: https://github.com/domdfcoding/attr_utils/actions?query=workflow%3A%22mypy%22
 	:alt: mypy status
 
-.. |requires| image:: https://dependency-dash.herokuapp.com/github/domdfcoding/attr_utils/badge.svg
-	:target: https://dependency-dash.herokuapp.com/github/domdfcoding/attr_utils/
+.. |requires| image:: https://dependency-dash.repo-helper.uk/github/domdfcoding/attr_utils/badge.svg
+	:target: https://dependency-dash.repo-helper.uk/github/domdfcoding/attr_utils/
 	:alt: Requirements Status
 
 .. |coveralls| image:: https://img.shields.io/coveralls/github/domdfcoding/attr_utils/master?logo=coveralls
@@ -109,7 +109,7 @@ attr_utils
 	:target: https://github.com/domdfcoding/attr_utils/commit/master
 	:alt: GitHub last commit
 
-.. |maintained| image:: https://img.shields.io/maintenance/yes/2022
+.. |maintained| image:: https://img.shields.io/maintenance/yes/2023
 	:alt: Maintenance
 
 .. |pypi-downloads| image:: https://img.shields.io/pypi/dm/attr_utils
