@@ -174,14 +174,14 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 			Documenter.add_content(self, more_content, True)
 
 		# set sourcename and add content from attribute documentation
-		sourcename = self.get_sourcename()
+		# sourcename = self.get_sourcename()
 
-		params, pre_output, post_output = self._get_docstring()
+		# params, pre_output, post_output = self._get_docstring()
 
-		self.add_line('', sourcename)
-		for line in list(self.process_doc([pre_output])):
-			self.add_line(line, sourcename)
-		self.add_line('', sourcename)
+		# self.add_line('', sourcename)
+		# for line in list(self.process_doc([pre_output])):
+		# 	self.add_line(line, sourcename)
+		# self.add_line('', sourcename)
 
 	def _get_docstring(self) -> Tuple[Dict[str, Param], List[str], List[str]]:
 		"""
@@ -265,7 +265,8 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 			all_docs[field] = ''.join(doc).strip()
 
 		self.add_line('', sourcename)
-		for line in list(self.process_doc([[*parameter_docs, '', '', *post_output]])):
+
+		for line in list(self.process_doc([[*pre_output, *parameter_docs, '', '', *post_output]])):
 			self.add_line(line, sourcename)
 		self.add_line('', sourcename)
 
@@ -273,13 +274,13 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 		if hasattr(self.object, "__slots__"):
 			slots_dict: MutableMapping[str, Optional[str]] = {}
-			for item in self.object.__slots__:
+			for item in self.object.__slots__:  # type: ignore[attr-defined]
 				if item in all_docs:
 					slots_dict[item] = all_docs[item]
 				else:
 					slots_dict[item] = None
 
-			self.object.__slots__ = slots_dict
+			self.object.__slots__ = slots_dict  # type: ignore[attr-defined]
 
 		if hasattr(self, "add_autosummary"):
 			self.add_autosummary()
