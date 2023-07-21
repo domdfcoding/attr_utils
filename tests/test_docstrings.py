@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Tuple
 
 # 3rd party
 import attr
+from domdf_python_tools.compat import importlib_metadata
 
 # this package
 from attr_utils.docstrings import add_attrs_doc
@@ -20,12 +21,12 @@ def untyped_converter(arg):
 class SomeClass:
 	a_string: str = attr.ib(converter=str)
 	custom_converter: Any = attr.ib(converter=my_converter)
-	untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)  # type: ignore
+	untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)
 
 
 def test_add_attrs_doc():
 
-	if attr.__version__ == "19.3.0":
+	if importlib_metadata.version("attrs") == "19.3.0":
 		doc = "\n        Automatically created by attrs.\n        "
 
 		assert SomeClass.__eq__.__doc__ is None

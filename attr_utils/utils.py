@@ -27,22 +27,27 @@ General utility functions.
 #
 
 # stdlib
-from typing import Tuple
+from typing import TYPE_CHECKING, Tuple
 
 # 3rd party
 from attr import Attribute
-from typing_extensions import Protocol, runtime_checkable
 
 __all__ = ["AttrsClass"]
 
+if TYPE_CHECKING:
+	# 3rd party
+	from attr import AttrsInstance as AttrsClass
+else:
+	# 3rd party
+	from typing_extensions import Protocol, runtime_checkable
 
-@runtime_checkable
-class AttrsClass(Protocol):
-	"""
-	:class:`~typing.Protocol` for attrs classes.
-	"""
+	@runtime_checkable
+	class AttrsClass(Protocol):
+		"""
+		:class:`~typing.Protocol` for attrs classes.
+		"""
 
-	#: Special attribute used internally by attrs.
-	__attrs_attrs__: Tuple[Attribute, ...]
+		#: Special attribute used internally by attrs.
+		__attrs_attrs__: Tuple[Attribute, ...]
 
-	__name__: str
+		__name__: str

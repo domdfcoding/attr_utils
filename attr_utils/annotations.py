@@ -158,7 +158,7 @@ def add_init_annotations(obj: _C) -> _C:
 
 	annotations: Dict[str, Optional[Type]] = {"return": None}
 
-	attrs = attr.fields(obj)  # type: ignore
+	attrs = attr.fields(obj)
 
 	for a in attrs:
 		arg_name = a.name.lstrip('_')
@@ -185,12 +185,12 @@ def add_init_annotations(obj: _C) -> _C:
 					else:
 						annotations[arg_name] = arg_type
 
-	if hasattr(obj.__init__, "__annotations__"):  # type: ignore
-		obj.__init__.__annotations__.update(annotations)  # type: ignore
+	if hasattr(obj.__init__, "__annotations__"):
+		obj.__init__.__annotations__.update(annotations)
 	else:  # pragma: no cover
-		obj.__init__.__annotations__ = annotations  # type: ignore
+		obj.__init__.__annotations__ = annotations
 
-	return obj
+	return cast(_C, obj)
 
 
 def attrib(

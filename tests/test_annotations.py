@@ -23,7 +23,7 @@ def untyped_converter(arg):
 class SomeClass:
 	a_string: str = attr.ib(converter=str)
 	custom_converter: Any = attr.ib(converter=my_converter)
-	untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)  # type: ignore
+	untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)
 	no_converter: Callable[[str], None] = attr.ib()
 
 

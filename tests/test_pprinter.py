@@ -61,7 +61,7 @@ def test_device():
 					},
 			)
 
-	if sys.version_info >= (3, 11):
+	if sys.version_info >= (3, 13):
 		expected = """tests.test_pprinter.Device(
 	device_id=1000,
 	display_name='Television',
