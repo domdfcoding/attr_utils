@@ -36,6 +36,7 @@ known_third_party = [
     "coincidence",
     "coverage",
     "coverage_pyver_pragma",
+    "docutils",
     "domdf_python_tools",
     "github",
     "importlib_metadata",
