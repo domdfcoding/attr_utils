@@ -24,10 +24,12 @@ python_versions:
  - 3.8
  - 3.9
  - "3.10"
- - 3.11-dev
+ - "3.11"
+ - 3.12-dev
  - pypy36
  - pypy37
  - pypy38
+ - pypy39
 
 extras_require:
   pprint:
@@ -65,12 +67,13 @@ third_party_version_matrix:
    - 19.3
    - 20.3
    - 21.4
-#   - latest
+   - latest
   mypy:
    - "0.900"
    - "0.910"
    - "0.921"
    - "0.931"
+   - "1.0.1"
 
 tox_unmanaged:
  - pytest
