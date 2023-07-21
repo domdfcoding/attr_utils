@@ -174,14 +174,14 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 			Documenter.add_content(self, more_content, True)
 
 		# set sourcename and add content from attribute documentation
-		# sourcename = self.get_sourcename()
+		sourcename = self.get_sourcename()
 
-		# params, pre_output, post_output = self._get_docstring()
+		params, pre_output, post_output = self._get_docstring()
 
-		# self.add_line('', sourcename)
-		# for line in list(self.process_doc([pre_output])):
-		# 	self.add_line(line, sourcename)
-		# self.add_line('', sourcename)
+		self.add_line('', sourcename)
+		for line in list(self.process_doc([pre_output])):
+			self.add_line(line, sourcename)
+		self.add_line('', sourcename)
 
 	def _get_docstring(self) -> Tuple[Dict[str, Param], List[str], List[str]]:
 		"""
@@ -266,7 +266,9 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 		self.add_line('', sourcename)
 
-		for line in list(self.process_doc([[*pre_output, *parameter_docs, '', '', *post_output]])):
+		for line in self.process_doc([[*pre_output, *parameter_docs, '', '', *post_output]]):
+			if line and line in pre_output:
+				continue
 			self.add_line(line, sourcename)
 		self.add_line('', sourcename)
 
