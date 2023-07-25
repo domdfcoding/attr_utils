@@ -6,3 +6,7 @@ Demo
 	:members:
 	:special-members:
 	:exclude-members: __init__,__setattr__,__hash__
+
+.. autoattrs:: demo.Connector
+	:members:
+	:exclude-members: __init__,__setattr__,__hash__,__attrs_init__

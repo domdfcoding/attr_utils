@@ -3,7 +3,7 @@ This example is based on real code.
 """
 
 # stdlib
-from typing import Any, Dict, List, Sequence, Tuple, Union, overload
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Union, overload
 
 # 3rd party
 import attr
@@ -74,3 +74,30 @@ class Device:
 
 		.. versionadded:: 1.2.3
 		"""
+
+
+@attr.s(init=False)
+class Connector:
+	"""
+	Represents an electrical connector.
+
+	:param name: The name of the connector.
+	:param n_pins: The number if pins. For common connectors this is inferred from the name.
+	:param right_angle: Whether this is a right angle connector.
+	"""
+
+	#: The name of the connector
+	name: str = attr.ib(converter=str)
+
+	#: The number of pins
+	n_pins: int = attr.ib(converter=int)
+
+	def __init__(self, name: str, n_pins: Optional[int] = None, right_angle: bool = False):
+		if name == "DA-15":
+			n_pins = 15
+		elif name == "DB-25":
+			n_pins = 25
+		elif name == "DE-15":
+			n_pins = 15
+
+		self.__attrs_init__(name, n_pins)
