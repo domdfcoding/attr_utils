@@ -1,7 +1,7 @@
 # stdlib
 import pathlib
 
-pytest_plugins = ("coincidence", )
+pytest_plugins = ("coincidence", "sphinx_toolbox.testing")
 
 repo_root = pathlib.Path(__file__).parent.parent
 

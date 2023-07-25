@@ -1,8 +1,14 @@
+{% set sig_prename_tag=("span" if sphinx_version >= (4, 0) else 'code') -%}
+{% set sig_object_class=(' class="sig sig-object py"' if sphinx_version >= (4, 0) else '') -%}
+{% set section = ("section" if docutils_version >= (0, 17) else 'div class="section"') -%}
+{% set end_section = ("section" if docutils_version >= (0, 17) else 'div') -%}
 <!DOCTYPE html>
 <html>
  <head>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>{% if docutils_version > (0, 18) %}
+  <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>{% elif docutils_version > (0, 17) %}
+  <meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>{% endif %}
   <title>
    Attr-Utils Demo — Python  documentation
   </title>
@@ -21,7 +27,7 @@
    <div class="documentwrapper">
     <div class="bodywrapper">
      <div class="body" role="main">
-      <div class="section" id="attr-utils-demo">
+      <{{ section }} id="attr-utils-demo">
        <h1>
         Attr-Utils Demo
         <a class="headerlink" href="#attr-utils-demo" title="Permalink to this headline">
@@ -183,7 +189,7 @@ If you prefer you can instead provide this as a keyword argument to
            is only officially supported on Python 3.7 and above.
           </p>
          </div>
-         <div class="section" id="examples">
+         <{{ section }} id="examples">
           <h2>
            Examples
            <a class="headerlink" href="#examples" title="Permalink to this headline">
@@ -197,75 +203,34 @@ If you prefer you can instead provide this as a keyword argument to
           </p>
           <div class="highlight-python notranslate">
            <div class="highlight">
-            <table class="highlighttable">
-             <tbody>
-              <tr>
-               <td class="linenos">
-                <div class="linenodiv">
-                 <pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span></pre>
-                </div>
-               </td>
-               <td class="code">
-                <div>
-                 <pre><span></span><span class="k">def</span> <span class="nf">my_converter</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]):</span>
-        <span class="k">return</span> <span class="n">arg</span>
-
-
-<span class="k">def</span> <span class="nf">untyped_converter</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">arg</span>
-
-
-<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
-<span class="k">class</span> <span class="nc">SomeClass</span><span class="p">:</span>
-        <span class="n">a_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
-        <span class="n">custom_converter</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">my_converter</span><span class="p">)</span>
-        <span class="n">untyped</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">untyped_converter</span><span class="p">)</span>
-        <span class="n">annotated</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
-                <span class="n">converter</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span>
-                <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">"annotation"</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]},</span>
-        <span class="p">)</span>
-
-<span class="n">add_attrs_annotations</span><span class="p">(</span><span class="n">SomeClass</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">SomeClass</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__annotations__</span><span class="p">)</span>
-<span class="c1"># {</span>
-<span class="c1">#       'return': None,</span>
-<span class="c1">#       'a_string': &lt;class 'str'&gt;,</span>
-<span class="c1">#       'custom_converter': typing.List[typing.Dict[str, typing.Any]],</span>
-<span class="c1">#       'untyped': typing.Tuple[str, int, float],</span>
-<span class="c1">#       }</span>
+            <pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">my_converter</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]):</span>
+<span class="linenos"> 2</span>        <span class="k">return</span> <span class="n">arg</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">untyped_converter</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="k">return</span> <span class="n">arg</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="linenos">10</span><span class="k">class</span> <span class="nc">SomeClass</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="n">a_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="n">custom_converter</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">my_converter</span><span class="p">)</span>
+<span class="linenos">13</span>        <span class="n">untyped</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">untyped_converter</span><span class="p">)</span>
+<span class="linenos">14</span>        <span class="n">annotated</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+<span class="linenos">15</span>                <span class="n">converter</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span>
+<span class="linenos">16</span>                <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">"annotation"</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]},</span>
+<span class="linenos">17</span>        <span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="n">add_attrs_annotations</span><span class="p">(</span><span class="n">SomeClass</span><span class="p">)</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="nb">print</span><span class="p">(</span><span class="n">SomeClass</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__annotations__</span><span class="p">)</span>
+<span class="linenos">22</span><span class="c1"># {</span>
+<span class="linenos">23</span><span class="c1">#       'return': None,</span>
+<span class="linenos">24</span><span class="c1">#       'a_string': &lt;class 'str'&gt;,</span>
+<span class="linenos">25</span><span class="c1">#       'custom_converter': typing.List[typing.Dict[str, typing.Any]],</span>
+<span class="linenos">26</span><span class="c1">#       'untyped': typing.Tuple[str, int, float],</span>
+<span class="linenos">27</span><span class="c1">#       }</span>
 </pre>
-                </div>
-               </td>
-              </tr>
-             </tbody>
-            </table>
            </div>
           </div>
           <p>
@@ -289,16 +254,16 @@ If you prefer you can instead provide this as a keyword argument to
           <blockquote>
            <div>
             <dl class="py class">
-             <dt id="attr_utils.annotations.AttrsClass">
+             <dt{{ sig_object_class }} id="attr_utils.annotations.AttrsClass">
               <em class="property">
                class
               </em>
-              <code class="sig-prename descclassname">
+              <{{ sig_prename_tag }} class="sig-prename descclassname">
                attr_utils.annotations.
-              </code>
-              <code class="sig-name descname">
+              </{{ sig_prename_tag }}>
+              <{{ sig_prename_tag }} class="sig-name descname">
                AttrsClass
-              </code>
+              </{{ sig_prename_tag }}>
               <span class="sig-paren">
                (
               </span>
@@ -401,8 +366,8 @@ If you prefer you can instead provide this as a keyword argument to
             </dl>
            </div>
           </blockquote>
-         </div>
-         <div class="section" id="api-reference">
+         </{{ end_section }}>
+         <{{ section }} id="api-reference">
           <h2>
            API Reference
            <a class="headerlink" href="#api-reference" title="Permalink to this headline">
@@ -410,16 +375,16 @@ If you prefer you can instead provide this as a keyword argument to
            </a>
           </h2>
           <dl class="py class">
-           <dt id="id0">
+           <dt{{ sig_object_class }} id="id0">
             <em class="property">
              class
             </em>
-            <code class="sig-prename descclassname">
+            <{{ sig_prename_tag }} class="sig-prename descclassname">
              attr_utils.annotations.
-            </code>
-            <code class="sig-name descname">
+            </{{ sig_prename_tag }}>
+            <{{ sig_prename_tag }} class="sig-name descname">
              AttrsClass
-            </code>
+            </{{ sig_prename_tag }}>
             <span class="sig-paren">
              (
             </span>
@@ -519,10 +484,10 @@ If you prefer you can instead provide this as a keyword argument to
              </dd>
             </dl>
             <dl class="py method">
-             <dt id="attr_utils.annotations.AttrsClass.__eq__">
-              <code class="sig-name descname">
+             <dt{{ sig_object_class }} id="attr_utils.annotations.AttrsClass.__eq__">
+              <{{ sig_prename_tag }} class="sig-name descname">
                __eq__
-              </code>
+              </{{ sig_prename_tag }}>
               <span class="sig-paren">
                (
               </span>
@@ -571,10 +536,10 @@ If you prefer you can instead provide this as a keyword argument to
              </dd>
             </dl>
             <dl class="py method">
-             <dt id="attr_utils.annotations.AttrsClass.__ge__">
-              <code class="sig-name descname">
+             <dt{{ sig_object_class }} id="attr_utils.annotations.AttrsClass.__ge__">
+              <{{ sig_prename_tag }} class="sig-name descname">
                __ge__
-              </code>
+              </{{ sig_prename_tag }}>
               <span class="sig-paren">
                (
               </span>
@@ -623,10 +588,10 @@ If you prefer you can instead provide this as a keyword argument to
              </dd>
             </dl>
             <dl class="py method">
-             <dt id="attr_utils.annotations.AttrsClass.__gt__">
-              <code class="sig-name descname">
+             <dt{{ sig_object_class }} id="attr_utils.annotations.AttrsClass.__gt__">
+              <{{ sig_prename_tag }} class="sig-name descname">
                __gt__
-              </code>
+              </{{ sig_prename_tag }}>
               <span class="sig-paren">
                (
               </span>
@@ -675,114 +640,10 @@ If you prefer you can instead provide this as a keyword argument to
              </dd>
             </dl>
             <dl class="py method">
-             <dt id="attr_utils.annotations.AttrsClass.__le__">
-              <code class="sig-name descname">
-               __le__
-              </code>
-              <span class="sig-paren">
-               (
-              </span>
-              <em class="sig-param">
-               <span class="n">
-                other
-               </span>
-              </em>
-              <span class="sig-paren">
-               )
-              </span>
-              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__le__" title="Permalink to this definition">
-               ¶
-              </a>
-             </dt>
-             <dd>
-              <p>
-               Return
-               <code class="docutils literal notranslate">
-                <span class="pre">
-                 self
-                </span>
-                <span class="pre">
-                 &lt;=
-                </span>
-                <span class="pre">
-                 other
-                </span>
-               </code>
-               .
-              </p>
-              <dl class="field-list simple">
-               <dt class="field-odd">
-                Return type
-               </dt>
-               <dd class="field-odd">
-                <p>
-                 <code class="xref py py-class docutils literal notranslate">
-                  <span class="pre">
-                   bool
-                  </span>
-                 </code>
-                </p>
-               </dd>
-              </dl>
-             </dd>
-            </dl>
-            <dl class="py method">
-             <dt id="attr_utils.annotations.AttrsClass.__lt__">
-              <code class="sig-name descname">
-               __lt__
-              </code>
-              <span class="sig-paren">
-               (
-              </span>
-              <em class="sig-param">
-               <span class="n">
-                other
-               </span>
-              </em>
-              <span class="sig-paren">
-               )
-              </span>
-              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__lt__" title="Permalink to this definition">
-               ¶
-              </a>
-             </dt>
-             <dd>
-              <p>
-               Return
-               <code class="docutils literal notranslate">
-                <span class="pre">
-                 self
-                </span>
-                <span class="pre">
-                 &lt;
-                </span>
-                <span class="pre">
-                 other
-                </span>
-               </code>
-               .
-              </p>
-              <dl class="field-list simple">
-               <dt class="field-odd">
-                Return type
-               </dt>
-               <dd class="field-odd">
-                <p>
-                 <code class="xref py py-class docutils literal notranslate">
-                  <span class="pre">
-                   bool
-                  </span>
-                 </code>
-                </p>
-               </dd>
-              </dl>
-             </dd>
-            </dl>
-            <dl class="py method">
-             <dt id="attr_utils.annotations.AttrsClass.__ne__">
-              <code class="sig-name descname">
+             <dt{{ sig_object_class }} id="attr_utils.annotations.AttrsClass.__ne__">
+              <{{ sig_prename_tag }} class="sig-name descname">
                __ne__
-              </code>
+              </{{ sig_prename_tag }}>
               <span class="sig-paren">
                (
               </span>
@@ -831,10 +692,10 @@ If you prefer you can instead provide this as a keyword argument to
              </dd>
             </dl>
             <dl class="py method">
-             <dt id="attr_utils.annotations.AttrsClass.__repr__">
-              <code class="sig-name descname">
+             <dt{{ sig_object_class }} id="attr_utils.annotations.AttrsClass.__repr__">
+              <{{ sig_prename_tag }} class="sig-name descname">
                __repr__
-              </code>
+              </{{ sig_prename_tag }}>
               <span class="sig-paren">
                (
               </span>
@@ -875,18 +736,18 @@ If you prefer you can instead provide this as a keyword argument to
             </dl>
            </dd>
           </dl>
-         </div>
+         </{{ end_section }}>
          <dl class="py class">
-          <dt id="id5">
+          <dt{{ sig_object_class }} id="id5">
            <em class="property">
             class
            </em>
-           <code class="sig-prename descclassname">
+           <{{ sig_prename_tag }} class="sig-prename descclassname">
             attr_utils.annotations.
-           </code>
-           <code class="sig-name descname">
+           </{{ sig_prename_tag }}>
+           <{{ sig_prename_tag }} class="sig-name descname">
             AttrsClass
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -986,10 +847,10 @@ If you prefer you can instead provide this as a keyword argument to
             </dd>
            </dl>
            <dl class="py method">
-            <dt id="id7">
-             <code class="sig-name descname">
+            <dt{{ sig_object_class }} id="id7">
+             <{{ sig_prename_tag }} class="sig-name descname">
               __eq__
-             </code>
+             </{{ sig_prename_tag }}>
              <span class="sig-paren">
               (
              </span>
@@ -1038,10 +899,10 @@ If you prefer you can instead provide this as a keyword argument to
             </dd>
            </dl>
            <dl class="py method">
-            <dt id="id8">
-             <code class="sig-name descname">
+            <dt{{ sig_object_class }} id="id8">
+             <{{ sig_prename_tag }} class="sig-name descname">
               __ge__
-             </code>
+             </{{ sig_prename_tag }}>
              <span class="sig-paren">
               (
              </span>
@@ -1090,10 +951,10 @@ If you prefer you can instead provide this as a keyword argument to
             </dd>
            </dl>
            <dl class="py method">
-            <dt id="id9">
-             <code class="sig-name descname">
+            <dt{{ sig_object_class }} id="id9">
+             <{{ sig_prename_tag }} class="sig-name descname">
               __gt__
-             </code>
+             </{{ sig_prename_tag }}>
              <span class="sig-paren">
               (
              </span>
@@ -1142,10 +1003,10 @@ If you prefer you can instead provide this as a keyword argument to
             </dd>
            </dl>
            <dl class="py method">
-            <dt id="id10">
-             <code class="sig-name descname">
-              __le__
-             </code>
+            <dt{{ sig_object_class }} id="id10">
+             <{{ sig_prename_tag }} class="sig-name descname">
+              __ne__
+             </{{ sig_prename_tag }}>
              <span class="sig-paren">
               (
              </span>
@@ -1158,110 +1019,6 @@ If you prefer you can instead provide this as a keyword argument to
               )
              </span>
              <a class="headerlink" href="#id10" title="Permalink to this definition">
-              ¶
-             </a>
-            </dt>
-            <dd>
-             <p>
-              Return
-              <code class="docutils literal notranslate">
-               <span class="pre">
-                self
-               </span>
-               <span class="pre">
-                &lt;=
-               </span>
-               <span class="pre">
-                other
-               </span>
-              </code>
-              .
-             </p>
-             <dl class="field-list simple">
-              <dt class="field-odd">
-               Return type
-              </dt>
-              <dd class="field-odd">
-               <p>
-                <code class="xref py py-class docutils literal notranslate">
-                 <span class="pre">
-                  bool
-                 </span>
-                </code>
-               </p>
-              </dd>
-             </dl>
-            </dd>
-           </dl>
-           <dl class="py method">
-            <dt id="id11">
-             <code class="sig-name descname">
-              __lt__
-             </code>
-             <span class="sig-paren">
-              (
-             </span>
-             <em class="sig-param">
-              <span class="n">
-               other
-              </span>
-             </em>
-             <span class="sig-paren">
-              )
-             </span>
-             <a class="headerlink" href="#id11" title="Permalink to this definition">
-              ¶
-             </a>
-            </dt>
-            <dd>
-             <p>
-              Return
-              <code class="docutils literal notranslate">
-               <span class="pre">
-                self
-               </span>
-               <span class="pre">
-                &lt;
-               </span>
-               <span class="pre">
-                other
-               </span>
-              </code>
-              .
-             </p>
-             <dl class="field-list simple">
-              <dt class="field-odd">
-               Return type
-              </dt>
-              <dd class="field-odd">
-               <p>
-                <code class="xref py py-class docutils literal notranslate">
-                 <span class="pre">
-                  bool
-                 </span>
-                </code>
-               </p>
-              </dd>
-             </dl>
-            </dd>
-           </dl>
-           <dl class="py method">
-            <dt id="id12">
-             <code class="sig-name descname">
-              __ne__
-             </code>
-             <span class="sig-paren">
-              (
-             </span>
-             <em class="sig-param">
-              <span class="n">
-               other
-              </span>
-             </em>
-             <span class="sig-paren">
-              )
-             </span>
-             <a class="headerlink" href="#id12" title="Permalink to this definition">
               ¶
              </a>
             </dt>
@@ -1298,17 +1055,17 @@ If you prefer you can instead provide this as a keyword argument to
             </dd>
            </dl>
            <dl class="py method">
-            <dt id="id13">
-             <code class="sig-name descname">
+            <dt{{ sig_object_class }} id="id11">
+             <{{ sig_prename_tag }} class="sig-name descname">
               __repr__
-             </code>
+             </{{ sig_prename_tag }}>
              <span class="sig-paren">
               (
              </span>
              <span class="sig-paren">
               )
              </span>
-             <a class="headerlink" href="#id13" title="Permalink to this definition">
+             <a class="headerlink" href="#id11" title="Permalink to this definition">
               ¶
              </a>
             </dt>
@@ -1344,7 +1101,7 @@ If you prefer you can instead provide this as a keyword argument to
          </dl>
         </div>
        </blockquote>
-      </div>
+      </{{ end_section }}>
      </div>
     </div>
    </div>

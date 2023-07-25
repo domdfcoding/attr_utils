@@ -1,8 +1,14 @@
+{% set sig_prename_tag=("span" if sphinx_version >= (4, 0) else 'code') -%}
+{% set sig_object_class=(' class="sig sig-object py"' if sphinx_version >= (4, 0) else '') -%}
+{% set section = ("section" if docutils_version >= (0, 17) else 'div class="section"') -%}
+{% set end_section = ("section" if docutils_version >= (0, 17) else 'div') -%}
 <!DOCTYPE html>
 <html>
  <head>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>{% if docutils_version > (0, 18) %}
+  <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>{% elif docutils_version > (0, 17) %}
+  <meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>{% endif %}
   <title>
    Attr-Utils Demo — Python  documentation
   </title>
@@ -21,7 +27,7 @@
    <div class="documentwrapper">
     <div class="bodywrapper">
      <div class="body" role="main">
-      <div class="section" id="attr-utils-demo">
+      <{{ section }} id="attr-utils-demo">
        <h1>
         Attr-Utils Demo
         <a class="headerlink" href="#attr-utils-demo" title="Permalink to this headline">
@@ -34,16 +40,16 @@
        <blockquote>
         <div>
          <dl class="py class">
-          <dt id="attr_utils.annotations.AttrsClass">
+          <dt{{ sig_object_class }} id="attr_utils.annotations.AttrsClass">
            <em class="property">
             class
            </em>
-           <code class="sig-prename descclassname">
+           <{{ sig_prename_tag }} class="sig-prename descclassname">
             attr_utils.annotations.
-           </code>
-           <code class="sig-name descname">
+           </{{ sig_prename_tag }}>
+           <{{ sig_prename_tag }} class="sig-name descname">
             AttrsClass
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -146,7 +152,7 @@
          </dl>
         </div>
        </blockquote>
-      </div>
+      </{{ end_section }}>
      </div>
     </div>
    </div>

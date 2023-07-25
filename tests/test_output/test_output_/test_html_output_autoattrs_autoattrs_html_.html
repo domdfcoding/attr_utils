@@ -1,8 +1,14 @@
+{% set sig_prename_tag=("span" if sphinx_version >= (4, 0) else 'code') -%}
+{% set sig_object_class=(' class="sig sig-object py"' if sphinx_version >= (4, 0) else '') -%}
+{% set section = ("section" if docutils_version >= (0, 17) else 'div class="section"') -%}
+{% set end_section = ("section" if docutils_version >= (0, 17) else 'div') -%}
 <!DOCTYPE html>
 <html>
  <head>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>{% if docutils_version > (0, 18) %}
+  <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>{% elif docutils_version > (0, 17) %}
+  <meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>{% endif %}
   <title>
    Demo — Python  documentation
   </title>
@@ -21,7 +27,7 @@
    <div class="documentwrapper">
     <div class="bodywrapper">
      <div class="body" role="main">
-      <div class="section" id="demo">
+      <{{ section }} id="demo">
        <h1>
         Demo
         <a class="headerlink" href="#demo" title="Permalink to this headline">
@@ -29,16 +35,16 @@
         </a>
        </h1>
        <dl class="py class">
-        <dt id="demo.Device">
+        <dt{{ sig_object_class }} id="demo.Device">
          <em class="property">
           class
          </em>
-         <code class="sig-prename descclassname">
+         <{{ sig_prename_tag}} class="sig-prename descclassname">
           demo.
-         </code>
-         <code class="sig-name descname">
+         </{{ sig_prename_tag}}>
+         <{{ sig_prename_tag}} class="sig-name descname">
           Device
-         </code>
+         </{{ sig_prename_tag}}>
          <span class="sig-paren">
           (
          </span>
@@ -340,10 +346,10 @@
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.__eq__">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.__eq__">
+           <{{ sig_prename_tag }} class="sig-name descname">
             __eq__
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -392,10 +398,10 @@
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.__ge__">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.__ge__">
+           <{{ sig_prename_tag }} class="sig-name descname">
             __ge__
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -444,10 +450,10 @@
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.__getitem__">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.__getitem__">
+           <{{ sig_prename_tag }} class="sig-name descname">
             __getitem__
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -470,10 +476,10 @@
             ¶
            </a>
           </dt>
-          <dt>
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }}>
+           <{{ sig_prename_tag }} class="sig-name descname">
             __getitem__
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -491,14 +497,7 @@
            <span class="sig-paren">
             )
            </span>
-           → List
-           <span class="p">
-            [
-           </span>
-           str
-           <span class="p">
-            ]
-           </span>
+           → List[str]
           </dt>
           <dd>
            <p>
@@ -576,10 +575,10 @@
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.__getstate__">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.__getstate__">
+           <{{ sig_prename_tag }} class="sig-name descname">
             __getstate__
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -604,10 +603,10 @@
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.__gt__">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.__gt__">
+           <{{ sig_prename_tag }} class="sig-name descname">
             __gt__
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -656,10 +655,10 @@
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.__le__">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.__le__">
+           <{{ sig_prename_tag }} class="sig-name descname">
             __le__
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -708,10 +707,10 @@
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.__lt__">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.__lt__">
+           <{{ sig_prename_tag }} class="sig-name descname">
             __lt__
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -760,10 +759,10 @@
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.__ne__">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.__ne__">
+           <{{ sig_prename_tag }} class="sig-name descname">
             __ne__
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -812,10 +811,10 @@
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.__repr__">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.__repr__">
+           <{{ sig_prename_tag }} class="sig-name descname">
             __repr__
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -855,10 +854,10 @@
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.__setstate__">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.__setstate__">
+           <{{ sig_prename_tag }} class="sig-name descname">
             __setstate__
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -888,30 +887,12 @@
           </dd>
          </dl>
          <dl class="py attribute">
-          <dt id="demo.Device.configuration">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.configuration">
+           <{{ sig_prename_tag }} class="sig-name descname">
             configuration
-           </code>
+           </{{ sig_prename_tag }}>
            <em class="property">
-            : List
-            <span class="p">
-             [
-            </span>
-            Dict
-            <span class="p">
-             [
-            </span>
-            str
-            <span class="p">
-             ,
-            </span>
-            Any
-            <span class="p">
-             ]
-            </span>
-            <span class="p">
-             ]
-            </span>
+            : List[Dict[str, Any]]
            </em>
            <a class="headerlink" href="#demo.Device.configuration" title="Permalink to this definition">
             ¶
@@ -924,30 +905,12 @@
           </dd>
          </dl>
          <dl class="py attribute">
-          <dt id="demo.Device.configuration2">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.configuration2">
+           <{{ sig_prename_tag }} class="sig-name descname">
             configuration2
-           </code>
+           </{{ sig_prename_tag }}>
            <em class="property">
-            : Tuple
-            <span class="p">
-             [
-            </span>
-            Dict
-            <span class="p">
-             [
-            </span>
-            str
-            <span class="p">
-             ,
-            </span>
-            Any
-            <span class="p">
-             ]
-            </span>
-            <span class="p">
-             ]
-            </span>
+            : Tuple[Dict[str, Any]]
            </em>
            <a class="headerlink" href="#demo.Device.configuration2" title="Permalink to this definition">
             ¶
@@ -966,30 +929,12 @@
           </dd>
          </dl>
          <dl class="py attribute">
-          <dt id="demo.Device.configuration3">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.configuration3">
+           <{{ sig_prename_tag }} class="sig-name descname">
             configuration3
-           </code>
+           </{{ sig_prename_tag }}>
            <em class="property">
-            : List
-            <span class="p">
-             [
-            </span>
-            Dict
-            <span class="p">
-             [
-            </span>
-            str
-            <span class="p">
-             ,
-            </span>
-            Any
-            <span class="p">
-             ]
-            </span>
-            <span class="p">
-             ]
-            </span>
+            : List[Dict[str, Any]]
            </em>
            <a class="headerlink" href="#demo.Device.configuration3" title="Permalink to this definition">
             ¶
@@ -1008,30 +953,12 @@
           </dd>
          </dl>
          <dl class="py attribute">
-          <dt id="demo.Device.configuration4">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.configuration4">
+           <{{ sig_prename_tag }} class="sig-name descname">
             configuration4
-           </code>
+           </{{ sig_prename_tag }}>
            <em class="property">
-            : List
-            <span class="p">
-             [
-            </span>
-            Dict
-            <span class="p">
-             [
-            </span>
-            str
-            <span class="p">
-             ,
-            </span>
-            Any
-            <span class="p">
-             ]
-            </span>
-            <span class="p">
-             ]
-            </span>
+            : List[Dict[str, Any]]
            </em>
            <a class="headerlink" href="#demo.Device.configuration4" title="Permalink to this definition">
             ¶
@@ -1050,10 +977,10 @@
           </dd>
          </dl>
          <dl class="py attribute">
-          <dt id="demo.Device.device_id">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.device_id">
+           <{{ sig_prename_tag }} class="sig-name descname">
             device_id
-           </code>
+           </{{ sig_prename_tag }}>
            <em class="property">
             : str
            </em>
@@ -1068,10 +995,10 @@
           </dd>
          </dl>
          <dl class="py attribute">
-          <dt id="demo.Device.display_name">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.display_name">
+           <{{ sig_prename_tag }} class="sig-name descname">
             display_name
-           </code>
+           </{{ sig_prename_tag }}>
            <em class="property">
             : str
            </em>
@@ -1086,13 +1013,13 @@
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.from_dict">
+          <dt{{ sig_object_class }} id="demo.Device.from_dict">
            <em class="property">
             classmethod
            </em>
-           <code class="sig-name descname">
+           <{{ sig_prename_tag }} class="sig-name descname">
             from_dict
-           </code>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -1154,10 +1081,10 @@
           </dd>
          </dl>
          <dl class="py attribute">
-          <dt id="demo.Device.rc_device">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.rc_device">
+           <{{ sig_prename_tag }} class="sig-name descname">
             rc_device
-           </code>
+           </{{ sig_prename_tag }}>
            <em class="property">
             : bool
            </em>
@@ -1179,10 +1106,10 @@ If
           </dd>
          </dl>
          <dl class="py method">
-          <dt id="demo.Device.to_dict">
-           <code class="sig-name descname">
+          <dt{{ sig_object_class }} id="demo.Device.to_dict">
+           <{{ sig_prename_tag}} class="sig-name descname">
             to_dict
-           </code>
+           </{{ sig_prename_tag}}>
            <span class="sig-paren">
             (
            </span>
@@ -1264,7 +1191,7 @@ If
          </dl>
         </dd>
        </dl>
-      </div>
+      </{{ end_section }}>
      </div>
     </div>
    </div>

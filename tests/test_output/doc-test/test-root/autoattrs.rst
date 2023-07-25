@@ -5,4 +5,4 @@ Demo
 .. autoattrs:: demo.Device
 	:members:
 	:special-members:
-	:exclude-members: __init__,__setattr__
+	:exclude-members: __init__,__setattr__,__hash__
