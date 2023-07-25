@@ -19,17 +19,53 @@ conda_channels:
  - conda-forge
 
 python_versions:
- - 3.6
- - 3.7
- - 3.8
- - 3.9
- - "3.10"
- - "3.11"
- - 3.12-dev
- - pypy36
- - pypy37
- - pypy38
- - pypy39
+ "3.6":
+ "3.7":
+ "3.8":
+ "3.9":
+ "3.10":
+ "3.11":
+ "3.12-dev":
+ "pypy36":
+  matrix_exclude:
+   mypy:
+   - "0.900"
+   - "0.910"
+   - "0.921"
+   - "0.931"
+   - "1.0.1"
+   - "latest"
+
+ "pypy37":
+  matrix_exclude:
+   mypy:
+   - "0.900"
+   - "0.910"
+   - "0.921"
+   - "0.931"
+   - "1.0.1"
+   - "latest"
+
+ "pypy38":
+  matrix_exclude:
+   mypy:
+   - "0.900"
+   - "0.910"
+   - "0.921"
+   - "0.931"
+   - "1.0.1"
+   - "latest"
+
+ "pypy39":
+  matrix_exclude:
+   mypy:
+   - "0.900"
+   - "0.910"
+   - "0.921"
+   - "0.931"
+   - "1.0.1"
+   - "latest"
+
 
 extras_require:
   pprint:
@@ -64,9 +100,9 @@ keywords:
 
 third_party_version_matrix:
   attrs:
-   - 19.3
-   - 20.3
+   - 21.2
    - 21.4
+   - 22.2
    - latest
   mypy:
    - "0.900"
@@ -78,8 +114,8 @@ third_party_version_matrix:
 
 tox_unmanaged:
  - pytest
- - tox
- - envlists
+#  - tox
+#  - envlists
 
 additional_ignore:
  - setup.cfg
