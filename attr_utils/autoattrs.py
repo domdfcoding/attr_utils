@@ -176,11 +176,23 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		# set sourcename and add content from attribute documentation
 		sourcename = self.get_sourcename()
 
-		params, pre_output, post_output = self._get_docstring()
-
 		self.add_line('', sourcename)
-		for line in list(self.process_doc([pre_output])):
-			self.add_line(line, sourcename)
+
+		if hasattr(self.object, "__attrs_init__"):
+			# Size varies depending on docutils config
+			tab_size = self.env.app.config.docutils_tab_width
+
+			if self.object.__doc__:
+				docstring = dedent(self.object.__doc__).expandtabs(tab_size).split('\n')
+				for line in list(self.process_doc([docstring])):
+					self.add_line(line, sourcename)
+
+		else:
+			params, pre_output, post_output = self._get_docstring()
+
+			for line in list(self.process_doc([pre_output])):
+				self.add_line(line, sourcename)
+
 		self.add_line('', sourcename)
 
 	def _get_docstring(self) -> Tuple[Dict[str, Param], List[str], List[str]]:
@@ -264,13 +276,14 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 			parameter_docs.append(' '.join(field_entry))
 			all_docs[field] = ''.join(doc).strip()
 
-		self.add_line('', sourcename)
+		if not hasattr(self.object, "__attrs_init__"):
+			self.add_line('', sourcename)
 
-		for line in self.process_doc([[*pre_output, *parameter_docs, '', '', *post_output]]):
-			if line and line in pre_output:
-				continue
-			self.add_line(line, sourcename)
-		self.add_line('', sourcename)
+			for line in self.process_doc([[*pre_output, *parameter_docs, '', '', *post_output]]):
+				if line and line in pre_output:
+					continue
+				self.add_line(line, sourcename)
+			self.add_line('', sourcename)
 
 		self._docstring_processed = True
 
