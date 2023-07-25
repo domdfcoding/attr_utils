@@ -3,8 +3,8 @@ import sys
 
 # 3rd party
 import pytest
-import sphinx  # type: ignore
-from bs4 import BeautifulSoup
+import sphinx
+from bs4 import BeautifulSoup  # type: ignore[import]
 from sphinx_toolbox.testing import HTMLRegressionFixture
 
 
