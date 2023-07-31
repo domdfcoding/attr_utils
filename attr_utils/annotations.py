@@ -157,7 +157,7 @@ def add_init_annotations(obj: _C) -> _C:
 		return obj
 
 	if hasattr(obj, "__attrs_init__"):
-		return obj
+		return obj  # type: ignore[return-value]
 
 	annotations: Dict[str, Optional[Type]] = {"return": None}
 
