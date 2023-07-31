@@ -156,6 +156,9 @@ def add_init_annotations(obj: _C) -> _C:
 	if not attr.has(obj):  # type: ignore
 		return obj
 
+	if hasattr(obj, "__attrs_init__"):
+		return obj
+
 	annotations: Dict[str, Optional[Type]] = {"return": None}
 
 	attrs = attr.fields(obj)
