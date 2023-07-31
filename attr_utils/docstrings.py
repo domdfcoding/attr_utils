@@ -35,7 +35,7 @@ from types import MethodType
 from typing import Optional, Pattern, Type, TypeVar
 
 # 3rd party
-from domdf_python_tools.compat import PYPY, PYPY37
+from domdf_python_tools.compat import PYPY
 from domdf_python_tools.doctools import base_new_docstrings, prettify_docstrings
 from domdf_python_tools.typing import MethodDescriptorType, MethodWrapperType, WrapperDescriptorType
 
