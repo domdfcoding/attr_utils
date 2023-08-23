@@ -28,16 +28,16 @@ jobs:
       fail-fast: False
       matrix:
         config:
-          - {python-version: "3.6", testenvs: "py36-attrs{21.2,21.4,22.2,latest},build", experimental: False}
-          - {python-version: "3.7", testenvs: "py37-attrs{21.2,21.4,22.2,latest},build", experimental: False}
-          - {python-version: "3.8", testenvs: "py38-attrs{21.2,21.4,22.2,latest},build", experimental: False}
-          - {python-version: "3.9", testenvs: "py39-attrs{21.2,21.4,22.2,latest},build", experimental: False}
-          - {python-version: "3.10", testenvs: "py310-attrs{21.2,21.4,22.2,latest},build", experimental: False}
-          - {python-version: "3.11", testenvs: "py311-attrs{21.2,21.4,22.2,latest},build", experimental: False}
-          - {python-version: "3.12.0-rc.1", testenvs: "py312-dev-attrs{21.2,21.4,22.2,latest},build", experimental: True}
-          - {python-version: "pypy-3.7", testenvs: "pypy37-attrs{21.2,21.4,22.2,latest},build", experimental: True}
-          - {python-version: "pypy-3.8", testenvs: "pypy38-attrs{21.2,21.4,22.2,latest},build", experimental: True}
-          - {python-version: "pypy-3.9", testenvs: "pypy39-attrs{21.2,21.4,22.2,latest},build", experimental: True}
+          - {python-version: "3.6", testenvs: "py36-attrs{21.2,21.4,22.2,latest},py36-mypy{0.900,0.910,0.921,0.931},build", experimental: False}
+          - {python-version: "3.7", testenvs: "py37-attrs{21.2,21.4,22.2,latest},py37-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1},build", experimental: False}
+          - {python-version: "3.8", testenvs: "py38-attrs{21.2,21.4,22.2,latest},py38-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,latest},build", experimental: False}
+          - {python-version: "3.9", testenvs: "py39-attrs{21.2,21.4,22.2,latest},py39-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,latest},build", experimental: False}
+          - {python-version: "3.10", testenvs: "py310-attrs{21.2,21.4,22.2,latest},py310-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,latest},build", experimental: False}
+          - {python-version: "3.11", testenvs: "py311-attrs{21.2,21.4,22.2,latest},py311-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,latest},build", experimental: False}
+          - {python-version: "3.12.0-rc.1", testenvs: "py312-dev-attrs{21.2,21.4,22.2,latest},py312-dev-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,latest},build", experimental: True}
+          - {python-version: "pypy-3.7", testenvs: "pypy37-attrs{21.2,21.4,22.2,latest},pypy37-mypy{},build", experimental: True}
+          - {python-version: "pypy-3.8", testenvs: "pypy38-attrs{21.2,21.4,22.2,latest},pypy38-mypy{},build", experimental: True}
+          - {python-version: "pypy-3.9", testenvs: "pypy39-attrs{21.2,21.4,22.2,latest},pypy39-mypy{},build", experimental: True}
 
     steps:
       - name: Checkout 🛎️

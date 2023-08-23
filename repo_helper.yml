@@ -20,7 +20,16 @@ conda_channels:
 
 python_versions:
  "3.6":
+  matrix_exclude:
+   mypy:
+   - "1.0.1"
+   - "1.2.0"
+   - "1.4.1"
+   - "latest"
  "3.7":
+  matrix_exclude:
+   mypy:
+   - "latest"
  "3.8":
  "3.9":
  "3.10":
@@ -34,6 +43,8 @@ python_versions:
    - "0.921"
    - "0.931"
    - "1.0.1"
+   - "1.2.0"
+   - "1.4.1"
    - "latest"
 
  "pypy37":
@@ -44,6 +55,8 @@ python_versions:
    - "0.921"
    - "0.931"
    - "1.0.1"
+   - "1.2.0"
+   - "1.4.1"
    - "latest"
 
  "pypy38":
@@ -54,6 +67,8 @@ python_versions:
    - "0.921"
    - "0.931"
    - "1.0.1"
+   - "1.2.0"
+   - "1.4.1"
    - "latest"
 
  "pypy39":
@@ -64,6 +79,8 @@ python_versions:
    - "0.921"
    - "0.931"
    - "1.0.1"
+   - "1.2.0"
+   - "1.4.1"
    - "latest"
 
 
@@ -110,6 +127,8 @@ third_party_version_matrix:
    - "0.921"
    - "0.931"
    - "1.0.1"
+   - "1.2.0"
+   - "1.4.1"
    - "latest"
 
 tox_unmanaged:
