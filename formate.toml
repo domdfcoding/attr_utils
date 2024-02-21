@@ -32,6 +32,7 @@ use_parentheses = true
 remove_redundant_aliases = true
 default_section = "THIRDPARTY"
 known_third_party = [
+    "alabaster",
     "attrs",
     "coincidence",
     "coverage",
@@ -42,6 +43,7 @@ known_third_party = [
     "importlib_metadata",
     "jinja2",
     "markupsafe",
+    "mypy",
     "prettyprinter",
     "pytest",
     "pytest_benchmark",
@@ -55,9 +57,15 @@ known_third_party = [
     "sdjson",
     "snapshottest",
     "sphinx_toolbox",
+    "sphinxcontrib_applehelp",
+    "sphinxcontrib_devhelp",
+    "sphinxcontrib_htmlhelp",
+    "sphinxcontrib_jsmath",
+    "sphinxcontrib_qthelp",
+    "sphinxcontrib_serializinghtml",
     "sphobjinv",
     "toolz",
     "typing_extensions",
     "typing_inspect",
 ]
-known_first_party = "attr_utils"
+known_first_party = [ "attr_utils",]
