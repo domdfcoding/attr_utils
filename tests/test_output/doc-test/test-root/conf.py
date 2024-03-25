@@ -2,6 +2,7 @@ extensions = [
 		"sphinx.ext.autodoc",
 		"attr_utils.annotations",
 		"attr_utils.autoattrs",
+		"sphinx_toolbox.more_autodoc.overloads",
 		]
 
 github_username = "domdfcoding"
