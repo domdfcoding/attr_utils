@@ -2,24 +2,37 @@
 {% set sig_object_class=(' class="sig sig-object py"' if sphinx_version >= (4, 0) else '') -%}
 {% set section = ("section" if docutils_version >= (0, 17) else 'div class="section"') -%}
 {% set end_section = ("section" if docutils_version >= (0, 17) else 'div') -%}
+{% set heading = ("heading" if sphinx_version >= (5, 0) else 'headline') -%}
+{% set typing_dot = ("typing." if sphinx_version >= (5, 0) else '') -%}
+{% macro d18_colon(indent) %}{% if docutils_version >= (0, 18) %}
+{{ indent }}<span class="colon">
+{{ indent }} :
+{{ indent }}</span>{% endif %}
+{%- endmacro -%}
 <!DOCTYPE html>
-<html>
+<html{% if sphinx_version >= (5, 0) %} lang="en"{% endif %}>
  <head>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>{% if docutils_version > (0, 18) %}
-  <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>{% elif docutils_version > (0, 17) %}
-  <meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>{% endif %}
-  <title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  {% if docutils_version[1] == 18 %}<meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+  {% elif docutils_version[1] == 17 %}<meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+  {% elif docutils_version[1] == 19 %}<meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
+  {% elif docutils_version[1] == 20 %}<meta content="width=device-width, initial-scale=1" name="viewport"/>
+  {% endif %}<title>
    Demo — Python  documentation
   </title>
-  <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
-  </script>
+  <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js{% if sphinx_version >= (7, 1) %}?v=b3ba4146{% endif %}">
+  </script>{% if sphinx_version < (6, 0) %}
   <script src="_static/jquery.js">
   </script>
   <script src="_static/underscore.js">
-  </script>
-  <script src="_static/doctools.js">
-  </script>
+  </script>{% if sphinx_version >= (5, 0) %}
+  <script src="_static/_sphinx_javascript_frameworks_compat.js">
+  </script>{% endif %}{% endif %}
+  <script src="_static/doctools.js{% if sphinx_version >= (7, 1) %}?v=888ff710{% endif %}">
+  </script>{% if sphinx_version >= (5, 2) %}
+  <script src="_static/sphinx_highlight.js{% if sphinx_version >= (7, 1) %}?v=4825356b{% endif %}">
+  </script>{% endif %}
   <meta content="width=device-width, initial-scale=0.9, maximum-scale=0.9" name="viewport"/>
  </head>
  <body>
@@ -30,7 +43,7 @@
       <{{ section }} id="demo">
        <h1>
         Demo
-        <a class="headerlink" href="#demo" title="Permalink to this headline">
+        <a class="headerlink" href="#demo" title="Permalink to this {{ heading }}">
          ¶
         </a>
        </h1>
@@ -39,12 +52,12 @@
          <em class="property">
           class
          </em>
-         <{{ sig_prename_tag}} class="sig-prename descclassname">
+         <{{ sig_prename_tag }} class="sig-prename descclassname">
           demo.
-         </{{ sig_prename_tag}}>
-         <{{ sig_prename_tag}} class="sig-name descname">
+         </{{ sig_prename_tag }}>
+         <{{ sig_prename_tag }} class="sig-name descname">
           Device
-         </{{ sig_prename_tag}}>
+         </{{ sig_prename_tag }}>
          <span class="sig-paren">
           (
          </span>
@@ -132,7 +145,7 @@
          </p>
          <dl class="field-list simple">
           <dt class="field-odd">
-           Parameters
+           Parameters{{ d18_colon('           ') }}
           </dt>
           <dd class="field-odd">
            <ul class="simple">
@@ -383,7 +396,7 @@
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Return type
+             Return type{{ d18_colon('             ') }}
             </dt>
             <dd class="field-odd">
              <p>
@@ -435,7 +448,7 @@
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Return type
+             Return type{{ d18_colon('             ') }}
             </dt>
             <dd class="field-odd">
              <p>
@@ -521,7 +534,7 @@
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Parameters
+             Parameters{{ d18_colon('             ') }}
             </dt>
             <dd class="field-odd">
              <p>
@@ -550,7 +563,7 @@
              </p>
             </dd>
             <dt class="field-even">
-             Return type
+             Return type{{ d18_colon('             ') }}
             </dt>
             <dd class="field-even">
              <p>
@@ -656,7 +669,7 @@
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Return type
+             Return type{{ d18_colon('             ') }}
             </dt>
             <dd class="field-odd">
              <p>
@@ -708,7 +721,7 @@
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Return type
+             Return type{{ d18_colon('             ') }}
             </dt>
             <dd class="field-odd">
              <p>
@@ -760,7 +773,7 @@
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Return type
+             Return type{{ d18_colon('             ') }}
             </dt>
             <dd class="field-odd">
              <p>
@@ -812,7 +825,7 @@
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Return type
+             Return type{{ d18_colon('             ') }}
             </dt>
             <dd class="field-odd">
              <p>
@@ -855,7 +868,7 @@
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Return type
+             Return type{{ d18_colon('             ') }}
             </dt>
             <dd class="field-odd">
              <p>
@@ -908,7 +921,7 @@
             configuration
            </{{ sig_prename_tag }}>
            <em class="property">
-            : List[Dict[str, Any]]
+            : {{ typing_dot }}List[{{ typing_dot }}Dict[str, {{ typing_dot }}Any]]
            </em>
            <a class="headerlink" href="#demo.Device.configuration" title="Permalink to this definition">
             ¶
@@ -926,7 +939,7 @@
             configuration2
            </{{ sig_prename_tag }}>
            <em class="property">
-            : Tuple[Dict[str, Any]]
+            : {{ typing_dot }}Tuple[{{ typing_dot }}Dict[str, {{ typing_dot }}Any]]
            </em>
            <a class="headerlink" href="#demo.Device.configuration2" title="Permalink to this definition">
             ¶
@@ -950,7 +963,7 @@
             configuration3
            </{{ sig_prename_tag }}>
            <em class="property">
-            : List[Dict[str, Any]]
+            : {{ typing_dot }}List[{{ typing_dot }}Dict[str, {{ typing_dot }}Any]]
            </em>
            <a class="headerlink" href="#demo.Device.configuration3" title="Permalink to this definition">
             ¶
@@ -974,7 +987,7 @@
             configuration4
            </{{ sig_prename_tag }}>
            <em class="property">
-            : List[Dict[str, Any]]
+            : {{ typing_dot }}List[{{ typing_dot }}Dict[str, {{ typing_dot }}Any]]
            </em>
            <a class="headerlink" href="#demo.Device.configuration4" title="Permalink to this definition">
             ¶
@@ -1065,7 +1078,7 @@
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Parameters
+             Parameters{{ d18_colon('             ') }}
             </dt>
             <dd class="field-odd">
              <p>
@@ -1123,9 +1136,9 @@ If
          </dl>
          <dl class="py method">
           <dt{{ sig_object_class }} id="demo.Device.to_dict">
-           <{{ sig_prename_tag}} class="sig-name descname">
+           <{{ sig_prename_tag }} class="sig-name descname">
             to_dict
-           </{{ sig_prename_tag}}>
+           </{{ sig_prename_tag }}>
            <span class="sig-paren">
             (
            </span>
@@ -1161,7 +1174,7 @@ If
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Parameters
+             Parameters{{ d18_colon('             ') }}
             </dt>
             <dd class="field-odd">
              <p>
@@ -1178,7 +1191,7 @@ If
              </p>
             </dd>
             <dt class="field-even">
-             Return type
+             Return type{{ d18_colon('             ') }}
             </dt>
             <dd class="field-even">
              <p>
@@ -1263,7 +1276,7 @@ If
          </p>
          <dl class="field-list simple">
           <dt class="field-odd">
-           Parameters
+           Parameters{{ d18_colon('           ') }}
           </dt>
           <dd class="field-odd">
            <ul class="simple">
@@ -1356,7 +1369,7 @@ If
          </dl>
         </dd>
        </dl>
-      </section>
+      </{{ end_section }}>
      </div>
     </div>
    </div>

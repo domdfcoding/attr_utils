@@ -99,12 +99,11 @@ API Reference
 # stdlib
 import warnings
 from textwrap import dedent
-from typing import Any, Dict, List, MutableMapping, Optional, Tuple, Type
+from typing import TYPE_CHECKING, Any, Dict, List, MutableMapping, Optional, Tuple, Type
 
 # 3rd party
 import attr
 from sphinx.application import Sphinx  # nodep
-from sphinx.deprecation import RemovedInSphinx50Warning  # nodep
 from sphinx.ext.autodoc import ClassDocumenter, Documenter  # nodep
 from sphinx.pycode import ModuleAnalyzer  # nodep
 from sphinx_toolbox import __version__  # nodep
@@ -116,6 +115,34 @@ from attr_utils.docstrings import add_attrs_doc
 from attr_utils.utils import AttrsClass
 
 __all__ = ["AttrsDocumenter", "setup"]
+
+if TYPE_CHECKING:
+	# 3rd party
+	from docutils.statemachine import StringList
+
+
+def _documenter_add_content(
+		self: Documenter,
+		more_content: Optional["StringList"],
+		) -> None:
+	"""
+        Add content from docstrings, attribute documentation and user.
+        """
+
+	# set sourcename and add content from attribute documentation
+	sourcename = self.get_sourcename()
+	if self.analyzer:
+		if self.objpath:
+			key = ('.'.join(self.objpath[:-1]), self.objpath[-1])
+			attr_docs = self.analyzer.find_attr_docs()
+			if key in attr_docs:
+				for i, line in enumerate(self.process_doc([list(attr_docs[key])])):
+					self.add_line(line, sourcename, i)
+
+	# add additional content (e.g. from document), if present
+	if more_content:
+		for line, src in zip(more_content.data, more_content.items):
+			self.add_line(line, src[0], src[1])
 
 
 class AttrsDocumenter(PatchedAutoSummClassDocumenter):
@@ -168,10 +195,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		:param no_docstring:
 		"""
 
-		with warnings.catch_warnings():
-			# TODO: work out what to do about this
-			warnings.simplefilter("ignore", RemovedInSphinx50Warning)
-			Documenter.add_content(self, more_content, True)
+		_documenter_add_content(self, more_content)
 
 		# set sourcename and add content from attribute documentation
 		sourcename = self.get_sourcename()

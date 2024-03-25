@@ -22,6 +22,14 @@ def test_html_output(page: BeautifulSoup, html_regression: HTMLRegressionFixture
 				):
 			div.replace_with(div.text)
 
+	for div in page.select("section"):
+		children = tuple(div.children)
+		if len(children) == 3 and children[1].name == "h2":
+			# Move sibling into section
+			siblings = list(div.parent.children)
+			next_sibling = siblings[siblings.index(div) + 2]
+			div.append(next_sibling.extract())
+
 	html_regression.check(page, jinja2=True)
 
 

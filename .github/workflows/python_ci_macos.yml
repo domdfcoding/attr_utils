@@ -28,17 +28,17 @@ jobs:
       fail-fast: False
       matrix:
         config:
-          - {python-version: "3.6", testenvs: "py36-attrs{21.2,21.4,22.2},py36-mypy{0.900,0.910,0.921,0.931},build", experimental: False}
-          - {python-version: "3.7", testenvs: "py37-attrs{21.2,21.4,22.2,23.1,23.2,latest},py37-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1},build", experimental: False}
-          - {python-version: "3.8", testenvs: "py38-attrs{21.2,21.4,22.2,23.1,23.2,latest},py38-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},build", experimental: False}
-          - {python-version: "3.9", testenvs: "py39-attrs{21.2,21.4,22.2,23.1,23.2,latest},py39-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},build", experimental: False}
-          - {python-version: "3.10", testenvs: "py310-attrs{21.2,21.4,22.2,23.1,23.2,latest},py310-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},build", experimental: False}
-          - {python-version: "3.11", testenvs: "py311-attrs{21.2,21.4,22.2,23.1,23.2,latest},py311-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},build", experimental: False}
-          - {python-version: "3.12", testenvs: "py312-attrs{21.2,21.4,22.2,23.1,23.2,latest},py312-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},build", experimental: True}
-          - {python-version: "3.13.0-alpha.5", testenvs: "py313-dev-attrs{21.2,21.4,22.2,23.1,23.2,latest},py313-dev-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},build", experimental: True}
-          - {python-version: "pypy-3.7", testenvs: "pypy37-attrs{21.2,21.4,22.2,23.1,23.2,latest},build", experimental: False}
-          - {python-version: "pypy-3.8", testenvs: "pypy38-attrs{21.2,21.4,22.2,23.1,23.2,latest},build", experimental: False}
-          - {python-version: "pypy-3.9", testenvs: "pypy39-attrs{21.2,21.4,22.2,23.1,23.2,latest},build", experimental: True}
+          - {python-version: "3.6", testenvs: "py36-attrs{21.2,21.4,22.2},py36-mypy{0.900,0.910,0.921,0.931},py36-sphinx{4,5},build", experimental: False}
+          - {python-version: "3.7", testenvs: "py37-attrs{21.2,21.4,22.2,23.1,23.2,latest},py37-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1},py37-sphinx{4,5},build", experimental: False}
+          - {python-version: "3.8", testenvs: "py38-attrs{21.2,21.4,22.2,23.1,23.2,latest},py38-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},py38-sphinx{4,5},build", experimental: False}
+          - {python-version: "3.9", testenvs: "py39-attrs{21.2,21.4,22.2,23.1,23.2,latest},py39-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},py39-sphinx{4,5},build", experimental: False}
+          - {python-version: "3.10", testenvs: "py310-attrs{21.2,21.4,22.2,23.1,23.2,latest},py310-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},py310-sphinx{4,5},build", experimental: False}
+          - {python-version: "3.11", testenvs: "py311-attrs{21.2,21.4,22.2,23.1,23.2,latest},py311-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},py311-sphinx{4,5},build", experimental: False}
+          - {python-version: "3.12", testenvs: "py312-attrs{21.2,21.4,22.2,23.1,23.2,latest},py312-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},py312-sphinx{4,5},build", experimental: True}
+          - {python-version: "3.13.0-alpha.5", testenvs: "py313-dev-attrs{21.2,21.4,22.2,23.1,23.2,latest},py313-dev-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},py313-dev-sphinx{4,5},build", experimental: True}
+          - {python-version: "pypy-3.7", testenvs: "pypy37-attrs{21.2,21.4,22.2,23.1,23.2,latest},pypy37-sphinx{4,5},build", experimental: False}
+          - {python-version: "pypy-3.8", testenvs: "pypy38-attrs{21.2,21.4,22.2,23.1,23.2,latest},pypy38-sphinx{4,5},build", experimental: False}
+          - {python-version: "pypy-3.9", testenvs: "pypy39-attrs{21.2,21.4,22.2,23.1,23.2,latest},pypy39-sphinx{4,5},build", experimental: True}
 
     steps:
       - name: Checkout 🛎️

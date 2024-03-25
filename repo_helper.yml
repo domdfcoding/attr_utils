@@ -104,7 +104,7 @@ extras_require:
   pprint:
    - prettyprinter==0.18.0
   sphinx:
-   - "sphinx>=3.2.0,<5"
+   - "sphinx>=3.2.0,<6"
    - "sphinx_toolbox>=2.16.0"
 
 extra_sphinx_extensions:
@@ -149,6 +149,9 @@ third_party_version_matrix:
    - "1.4.1"
    - "1.6.1"
    - "latest"
+  sphinx:
+   - "4"
+   - "5"
 
 tox_unmanaged:
  - pytest

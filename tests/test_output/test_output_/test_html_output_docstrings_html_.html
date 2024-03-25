@@ -2,24 +2,36 @@
 {% set sig_object_class=(' class="sig sig-object py"' if sphinx_version >= (4, 0) else '') -%}
 {% set section = ("section" if docutils_version >= (0, 17) else 'div class="section"') -%}
 {% set end_section = ("section" if docutils_version >= (0, 17) else 'div') -%}
+{% set heading = ("heading" if sphinx_version >= (5, 0) else 'headline') -%}
+{% macro d18_colon(indent) %}{% if docutils_version >= (0, 18) %}
+{{ indent }}<span class="colon">
+{{ indent }} :
+{{ indent }}</span>{% endif %}
+{%- endmacro -%}
 <!DOCTYPE html>
-<html>
+<html{% if sphinx_version >= (5, 0) %} lang="en"{% endif %}>
  <head>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>{% if docutils_version > (0, 18) %}
-  <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>{% elif docutils_version > (0, 17) %}
-  <meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>{% endif %}
-  <title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  {% if docutils_version[1] == 18 %}<meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+  {% elif docutils_version[1] == 17 %}<meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+  {% elif docutils_version[1] == 19 %}<meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
+  {% elif docutils_version[1] == 20 %}<meta content="width=device-width, initial-scale=1" name="viewport"/>
+  {% endif %}<title>
    Attr-Utils Demo — Python  documentation
   </title>
-  <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js">
-  </script>
+  <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js{% if sphinx_version >= (7, 1) %}?v=b3ba4146{% endif %}">
+  </script>{% if sphinx_version < (6, 0) %}
   <script src="_static/jquery.js">
   </script>
   <script src="_static/underscore.js">
-  </script>
-  <script src="_static/doctools.js">
-  </script>
+  </script>{% if sphinx_version >= (5, 0) %}
+  <script src="_static/_sphinx_javascript_frameworks_compat.js">
+  </script>{% endif %}{% endif %}
+  <script src="_static/doctools.js{% if sphinx_version >= (7, 1) %}?v=888ff710{% endif %}">
+  </script>{% if sphinx_version >= (5, 2) %}
+  <script src="_static/sphinx_highlight.js{% if sphinx_version >= (7, 1) %}?v=4825356b{% endif %}">
+  </script>{% endif %}
   <meta content="width=device-width, initial-scale=0.9, maximum-scale=0.9" name="viewport"/>
  </head>
  <body>
@@ -30,7 +42,7 @@
       <{{ section }} id="attr-utils-demo">
        <h1>
         Attr-Utils Demo
-        <a class="headerlink" href="#attr-utils-demo" title="Permalink to this headline">
+        <a class="headerlink" href="#attr-utils-demo" title="Permalink to this {{ heading }}">
          ¶
         </a>
        </h1>
@@ -192,7 +204,7 @@ If you prefer you can instead provide this as a keyword argument to
          <{{ section }} id="examples">
           <h2>
            Examples
-           <a class="headerlink" href="#examples" title="Permalink to this headline">
+           <a class="headerlink" href="#examples" title="Permalink to this {{ heading }}">
             ¶
            </a>
           </h2>
@@ -307,7 +319,7 @@ If you prefer you can instead provide this as a keyword argument to
               </p>
               <dl class="field-list simple">
                <dt class="field-odd">
-                Parameters
+                Parameters{{ d18_colon('                ') }}
                </dt>
                <dd class="field-odd">
                 <ul class="simple">
@@ -370,7 +382,7 @@ If you prefer you can instead provide this as a keyword argument to
          <{{ section }} id="api-reference">
           <h2>
            API Reference
-           <a class="headerlink" href="#api-reference" title="Permalink to this headline">
+           <a class="headerlink" href="#api-reference" title="Permalink to this {{ heading }}">
             ¶
            </a>
           </h2>
@@ -428,7 +440,7 @@ If you prefer you can instead provide this as a keyword argument to
             </p>
             <dl class="field-list simple">
              <dt class="field-odd">
-              Parameters
+              Parameters{{ d18_colon('              ') }}
              </dt>
              <dd class="field-odd">
               <ul class="simple">
@@ -521,7 +533,7 @@ If you prefer you can instead provide this as a keyword argument to
               </p>
               <dl class="field-list simple">
                <dt class="field-odd">
-                Return type
+                Return type{{ d18_colon('                ') }}
                </dt>
                <dd class="field-odd">
                 <p>
@@ -573,7 +585,7 @@ If you prefer you can instead provide this as a keyword argument to
               </p>
               <dl class="field-list simple">
                <dt class="field-odd">
-                Return type
+                Return type{{ d18_colon('                ') }}
                </dt>
                <dd class="field-odd">
                 <p>
@@ -625,7 +637,7 @@ If you prefer you can instead provide this as a keyword argument to
               </p>
               <dl class="field-list simple">
                <dt class="field-odd">
-                Return type
+                Return type{{ d18_colon('                ') }}
                </dt>
                <dd class="field-odd">
                 <p>
@@ -677,7 +689,7 @@ If you prefer you can instead provide this as a keyword argument to
               </p>
               <dl class="field-list simple">
                <dt class="field-odd">
-                Return type
+                Return type{{ d18_colon('                ') }}
                </dt>
                <dd class="field-odd">
                 <p>
@@ -720,7 +732,7 @@ If you prefer you can instead provide this as a keyword argument to
               </p>
               <dl class="field-list simple">
                <dt class="field-odd">
-                Return type
+                Return type{{ d18_colon('                ') }}
                </dt>
                <dd class="field-odd">
                 <p>
@@ -791,7 +803,7 @@ If you prefer you can instead provide this as a keyword argument to
            </p>
            <dl class="field-list simple">
             <dt class="field-odd">
-             Parameters
+             Parameters{{ d18_colon('             ') }}
             </dt>
             <dd class="field-odd">
              <ul class="simple">
@@ -884,7 +896,7 @@ If you prefer you can instead provide this as a keyword argument to
              </p>
              <dl class="field-list simple">
               <dt class="field-odd">
-               Return type
+               Return type{{ d18_colon('               ') }}
               </dt>
               <dd class="field-odd">
                <p>
@@ -936,7 +948,7 @@ If you prefer you can instead provide this as a keyword argument to
              </p>
              <dl class="field-list simple">
               <dt class="field-odd">
-               Return type
+               Return type{{ d18_colon('               ') }}
               </dt>
               <dd class="field-odd">
                <p>
@@ -988,7 +1000,7 @@ If you prefer you can instead provide this as a keyword argument to
              </p>
              <dl class="field-list simple">
               <dt class="field-odd">
-               Return type
+               Return type{{ d18_colon('               ') }}
               </dt>
               <dd class="field-odd">
                <p>
@@ -1040,7 +1052,7 @@ If you prefer you can instead provide this as a keyword argument to
              </p>
              <dl class="field-list simple">
               <dt class="field-odd">
-               Return type
+               Return type{{ d18_colon('               ') }}
               </dt>
               <dd class="field-odd">
                <p>
@@ -1083,7 +1095,7 @@ If you prefer you can instead provide this as a keyword argument to
              </p>
              <dl class="field-list simple">
               <dt class="field-odd">
-               Return type
+               Return type{{ d18_colon('               ') }}
               </dt>
               <dd class="field-odd">
                <p>
