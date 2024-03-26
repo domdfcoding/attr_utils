@@ -97,7 +97,6 @@ API Reference
 #
 
 # stdlib
-import warnings
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Dict, List, MutableMapping, Optional, Tuple, Type
 
@@ -118,16 +117,13 @@ __all__ = ["AttrsDocumenter", "setup"]
 
 if TYPE_CHECKING:
 	# 3rd party
-	from docutils.statemachine import StringList
+	from docutils.statemachine import StringList  # type: ignore[import]
 
 
 def _documenter_add_content(
 		self: Documenter,
 		more_content: Optional["StringList"],
 		) -> None:
-	"""
-        Add content from docstrings, attribute documentation and user.
-        """
 
 	# set sourcename and add content from attribute documentation
 	sourcename = self.get_sourcename()

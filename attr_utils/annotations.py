@@ -135,7 +135,7 @@ else:  # pragma: no cover (py37+)
 	# 3rd party
 	from typing_inspect import get_origin  # type: ignore
 
-if TYPE_CHECKING or attr_utils._docs:
+if TYPE_CHECKING or attr_utils._docs:  # pragma: no cover
 	# 3rd party
 	from sphinx.application import Sphinx
 	from sphinx_toolbox.utils import SphinxExtMetadata
