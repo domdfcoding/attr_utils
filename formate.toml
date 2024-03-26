@@ -48,6 +48,7 @@ known_third_party = [
     "pytest_randomly",
     "pytest_timeout",
     "sdjson",
+    "setuptools",
     "snapshottest",
     "sphinx_toolbox",
     "sphinxcontrib_applehelp",
