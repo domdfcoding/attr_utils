@@ -301,9 +301,7 @@ def setup(app: "Sphinx") -> "SphinxExtMetadata":
 ################################
 
 
-def parse_occupations(  # pragma: no cover
-		occupations: Iterable[str],
-		) -> Iterable[str]:
+def parse_occupations(occupations: Iterable[str]) -> Iterable[str]:  # pragma: no cover
 
 	if isinstance(occupations, str):
 		return [x.strip() for x in occupations.split(',')]
