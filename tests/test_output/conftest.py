@@ -28,12 +28,13 @@
 
 # stdlib
 from types import MethodType
-from typing import Iterable, Optional
+from typing import Iterable, Iterator, Optional
 
 # 3rd party
 import pytest
 from bs4 import BeautifulSoup  # type: ignore[import]
 from domdf_python_tools.paths import PathPlus
+from sphinx.application import Sphinx
 from sphinx.testing.path import path
 from sphinx.util import logging
 from sphinx.util.build_phase import BuildPhase
@@ -102,7 +103,7 @@ def rootdir():
 
 
 @pytest.fixture()
-def patched_app(app, monkeypatch):
+def patched_app(app: Sphinx, monkeypatch) -> Iterable[Sphinx]:
 
 	def build(
 			self,
@@ -162,7 +163,7 @@ def patched_app(app, monkeypatch):
 
 
 @pytest.fixture()
-def page(patched_app, request) -> BeautifulSoup:
+def page(patched_app: Sphinx, request) -> Iterator[BeautifulSoup]:
 	patched_app.build(force_all=True)
 
 	pagename = request.param

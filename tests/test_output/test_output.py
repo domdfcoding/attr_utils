@@ -1,14 +1,12 @@
-# stdlib
-import sys
-
 # 3rd party
 import pytest
 import sphinx
 from bs4 import BeautifulSoup  # type: ignore[import]
+from sphinx.application import Sphinx
 from sphinx_toolbox.testing import HTMLRegressionFixture
 
 
-def test_build(patched_app):
+def test_build(patched_app: Sphinx):
 	patched_app.build()
 	patched_app.build()
 
@@ -48,6 +46,3 @@ def test_html_output_autoattrs(page: BeautifulSoup, html_regression: HTMLRegress
 		div.replace_with(new_tag)
 
 	html_regression.check(page, jinja2=True)
-
-
-

@@ -3,7 +3,7 @@ import __future__
 # stdlib
 from collections import Counter
 from enum import IntEnum
-from typing import Any, Mapping, MutableMapping, get_type_hints, no_type_check
+from typing import Any, Dict, Mapping, MutableMapping, get_type_hints, no_type_check
 
 # 3rd party
 import attr
@@ -232,7 +232,7 @@ class HasToDict(Protocol):
 
 
 @register_encoder(HasToDict)
-def serialise_attrs(obj: HasToDict):
+def serialise_attrs(obj: HasToDict) -> Dict[str, Any]:
 	return obj.to_dict()
 
 
