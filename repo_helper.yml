@@ -31,11 +31,15 @@ python_versions:
    - 23.1
    - 23.2
    - latest
+   sphinx:
+   - 6
  "3.7":
   matrix_exclude:
    mypy:
    - "1.6.1"
    - "latest"
+   sphinx:
+   - 6
  "3.8":
  "3.9":
  "3.10":
@@ -43,6 +47,9 @@ python_versions:
  "3.12":
   experimental: true
  "3.13-dev":
+   sphinx:
+   - 4
+   - 5
  "pypy36":
   matrix_exclude:
    mypy:
@@ -59,7 +66,8 @@ python_versions:
    - 23.1
    - 23.2
    - latest
-
+   sphinx:
+   - 6
  "pypy37":
   matrix_exclude:
    mypy:
@@ -72,7 +80,8 @@ python_versions:
    - "1.4.1"
    - "1.6.1"
    - "latest"
-
+   sphinx:
+   - 6
  "pypy38":
   matrix_exclude:
    mypy:
@@ -104,7 +113,7 @@ extras_require:
   pprint:
    - prettyprinter==0.18.0
   sphinx:
-   - "sphinx>=3.2.0,<6"
+   - "sphinx>=3.2.0,<7"
    - "sphinx_toolbox>=2.16.0"
 
 extra_sphinx_extensions:
@@ -152,6 +161,7 @@ third_party_version_matrix:
   sphinx:
    - "4"
    - "5"
+   - "6"
 
 tox_unmanaged:
  - pytest

@@ -35,9 +35,16 @@ import pytest
 from bs4 import BeautifulSoup  # type: ignore
 from domdf_python_tools.paths import PathPlus
 from sphinx.testing.path import path
-from sphinx.util import logging, progress_message
+from sphinx.util import logging
 from sphinx.util.build_phase import BuildPhase
 from sphinx.util.parallel import SerialTasks, parallel_available
+
+try:
+	# 3rd party
+	from sphinx.util.display import progress_message
+except ImportError:
+	# 3rd party
+	from sphinx.util import progress_message
 
 pytest_plugins = "sphinx.testing.fixtures"
 
