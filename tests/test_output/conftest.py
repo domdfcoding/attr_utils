@@ -32,7 +32,7 @@ from typing import Iterable, Optional
 
 # 3rd party
 import pytest
-from bs4 import BeautifulSoup  # type: ignore
+from bs4 import BeautifulSoup  # type: ignore[import]
 from domdf_python_tools.paths import PathPlus
 from sphinx.testing.path import path
 from sphinx.util import logging
@@ -44,7 +44,7 @@ try:
 	from sphinx.util.display import progress_message
 except ImportError:
 	# 3rd party
-	from sphinx.util import progress_message
+	from sphinx.util import progress_message  # type: ignore[no-redef]
 
 pytest_plugins = "sphinx.testing.fixtures"
 

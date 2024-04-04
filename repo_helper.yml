@@ -11,7 +11,6 @@ short_desc: 'Utilities to augment attrs.'
 
 use_whey: true
 min_coverage: 95
-python_deploy_version: 3.7
 tox_testenv_extras: all
 standalone_contrib_guide: true
 
@@ -33,6 +32,7 @@ python_versions:
    - latest
    sphinx:
    - 6
+   - 7
  "3.7":
   matrix_exclude:
    mypy:
@@ -40,6 +40,7 @@ python_versions:
    - "latest"
    sphinx:
    - 6
+   - 7
  "3.8":
  "3.9":
  "3.10":
@@ -68,6 +69,7 @@ python_versions:
    - latest
    sphinx:
    - 6
+   - 7
  "pypy37":
   matrix_exclude:
    mypy:
@@ -82,6 +84,7 @@ python_versions:
    - "latest"
    sphinx:
    - 6
+   - 7
  "pypy38":
   matrix_exclude:
    mypy:
@@ -114,7 +117,7 @@ extras_require:
    - prettyprinter==0.18.0
   sphinx:
    - "sphinx>=3.2.0,<7"
-   - "sphinx_toolbox>=2.16.0"
+   - "sphinx_toolbox>=3.3.0"
 
 extra_sphinx_extensions:
  - attr_utils.annotations
@@ -162,6 +165,7 @@ third_party_version_matrix:
    - "4"
    - "5"
    - "6"
+   - "7"
 
 tox_unmanaged:
  - pytest

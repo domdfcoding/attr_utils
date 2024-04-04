@@ -26,8 +26,8 @@ Documentation = "https://attr-utils.readthedocs.io/en/latest"
 
 [project.optional-dependencies]
 pprint = [ "prettyprinter==0.18.0",]
-sphinx = [ "sphinx<7,>=3.2.0", "sphinx-toolbox>=2.16.0",]
-all = [ "prettyprinter==0.18.0", "sphinx<7,>=3.2.0", "sphinx-toolbox>=2.16.0",]
+sphinx = [ "sphinx<7,>=3.2.0", "sphinx-toolbox>=3.3.0",]
+all = [ "prettyprinter==0.18.0", "sphinx<7,>=3.2.0", "sphinx-toolbox>=3.3.0",]
 
 [tool.mkrecipe]
 conda-channels = [ "conda-forge", "domdfcoding",]
@@ -131,7 +131,7 @@ platforms = [ "Windows", "macOS", "Linux",]
 license-key = "MIT"
 
 [tool.mypy]
-python_version = "3.7"
+python_version = "3.8"
 namespace_packages = true
 check_untyped_defs = true
 warn_unused_ignores = true
