@@ -57,6 +57,7 @@ known_third_party = [
     "sphinxcontrib_jsmath",
     "sphinxcontrib_qthelp",
     "sphinxcontrib_serializinghtml",
+    "sphobjinv",
     "toolz",
     "typing_extensions",
     "typing_inspect",
