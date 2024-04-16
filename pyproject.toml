@@ -14,6 +14,7 @@ dynamic = [ "requires-python", "classifiers", "dependencies",]
 name = "Dominic Davis-Foster"
 email = "dominic@davis-foster.co.uk"
 
+
 [project.license]
 file = "LICENSE"
 
@@ -116,9 +117,6 @@ autodoc_exclude_members = [
 [tool.dep_checker]
 allowed_unused = [ "toolz",]
 
-[tool.dep_checker.name_mapping]
-attrs = "attr"
-
 [tool.whey]
 base-classifiers = [
     "Intended Audience :: Developers",
@@ -143,15 +141,8 @@ incremental = false
 [tool.snippet-fmt]
 directives = [ "code-block",]
 
-[tool.snippet-fmt.languages.python]
-reformat = true
-
-[tool.snippet-fmt.languages.TOML]
-reformat = true
-
-[tool.snippet-fmt.languages.ini]
-
-[tool.snippet-fmt.languages.json]
+[tool.dep_checker.name_mapping]
+attrs = "attr"
 
 [tool.dependency-dash."requirements.txt"]
 order = 10
@@ -163,3 +154,13 @@ include = false
 [tool.dependency-dash."doc-source/requirements.txt"]
 order = 30
 include = false
+
+[tool.snippet-fmt.languages.python]
+reformat = true
+
+[tool.snippet-fmt.languages.TOML]
+reformat = true
+
+[tool.snippet-fmt.languages.ini]
+
+[tool.snippet-fmt.languages.json]
