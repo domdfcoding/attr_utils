@@ -22,7 +22,7 @@ jobs:
     runs-on: "windows-2019"
     continue-on-error: ${{ matrix.config.experimental }}
     env:
-      USING_COVERAGE: '3.7,3.8,3.9,3.10,3.11,3.12,3.13.0-alpha.6,pypy-3.7,pypy-3.8,pypy-3.9'
+      USING_COVERAGE: '3.7,3.8,3.9,3.10,3.11,3.12,3.13.0-beta.1,pypy-3.7,pypy-3.8,pypy-3.9'
 
     strategy:
       fail-fast: False
@@ -34,7 +34,7 @@ jobs:
           - {python-version: "3.10", testenvs: "py310-attrs{21.2,21.4,22.2,23.1,23.2,latest},py310-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},py310-sphinx{4,5,6,7},build", experimental: False}
           - {python-version: "3.11", testenvs: "py311-attrs{21.2,21.4,22.2,23.1,23.2,latest},py311-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},py311-sphinx{4,5,6,7},build", experimental: False}
           - {python-version: "3.12", testenvs: "py312-attrs{21.2,21.4,22.2,23.1,23.2,latest},py312-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},py312-sphinx{4,5,6,7},build", experimental: True}
-          - {python-version: "3.13.0-alpha.6", testenvs: "py313-dev-attrs{21.2,21.4,22.2,23.1,23.2,latest},py313-dev-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},py313-dev-sphinx{4,5,6,7},build", experimental: True}
+          - {python-version: "3.13.0-beta.1", testenvs: "py313-dev-attrs{21.2,21.4,22.2,23.1,23.2,latest},py313-dev-mypy{0.900,0.910,0.921,0.931,1.0.1,1.2.0,1.4.1,1.6.1,latest},py313-dev-sphinx{4,5,6,7},build", experimental: True}
           - {python-version: "pypy-3.7", testenvs: "pypy37-attrs{21.2,21.4,22.2,23.1,23.2,latest},pypy37-sphinx{4,5},build", experimental: False}
           - {python-version: "pypy-3.8", testenvs: "pypy38-attrs{21.2,21.4,22.2,23.1,23.2,latest},pypy38-sphinx{4,5,6,7},build", experimental: False}
           - {python-version: "pypy-3.9", testenvs: "pypy39-attrs{21.2,21.4,22.2,23.1,23.2,latest},pypy39-sphinx{4,5,6,7},build", experimental: True}
