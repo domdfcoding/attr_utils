@@ -63,6 +63,7 @@ Plugin for `mypy <https://github.com/python/mypy>`_ which adds support for attr_
 
 # stdlib
 from typing import Any, Callable, List, MutableMapping, Optional
+from typing import Type as TypingType
 
 # 3rd party
 from mypy.nodes import (  # nodep
@@ -94,7 +95,7 @@ decorator_registry: MutableMapping[str, Callable[[ClassDefContext], None]] = {}
 _builtins = "builtins" if mypy_version > "0.930" else "__builtins__"
 
 
-def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext):
+def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext) -> None:
 	"""
 	Handles :func:`attr_utils.serialise.serde`.
 
@@ -244,7 +245,7 @@ def add_classmethod_to_class(
 	info.defn.defs.body.append(func)
 
 
-def plugin(version: str):
+def plugin(version: str) -> TypingType[AttrUtilsPlugin]:
 	"""
 	Entry point to :mod:`attr_utils.mypy_plugin`.
 
