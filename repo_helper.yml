@@ -33,6 +33,7 @@ python_versions:
  "3.12":
   experimental: true
  "3.13-dev":
+  matrix_exclude:
    sphinx:
    - 4
    - 5
