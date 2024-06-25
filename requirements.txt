@@ -1,4 +1,4 @@
-attrs<23.2.0,>=21.2.0
+attrs>=21.2.0
 domdf-python-tools>=3.6.1
 toolz>=0.11.1
 typing-extensions>=4.0.0
