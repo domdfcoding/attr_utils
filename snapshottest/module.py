@@ -5,6 +5,7 @@ import sys
 import importlib.util
 from collections import defaultdict
 import logging
+from typing import Dict
 
 from .snapshot import Snapshot
 from .formatter import Formatter
@@ -32,16 +33,16 @@ def _load_source(module_name, filepath):
     https://discuss.python.org/t/how-do-i-migrate-from-imp/27885 
     """
     spec = importlib.util.spec_from_file_location(module_name, filepath)
-    module = importlib.util.module_from_spec(spec)
+    module = importlib.util.module_from_spec(spec)  # type: ignore[arg-type]
     # As a performance optimization, store loaded module for further use.
     # https://docs.python.org/3.11/library/sys.html#sys.modules
     sys.modules[module_name] = module
-    spec.loader.exec_module(module)
+    spec.loader.exec_module(module)  # type: ignore[union-attr]
     return module
 
 
 class SnapshotModule(object):
-    _snapshot_modules = {}
+    _snapshot_modules: Dict = {}
 
     def __init__(self, module, filepath):
         self._original_snapshot = None
@@ -276,7 +277,7 @@ class SnapshotTest(object):
         assert value == snapshot
 
     def assert_match(self, value, name=""):
-        self.curr_snapshot = name or self.snapshot_counter
+        self.curr_snapshot = name or self.snapshot_counter  # type: ignore[assignment]
         self.visit()
         if self.update:
             self.store(value)

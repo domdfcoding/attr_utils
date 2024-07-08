@@ -1,5 +1,5 @@
 from termcolor import colored
-from fastdiff import compare
+from fastdiff import compare  # type: ignore[import]
 
 from .sorted_dict import SortedDict
 from .formatter import Formatter

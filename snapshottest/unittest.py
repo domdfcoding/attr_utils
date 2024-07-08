@@ -41,8 +41,8 @@ class TestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """On inherited classes, run our `setUp` method"""
-        cls._snapshot_tests = []
-        cls._snapshot_file = inspect.getfile(cls)
+        cls._snapshot_tests = []  # type: ignore[attr-defined]
+        cls._snapshot_file = inspect.getfile(cls)  # type: ignore[attr-defined]
 
         if cls is not TestCase and cls.setUp is not TestCase.setUp:
             orig_setUp = cls.setUp
@@ -56,8 +56,8 @@ class TestCase(unittest.TestCase):
                 TestCase.tearDown(self)
                 return orig_tearDown(self, *args, **kwargs)
 
-            cls.setUp = setUpOverride
-            cls.tearDown = tearDownOverride
+            cls.setUp = setUpOverride  # type: ignore[assignment]
+            cls.tearDown = tearDownOverride  # type: ignore[assignment]
 
         super(TestCase, cls).setUpClass()
 
@@ -70,8 +70,8 @@ class TestCase(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        if cls._snapshot_tests:
-            module = SnapshotModule.get_module_for_testpath(cls._snapshot_file)
+        if cls._snapshot_tests:  # type: ignore[attr-defined]
+            module = SnapshotModule.get_module_for_testpath(cls._snapshot_file)  # type: ignore[attr-defined]
             module.save()
         super(TestCase, cls).tearDownClass()
 
@@ -82,18 +82,18 @@ class TestCase(unittest.TestCase):
         self._snapshot = UnitTestSnapshotTest(
             test_class=self.__class__,
             test_id=self.id(),
-            test_filepath=self._snapshot_file,
+            test_filepath=self._snapshot_file,  # type: ignore[attr-defined]
             should_update=self.snapshot_should_update,
             assertEqual=self.assertEqual,
         )
-        self._snapshot_tests.append(self._snapshot)
+        self._snapshot_tests.append(self._snapshot)  # type: ignore[attr-defined]
         SnapshotTest._current_tester = self._snapshot
 
     def tearDown(self):
         """Do some custom setup"""
         # print dir(self.__module__)
         SnapshotTest._current_tester = None
-        self._snapshot = None
+        self._snapshot = None  # type: ignore[assignment]
 
     def assert_match_snapshot(self, value, name=""):
         self._snapshot.assert_match(value, name=name)

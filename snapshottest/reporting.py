@@ -8,13 +8,13 @@ def reporting_lines(testing_cli):
     successful_snapshots = SnapshotModule.stats_successful_snapshots()
     bold = ["bold"]
     if successful_snapshots:
-        yield (colored("{} snapshots passed", attrs=bold) + ".").format(
+        yield (colored("{} snapshots passed", attrs=bold) + ".").format(  # type: ignore[arg-type]
             successful_snapshots
         )
     new_snapshots = SnapshotModule.stats_new_snapshots()
     if new_snapshots[0]:
         yield (
-            colored("{} snapshots written", "green", attrs=bold) + " in {} test suites."
+            colored("{} snapshots written", "green", attrs=bold) + " in {} test suites."  # type: ignore[arg-type]
         ).format(*new_snapshots)
     inspect_str = colored(
         "Inspect your code or run with `{} --snapshot-update` to update them.".format(
@@ -25,14 +25,14 @@ def reporting_lines(testing_cli):
     failed_snapshots = SnapshotModule.stats_failed_snapshots()
     if failed_snapshots[0]:
         yield (
-            colored("{} snapshots failed", "red", attrs=bold)
+            colored("{} snapshots failed", "red", attrs=bold)  # type: ignore[arg-type]
             + " in {} test suites. "
             + inspect_str
         ).format(*failed_snapshots)
     unvisited_snapshots = SnapshotModule.stats_unvisited_snapshots()
     if unvisited_snapshots[0]:
         yield (
-            colored("{} snapshots deprecated", "yellow", attrs=bold)
+            colored("{} snapshots deprecated", "yellow", attrs=bold)  # type: ignore[arg-type]
             + " in {} test suites. "
             + inspect_str
         ).format(*unvisited_snapshots)

@@ -1,7 +1,7 @@
 # snapshottest: v1 - https://goo.gl/zC4yUc
 
 # 3rd party
-from snapshottest import Snapshot  # type: ignore
+from snapshottest import Snapshot
 
 snapshots = Snapshot()
 
