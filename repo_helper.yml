@@ -13,6 +13,7 @@ use_whey: true
 min_coverage: 95
 tox_testenv_extras: all
 standalone_contrib_guide: true
+pre_commit_exclude: "^snapshottest/"
 
 conda_channels:
  - conda-forge

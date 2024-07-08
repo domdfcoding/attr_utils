@@ -1,8 +1,10 @@
 # snapshottest>=0.6.0
+# snapshottest@ git+https://github.com/MarcellPerger1/snapshottest.git@dont-use-imp
 alabaster<=0.7.13
 coincidence>=0.2.0
 coverage>=5.1
 coverage-pyver-pragma>=0.2.1
+fastdiff<1,>=0.1.4
 importlib-metadata>=3.6.0
 mypy<1.8.0; platform_python_implementation == "CPython"
 pytest<7.2.0,>=6.0.0
@@ -14,10 +16,10 @@ pytest-randomly>=3.7.0
 pytest-timeout>=1.4.2
 sdjson>=0.3.0
 setuptools>=59.6.0
-snapshottest@ git+https://github.com/MarcellPerger1/snapshottest.git@dont-use-imp
 sphinxcontrib-applehelp<=1.0.4
 sphinxcontrib-devhelp<=1.0.2
 sphinxcontrib-htmlhelp<=2.0.1
 sphinxcontrib-jsmath<=1.0.1
 sphinxcontrib-qthelp<=1.0.3
 sphinxcontrib-serializinghtml<=1.1.5
+termcolor>=2.4.0
