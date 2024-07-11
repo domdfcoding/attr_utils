@@ -7,7 +7,7 @@ coverage-pyver-pragma>=0.2.1
 fastdiff<1,>=0.1.4
 importlib-metadata>=3.6.0
 mypy<1.8.0; platform_python_implementation == "CPython"
-pytest<7.2.0,>=6.0.0
+pytest>=6.0.0
 pytest-benchmark>=3.2.3
 pytest-cov>=2.8.1
 pytest-mypy-plugins>=1.6.1; platform_python_implementation == "CPython"
