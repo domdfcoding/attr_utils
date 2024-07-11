@@ -33,11 +33,22 @@ python_versions:
  "3.11":
  "3.12":
   experimental: true
+  matrix_exclude:
+   mypy:
+   - "0.900"
+   - "0.910"
+   - "0.921"
+   - "0.931"
  "3.13-dev":
   matrix_exclude:
    sphinx:
    - 4
    - 5
+   mypy:
+   - "0.900"
+   - "0.910"
+   - "0.921"
+   - "0.931"
  "pypy37":
   matrix_exclude:
    mypy:
