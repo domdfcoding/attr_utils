@@ -141,7 +141,7 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext) -> None:
 #
 # def attr__make_attrs(cls_def_ctx: ClassDefContext):
 # 	"""
-# 	Handles :func:attr.ib`.
+# 	Handles :func:attrs.field`.
 #
 # 	:param cls_def_ctx:
 # 	"""
@@ -149,7 +149,7 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext) -> None:
 # 	info = cls_def_ctx.cls.info
 #
 # 	list_ = cls_def_ctx.api.lookup_fully_qualified_or_none('typing.List')
-# 	attribute = cls_def_ctx.api.lookup_fully_qualified_or_none('attr.Attribute')
+# 	attribute = cls_def_ctx.api.lookup_fully_qualified_or_none('attrs.Attribute')
 # 	#
 # 	# if "__attrs_attrs__" not in info.names:
 # 	# 	info.names["__attrs_attrs__"] = SymbolTableNode(
@@ -159,9 +159,9 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext) -> None:
 # 	# 			)
 
 decorator_registry["attr_utils.serialise.serde"] = attr_utils_serialise_serde
-# decorator_registry["attr._make.attrs"] = attr__make_attrs
-# decorator_registry["attr.s"] = attr__make_attrs
-# decorator_registry["attr.attrs"] = attr__make_attrs
+# decorator_registry["attrs._make.attrs"] = attr__make_attrs
+# decorator_registry["attrs.field"] = attr__make_attrs
+# decorator_registry["attrs.attrs"] = attr__make_attrs
 
 
 class AttrUtilsPlugin(Plugin):

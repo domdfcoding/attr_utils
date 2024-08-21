@@ -4,7 +4,7 @@ import __future__
 from typing import Any, Callable, Dict, List, Tuple, get_type_hints
 
 # 3rd party
-import attr
+import attrs
 from coincidence import PEP_563
 
 # this package
@@ -19,12 +19,12 @@ def untyped_converter(arg):
 	return arg
 
 
-@attr.s
+@attrs.define
 class SomeClass:
-	a_string: str = attr.ib(converter=str)
-	custom_converter: Any = attr.ib(converter=my_converter)
-	untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)
-	no_converter: Callable[[str], None] = attr.ib()
+	a_string: str = attrs.field(converter=str)
+	custom_converter: Any = attrs.field(converter=my_converter)
+	untyped: Tuple[str, int, float] = attrs.field(converter=untyped_converter)
+	no_converter: Callable[[str], None] = attrs.field()
 
 
 def test_add_init_annotations():

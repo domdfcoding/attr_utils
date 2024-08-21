@@ -6,7 +6,7 @@ This example is based on real code.
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Union, overload
 
 # 3rd party
-import attr
+import attrs
 from domdf_python_tools.utils import strtobool
 
 # this package
@@ -17,37 +17,37 @@ from attr_utils.serialise import serde
 
 @pretty_repr
 @serde
-@attr.s(slots=True)
+@attrs.define(slots=True, order=True)
 class Device:
 	"""
 	Represents a device in an :class:`~.AcqMethod`.
 	"""
 
 	#: The ID of the device
-	device_id: str = attr.ib(converter=str)
+	device_id: str = attrs.field(converter=str)
 
 	#: The display name for the device.
-	display_name: str = attr.ib(converter=str)
+	display_name: str = attrs.field(converter=str)
 
-	rc_device: bool = attr.ib(converter=strtobool)
+	rc_device: bool = attrs.field(converter=strtobool)
 	"""
 	Flag to indicate the device is an RC Device.
 	If :py:obj:`False` the device is an SCIC.
 	"""
 
 	#: List of key: value mappings for configuration options.
-	configuration: List[Dict[str, Any]] = attr.ib(converter=list, factory=list)
+	configuration: List[Dict[str, Any]] = attrs.field(converter=list, factory=list)
 
 	#: Alternative form of ``configuration``.
-	configuration2: Tuple[Dict[str, Any]] = attr.ib(
+	configuration2: Tuple[Dict[str, Any]] = attrs.field(
 			converter=tuple,
-			default=attr.Factory(tuple),
+			default=attrs.Factory(tuple),
 			)
 
 	#: Alternative form of ``configuration``.
-	configuration3: List[Dict[str, Any]] = attr.ib(
+	configuration3: List[Dict[str, Any]] = attrs.field(
 			converter=list,
-			default=attr.Factory(list),
+			default=attrs.Factory(list),
 			metadata={"annotation": Sequence[Dict[str, Any]]},
 			)
 
@@ -76,7 +76,7 @@ class Device:
 		"""
 
 
-@attr.s(init=False)
+@attrs.define(init=False, order=True)
 class Connector:
 	"""
 	Represents an electrical connector.
@@ -87,10 +87,10 @@ class Connector:
 	"""
 
 	#: The name of the connector
-	name: str = attr.ib(converter=str)
+	name: str = attrs.field(converter=str)
 
 	#: The number of pins
-	n_pins: int = attr.ib(converter=int)
+	n_pins: int = attrs.field(converter=int)
 
 	def __init__(self, name: str, n_pins: Optional[int] = None, right_angle: bool = False):
 		if name == "DA-15":

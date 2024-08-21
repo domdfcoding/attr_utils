@@ -6,7 +6,7 @@ from enum import IntEnum
 from typing import Any, Dict, Mapping, MutableMapping, get_type_hints, no_type_check
 
 # 3rd party
-import attr
+import attrs
 import sdjson
 from coincidence import PEP_563
 from sdjson import register_encoder
@@ -30,32 +30,32 @@ class Port(IntEnum):
 
 
 @serde
-@attr.s(slots=True)
+@attrs.define(slots=True)
 class Device:
 	"""
 	Represents a device in an :class:`~.AcqMethod`.
 	"""
 
 	#: The ID of the device
-	device_id: int = attr.ib(converter=int)
+	device_id: int = attrs.field(converter=int)
 
 	#: The display name for the device.
-	display_name: str = attr.ib(converter=str)
+	display_name: str = attrs.field(converter=str)
 
 	#: The type of device.
-	device_type: DeviceType = attr.ib(converter=DeviceType)
+	device_type: DeviceType = attrs.field(converter=DeviceType)
 
 	#: Key: value mapping of configuration options.
-	configuration: MutableMapping[str, Any] = attr.ib(default=attr.Factory(dict))
+	configuration: MutableMapping[str, Any] = attrs.field(default=attrs.Factory(dict))
 
 
-@attr.s(slots=True)
+@attrs.define(slots=True)
 class EnhancedDevice(Device):
 	"""
 	A :class:`~.Device` with more features!
 	"""
 
-	warp_drive: Literal["Engaged!"] = attr.ib(default="Engaged!")
+	warp_drive: Literal["Engaged!"] = attrs.field(default="Engaged!")
 
 
 class MagicMapping(dict):
@@ -128,7 +128,7 @@ def test_enhanced_device():
 					},
 			)
 
-	assert attr.asdict(e) == {
+	assert attrs.asdict(e) == {
 			"device_id": 1000,
 			"display_name": "Television",
 			"device_type": DeviceType.RC,

@@ -22,7 +22,7 @@ even when converter functions *are* used, based on the following assumptions:
 The annotation can also be provided via the ``'annotation'`` key in the
 `metadata dict <https://www.attrs.org/en/stable/examples.html#metadata>`_.
 If you prefer you can instead provide this as a keyword argument to :func:`~.attrib`
-which will construct the metadata dict and call :func:`attr.ib` for you.
+which will construct the metadata dict and call :func:`attrs.field` for you.
 
 .. _attrs: https://www.attrs.org/en/stable/
 
@@ -52,12 +52,12 @@ Examples
 		return arg
 
 
-	@attr.s
+	@attrs.define
 	class SomeClass:
-		a_string: str = attr.ib(converter=str)
-		custom_converter: Any = attr.ib(converter=my_converter)
-		untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)
-		annotated: List[str] = attr.ib(
+		a_string: str = attrs.field(converter=str)
+		custom_converter: Any = attrs.field(converter=my_converter)
+		untyped: Tuple[str, int, float] = attrs.field(converter=untyped_converter)
+		annotated: List[str] = attrs.field(
 			converter=list,
 			metadata={"annotation": Sequence[str]},
 		)
@@ -123,7 +123,7 @@ import sys
 from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional, Type, TypeVar, Union, cast
 
 # 3rd party
-import attr
+import attrs
 
 # this package
 import attr_utils
@@ -153,7 +153,7 @@ def add_init_annotations(obj: _C) -> _C:
 	.. _attrs: https://www.attrs.org/en/stable/
 	"""
 
-	if not attr.has(obj):  # type: ignore
+	if not attrs.has(obj):  # type: ignore
 		return obj
 
 	if hasattr(obj, "__attrs_init__"):
@@ -161,9 +161,9 @@ def add_init_annotations(obj: _C) -> _C:
 
 	annotations: Dict[str, Optional[Type]] = {"return": None}
 
-	attrs = attr.fields(obj)
+	fields = attrs.fields(obj)
 
-	for a in attrs:
+	for a in fields:
 		arg_name = a.name.lstrip('_')
 
 		if a.init is True and a.type is not None:
@@ -197,13 +197,13 @@ def add_init_annotations(obj: _C) -> _C:
 
 
 def attrib(
-		default=attr.NOTHING,
+		default=attrs.NOTHING,
 		validator=None,
 		repr: bool = True,  # noqa: A002  # pylint: disable=redefined-builtin
 		hash=None,  # noqa: A002  # pylint: disable=redefined-builtin
 		init=True,
 		metadata=None,
-		annotation: Union[Type, object] = attr.NOTHING,
+		annotation: Union[Type, object] = attrs.NOTHING,
 		converter=None,
 		factory=None,
 		kw_only: bool = False,
@@ -212,7 +212,7 @@ def attrib(
 		**kwargs,
 		):
 	r"""
-	Wrapper around :func:`attr.ib` which supports the ``annotation``
+	Wrapper around :func:`attrs.field` which supports the ``annotation``
 	keyword argument for use by :func:`~.add_init_annotations`.
 
 	.. versionadded:: 0.2.0
@@ -231,16 +231,16 @@ def attrib(
 	:param eq:
 	:param order:
 
-	See the documentation for :func:`attr.ib` for descriptions of the other arguments.
+	See the documentation for :func:`attrs.field` for descriptions of the other arguments.
 	"""  # noqa: D400
 
-	if annotation is not attr.NOTHING:
+	if annotation is not attrs.NOTHING:
 		if metadata is None:
 			metadata = {}
 
 		metadata["annotation"] = annotation
 
-	return attr.ib(
+	return attrs.field(
 			default=default,
 			validator=validator,
 			repr=repr,
@@ -309,7 +309,7 @@ def parse_occupations(occupations: Iterable[str]) -> Iterable[str]:  # pragma: n
 		return [str(x) for x in occupations]
 
 
-@attr.s
+@attrs.define
 class AttrsClass:
 	"""
 	Example of using :func:`~.add_init_annotations` for attrs_ classes with Sphinx documentation.
@@ -321,6 +321,6 @@ class AttrsClass:
 	:param occupations: The occupation(s) of the person.
 	"""
 
-	name: str = attr.ib(converter=str)
-	age: int = attr.ib(converter=int)
-	occupations: List[str] = attr.ib(converter=parse_occupations)
+	name: str = attrs.field(converter=str)
+	age: int = attrs.field(converter=int)
+	occupations: List[str] = attrs.field(converter=parse_occupations)

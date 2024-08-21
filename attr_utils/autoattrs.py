@@ -101,7 +101,7 @@ from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Dict, List, MutableMapping, Optional, Tuple, Type
 
 # 3rd party
-import attr
+import attrs
 from sphinx.application import Sphinx  # nodep
 from sphinx.ext.autodoc import ClassDocumenter, Documenter  # nodep
 from sphinx.pycode import ModuleAnalyzer  # nodep
@@ -181,7 +181,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		.. latex:clearpage::
 		"""
 
-		return attr.has(member) and isinstance(member, type)
+		return attrs.has(member) and isinstance(member, type)
 
 	def add_content(self, more_content: Any, no_docstring: bool = False) -> None:  # type: ignore
 		"""
@@ -244,7 +244,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 		ret = super().import_object(raiseerror)
 
-		if attr.has(self.object):
+		if attrs.has(self.object):
 			self.object = add_attrs_doc(self.object)
 
 		return ret
@@ -281,7 +281,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		params, pre_output, post_output = self._get_docstring()
 		all_docs = {}
 
-		for field in (a.name for a in attr.fields(self.object) if a.init):
+		for field in (a.name for a in attrs.fields(self.object) if a.init):
 			doc: List[str] = ['']
 
 			# Prefer doc from class docstring
@@ -344,7 +344,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 		:param want_all:
 		"""  # noqa: D400
 
-		attrib_names = (a.name for a in attr.fields(self.object) if a.init)
+		attrib_names = (a.name for a in attrs.fields(self.object) if a.init)
 
 		no_init_attribs = self.options.get("no-init-attribs", False)
 

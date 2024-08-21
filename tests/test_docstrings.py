@@ -2,7 +2,7 @@
 from typing import Any, Dict, List, Tuple
 
 # 3rd party
-import attr
+import attrs
 from domdf_python_tools.compat import importlib_metadata
 
 # this package
@@ -17,11 +17,11 @@ def untyped_converter(arg):
 	return arg
 
 
-@attr.s
+@attrs.define(order=True)
 class SomeClass:
-	a_string: str = attr.ib(converter=str)
-	custom_converter: Any = attr.ib(converter=my_converter)
-	untyped: Tuple[str, int, float] = attr.ib(converter=untyped_converter)
+	a_string: str = attrs.field(converter=str)
+	custom_converter: Any = attrs.field(converter=my_converter)
+	untyped: Tuple[str, int, float] = attrs.field(converter=untyped_converter)
 
 
 def test_add_attrs_doc():

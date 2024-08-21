@@ -1,12 +1,12 @@
 - case: mypy_path_from_env
   main: |
     from attr_utils.serialise import serde
-    import attr
+    import attrs
 
     @serde
-    @attr.s
+    @attrs.define
     class F:
-        foo: int = attr.ib()
+        foo: int = attrs.field()
 
     for key, value in F(42).to_dict().items():
         print(key, value)

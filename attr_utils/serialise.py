@@ -13,7 +13,7 @@ Example usage
 
 .. code-block:: python
 
-	>>> import attr
+	>>> import attrs
 	>>> from attr_utils.serialise import serde
 
 	>>> person_dict = {"contact": {"personal": {"name": "John"}, "phone": "555-112233"}}
@@ -22,10 +22,10 @@ Example usage
 	>>> phone_path = ["contact", "phone"]
 
 	>>> @serde
-	... @attr.s
+	... @attrs.define
 	... class Person(object):
-	... 	name = attr.ib(metadata={"to": name_path, "from": name_path})
-	... 	phone = attr.ib(metadata={"to": phone_path, "from": phone_path})
+	... 	name = attrs.field(metadata={"to": name_path, "from": name_path})
+	... 	phone = attrs.field(metadata={"to": phone_path, "from": phone_path})
 
 	>>> p = Person.from_dict(person_dict)
 	Person(name=John phone=555-112233)
@@ -108,18 +108,18 @@ def serde(
 	Decorator to add serialisation and deserialisation capabilities to attrs classes.
 
 	The keys used in the dictionary output, and used when creating the class from a dictionary,
-	can be controlled using the ``metadata`` argument in :func:`attr.ib`:
+	can be controlled using the ``metadata`` argument in :func:`attrs.field`:
 
 	.. code-block::
 
 		from attr_utils.serialize import serde
-		import attr
+		import attrs
 
 		@serde
-		@attr.s
+		@attrs.define
 		class Person(object):
-			name = attr.ib(metadata={"to": name_path, "from": name_path})
-			phone = attr.ib(metadata={"to": phone_path, "from": phone_path})
+			name = attrs.field(metadata={"to": name_path, "from": name_path})
+			phone = attrs.field(metadata={"to": phone_path, "from": phone_path})
 
 	The names of the keys given in the ``metadata`` argument can be controlled with the
 	``from_key`` and ``to_key`` arguments:
@@ -127,13 +127,13 @@ def serde(
 	.. code-block::
 
 		from attr_utils.serialize import serde
-		import attr
+		import attrs
 
 		@serde(from_key="get", to_key="set")
-		@attr.s
+		@attrs.define
 		class Person(object):
-			name = attr.ib(metadata={"get": name_path, "set": name_path})
-			phone = attr.ib(metadata={"get": phone_path, "set": phone_path})
+			name = attrs.field(metadata={"get": name_path, "set": name_path})
+			phone = attrs.field(metadata={"get": phone_path, "set": phone_path})
 
 
 	This may be required when using other extensions to attrs.

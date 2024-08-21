@@ -8,7 +8,7 @@ from textwrap import dedent
 from typing import Any, Dict, get_type_hints
 
 # 3rd party
-import attr
+import attrs
 from coincidence import PEP_563
 
 # this package
@@ -29,23 +29,23 @@ class Port(IntEnum):
 
 
 @pretty_repr
-@attr.s(slots=True)
+@attrs.define(slots=True)
 class Device:
 	"""
 	Represents a device in an :class:`~.AcqMethod`.
 	"""
 
 	#: The ID of the device
-	device_id: int = attr.ib(converter=int)
+	device_id: int = attrs.field(converter=int)
 
 	#: The display name for the device.
-	display_name: str = attr.ib(converter=str)
+	display_name: str = attrs.field(converter=str)
 
 	#: The type of device.
-	device_type: DeviceType = attr.ib(converter=DeviceType)
+	device_type: DeviceType = attrs.field(converter=DeviceType)
 
 	#: Key: value mapping of configuration options.
-	configuration: Dict[str, Any] = attr.ib(default=attr.Factory(dict))
+	configuration: Dict[str, Any] = attrs.field(default=attrs.Factory(dict))
 
 
 def test_device():

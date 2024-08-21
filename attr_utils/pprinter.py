@@ -56,7 +56,7 @@ import sys
 from typing import Any, Callable, Optional, Type, TypeVar, Union
 
 # 3rd party
-import attr
+import attrs
 from typing_extensions import Protocol, runtime_checkable
 
 try:
@@ -175,13 +175,13 @@ def pretty_repr(obj: Type):
 
 	.. code-block:: python
 
-		>>> import attr
+		>>> import attrs
 		>>> from attr_utils.pprinter import pretty_repr
 
 		>>> @pretty_repr
-		... @attr.s
+		... @attrs.define
 		... class Person(object):
-		... 	name = attr.ib()
+		... 	name = attrs.field()
 
 		>>> repr(Person(name="Bob"))
 		Person(name='Bob')
@@ -189,7 +189,7 @@ def pretty_repr(obj: Type):
 	:param obj:
 	"""
 
-	if attr.has(obj):
+	if attrs.has(obj):
 
 		def __repr__(self) -> str:
 			return prettyprinter.pformat(self)

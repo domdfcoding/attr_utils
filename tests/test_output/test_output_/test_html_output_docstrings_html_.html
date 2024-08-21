@@ -166,7 +166,7 @@ If you prefer you can instead provide this as a keyword argument to
           which will construct the metadata dict and call
           <code class="xref py py-func docutils literal notranslate">
            <span class="pre">
-            attr.ib()
+            attrs.field()
            </span>
           </code>
           for you.
@@ -223,12 +223,12 @@ If you prefer you can instead provide this as a keyword argument to
 <span class="linenos"> 6</span>        <span class="k">return</span> <span class="n">arg</span>
 <span class="linenos"> 7</span>
 <span class="linenos"> 8</span>
-<span class="linenos"> 9</span><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="linenos"> 9</span><span class="nd">@attrs</span><span class="o">.</span><span class="n">define</span>
 <span class="linenos">10</span><span class="k">class</span> <span class="nc">SomeClass</span><span class="p">:</span>
-<span class="linenos">11</span>        <span class="n">a_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
-<span class="linenos">12</span>        <span class="n">custom_converter</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">my_converter</span><span class="p">)</span>
-<span class="linenos">13</span>        <span class="n">untyped</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">untyped_converter</span><span class="p">)</span>
-<span class="linenos">14</span>        <span class="n">annotated</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+<span class="linenos">11</span>        <span class="n">a_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="n">custom_converter</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">my_converter</span><span class="p">)</span>
+<span class="linenos">13</span>        <span class="n">untyped</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">converter</span><span class="o">=</span><span class="n">untyped_converter</span><span class="p">)</span>
+<span class="linenos">14</span>        <span class="n">annotated</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="n">field</span><span class="p">(</span>
 <span class="linenos">15</span>                <span class="n">converter</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span>
 <span class="linenos">16</span>                <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">"annotation"</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]},</span>
 <span class="linenos">17</span>        <span class="p">)</span>
@@ -372,6 +372,80 @@ If you prefer you can instead provide this as a keyword argument to
                   </p>
                  </li>
                 </ul>
+               </dd>
+              </dl>
+              <dl class="py attribute">
+               <dt{{ sig_object_class }} id="attr_utils.annotations.AttrsClass.age">
+                <span class="sig-name descname">
+                 age
+                </span>
+                <em class="property">
+                 <span class="p">
+                  :
+                 </span>
+                 <code class="xref py py-class docutils literal notranslate">
+                  int
+                 </code>
+                </em>
+                <a class="headerlink" href="#attr_utils.annotations.AttrsClass.age" title="Permalink to this definition">
+                 ¶
+                </a>
+               </dt>
+               <dd>
+                <p>
+                 The age of the person.
+                </p>
+               </dd>
+              </dl>
+              <dl class="py attribute">
+               <dt class="sig sig-object py" id="attr_utils.annotations.AttrsClass.name">
+                <span class="sig-name descname">
+                 name
+                </span>
+                <em class="property">
+                 <span class="p">
+                  :
+                 </span>
+                 <code class="xref py py-class docutils literal notranslate">
+                  str
+                 </code>
+                </em>
+                <a class="headerlink" href="#attr_utils.annotations.AttrsClass.name" title="Permalink to this definition">
+                 ¶
+                </a>
+               </dt>
+               <dd>
+                <p>
+                 The name of the person.
+                </p>
+               </dd>
+              </dl>
+              <dl class="py attribute">
+               <dt class="sig sig-object py" id="attr_utils.annotations.AttrsClass.occupations">
+                <span class="sig-name descname">
+                 occupations
+                </span>
+                <em class="property">
+                 <span class="p">
+                  :
+                 </span>
+                 <code class="xref py py-class docutils literal notranslate">
+                  typing.List
+                 </code>
+                 [
+                 <code class="xref py py-class docutils literal notranslate">
+                  str
+                 </code>
+                 ]
+                </em>
+                <a class="headerlink" href="#attr_utils.annotations.AttrsClass.occupations" title="Permalink to this definition">
+                 ¶
+                </a>
+               </dt>
+               <dd>
+                <p>
+                 The occupation(s) of the person.
+                </p>
                </dd>
               </dl>
              </dd>
@@ -548,110 +622,6 @@ If you prefer you can instead provide this as a keyword argument to
              </dd>
             </dl>
             <dl class="py method">
-             <dt{{ sig_object_class }} id="attr_utils.annotations.AttrsClass.__ge__">
-              <{{ sig_prename_tag }} class="sig-name descname">
-               __ge__
-              </{{ sig_prename_tag }}>
-              <span class="sig-paren">
-               (
-              </span>
-              <em class="sig-param">
-               <span class="n">
-                other
-               </span>
-              </em>
-              <span class="sig-paren">
-               )
-              </span>
-              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__ge__" title="Permalink to this definition">
-               ¶
-              </a>
-             </dt>
-             <dd>
-              <p>
-               Return
-               <code class="docutils literal notranslate">
-                <span class="pre">
-                 self
-                </span>
-                <span class="pre">
-                 &gt;=
-                </span>
-                <span class="pre">
-                 other
-                </span>
-               </code>
-               .
-              </p>
-              <dl class="field-list simple">
-               <dt class="field-odd">
-                Return type{{ d18_colon('                ') }}
-               </dt>
-               <dd class="field-odd">
-                <p>
-                 <code class="xref py py-class docutils literal notranslate">
-                  <span class="pre">
-                   bool
-                  </span>
-                 </code>
-                </p>
-               </dd>
-              </dl>
-             </dd>
-            </dl>
-            <dl class="py method">
-             <dt{{ sig_object_class }} id="attr_utils.annotations.AttrsClass.__gt__">
-              <{{ sig_prename_tag }} class="sig-name descname">
-               __gt__
-              </{{ sig_prename_tag }}>
-              <span class="sig-paren">
-               (
-              </span>
-              <em class="sig-param">
-               <span class="n">
-                other
-               </span>
-              </em>
-              <span class="sig-paren">
-               )
-              </span>
-              <a class="headerlink" href="#attr_utils.annotations.AttrsClass.__gt__" title="Permalink to this definition">
-               ¶
-              </a>
-             </dt>
-             <dd>
-              <p>
-               Return
-               <code class="docutils literal notranslate">
-                <span class="pre">
-                 self
-                </span>
-                <span class="pre">
-                 &gt;
-                </span>
-                <span class="pre">
-                 other
-                </span>
-               </code>
-               .
-              </p>
-              <dl class="field-list simple">
-               <dt class="field-odd">
-                Return type{{ d18_colon('                ') }}
-               </dt>
-               <dd class="field-odd">
-                <p>
-                 <code class="xref py py-class docutils literal notranslate">
-                  <span class="pre">
-                   bool
-                  </span>
-                 </code>
-                </p>
-               </dd>
-              </dl>
-             </dd>
-            </dl>
-            <dl class="py method">
              <dt{{ sig_object_class }} id="attr_utils.annotations.AttrsClass.__ne__">
               <{{ sig_prename_tag }} class="sig-name descname">
                __ne__
@@ -721,7 +691,7 @@ If you prefer you can instead provide this as a keyword argument to
              <dd>
               <p>
                Return a string representation of the
-               <a class="reference internal" href="#id5" title="attr_utils.annotations.AttrsClass">
+               <a class="reference internal" href="#id8" title="attr_utils.annotations.AttrsClass">
                 <code class="xref py py-class docutils literal notranslate">
                  <span class="pre">
                   AttrsClass
@@ -746,11 +716,85 @@ If you prefer you can instead provide this as a keyword argument to
               </dl>
              </dd>
             </dl>
+            <dl class="py attribute">
+             <dt{{ sig_object_class }} id="id5">
+              <span class="sig-name descname">
+               age
+              </span>
+              <em class="property">
+               <span class="p">
+                :
+               </span>
+               <code class="xref py py-class docutils literal notranslate">
+                int
+               </code>
+              </em>
+              <a class="headerlink" href="#id5" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               The age of the person.
+              </p>
+             </dd>
+            </dl>
+            <dl class="py attribute">
+             <dt{{ sig_object_class }} id="id6">
+              <span class="sig-name descname">
+               name
+              </span>
+              <em class="property">
+               <span class="p">
+                :
+               </span>
+               <code class="xref py py-class docutils literal notranslate">
+                str
+               </code>
+              </em>
+              <a class="headerlink" href="#id6" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               The name of the person.
+              </p>
+             </dd>
+            </dl>
+            <dl class="py attribute">
+             <dt{{ sig_object_class }} id="id7">
+              <span class="sig-name descname">
+               occupations
+              </span>
+              <em class="property">
+               <span class="p">
+                :
+               </span>
+               <code class="xref py py-class docutils literal notranslate">
+                typing.List
+               </code>
+               [
+               <code class="xref py py-class docutils literal notranslate">
+                str
+               </code>
+               ]
+              </em>
+              <a class="headerlink" href="#id7" title="Permalink to this definition">
+               ¶
+              </a>
+             </dt>
+             <dd>
+              <p>
+               The occupation(s) of the person.
+              </p>
+             </dd>
+            </dl>
            </dd>
           </dl>
          </{{ end_section }}>
          <dl class="py class">
-          <dt{{ sig_object_class }} id="id5">
+          <dt{{ sig_object_class }} id="id8">
            <em class="property">
             class
            </em>
@@ -783,7 +827,7 @@ If you prefer you can instead provide this as a keyword argument to
            <span class="sig-paren">
             )
            </span>
-           <a class="headerlink" href="#id5" title="Permalink to this definition">
+           <a class="headerlink" href="#id8" title="Permalink to this definition">
             ¶
            </a>
           </dt>
@@ -859,7 +903,7 @@ If you prefer you can instead provide this as a keyword argument to
             </dd>
            </dl>
            <dl class="py method">
-            <dt{{ sig_object_class }} id="id7">
+            <dt{{ sig_object_class }} id="id10">
              <{{ sig_prename_tag }} class="sig-name descname">
               __eq__
              </{{ sig_prename_tag }}>
@@ -874,7 +918,7 @@ If you prefer you can instead provide this as a keyword argument to
              <span class="sig-paren">
               )
              </span>
-             <a class="headerlink" href="#id7" title="Permalink to this definition">
+             <a class="headerlink" href="#id10" title="Permalink to this definition">
               ¶
              </a>
             </dt>
@@ -911,111 +955,7 @@ If you prefer you can instead provide this as a keyword argument to
             </dd>
            </dl>
            <dl class="py method">
-            <dt{{ sig_object_class }} id="id8">
-             <{{ sig_prename_tag }} class="sig-name descname">
-              __ge__
-             </{{ sig_prename_tag }}>
-             <span class="sig-paren">
-              (
-             </span>
-             <em class="sig-param">
-              <span class="n">
-               other
-              </span>
-             </em>
-             <span class="sig-paren">
-              )
-             </span>
-             <a class="headerlink" href="#id8" title="Permalink to this definition">
-              ¶
-             </a>
-            </dt>
-            <dd>
-             <p>
-              Return
-              <code class="docutils literal notranslate">
-               <span class="pre">
-                self
-               </span>
-               <span class="pre">
-                &gt;=
-               </span>
-               <span class="pre">
-                other
-               </span>
-              </code>
-              .
-             </p>
-             <dl class="field-list simple">
-              <dt class="field-odd">
-               Return type{{ d18_colon('               ') }}
-              </dt>
-              <dd class="field-odd">
-               <p>
-                <code class="xref py py-class docutils literal notranslate">
-                 <span class="pre">
-                  bool
-                 </span>
-                </code>
-               </p>
-              </dd>
-             </dl>
-            </dd>
-           </dl>
-           <dl class="py method">
-            <dt{{ sig_object_class }} id="id9">
-             <{{ sig_prename_tag }} class="sig-name descname">
-              __gt__
-             </{{ sig_prename_tag }}>
-             <span class="sig-paren">
-              (
-             </span>
-             <em class="sig-param">
-              <span class="n">
-               other
-              </span>
-             </em>
-             <span class="sig-paren">
-              )
-             </span>
-             <a class="headerlink" href="#id9" title="Permalink to this definition">
-              ¶
-             </a>
-            </dt>
-            <dd>
-             <p>
-              Return
-              <code class="docutils literal notranslate">
-               <span class="pre">
-                self
-               </span>
-               <span class="pre">
-                &gt;
-               </span>
-               <span class="pre">
-                other
-               </span>
-              </code>
-              .
-             </p>
-             <dl class="field-list simple">
-              <dt class="field-odd">
-               Return type{{ d18_colon('               ') }}
-              </dt>
-              <dd class="field-odd">
-               <p>
-                <code class="xref py py-class docutils literal notranslate">
-                 <span class="pre">
-                  bool
-                 </span>
-                </code>
-               </p>
-              </dd>
-             </dl>
-            </dd>
-           </dl>
-           <dl class="py method">
-            <dt{{ sig_object_class }} id="id10">
+            <dt{{ sig_object_class }} id="id11">
              <{{ sig_prename_tag }} class="sig-name descname">
               __ne__
              </{{ sig_prename_tag }}>
@@ -1030,7 +970,7 @@ If you prefer you can instead provide this as a keyword argument to
              <span class="sig-paren">
               )
              </span>
-             <a class="headerlink" href="#id10" title="Permalink to this definition">
+             <a class="headerlink" href="#id11" title="Permalink to this definition">
               ¶
              </a>
             </dt>
@@ -1067,7 +1007,7 @@ If you prefer you can instead provide this as a keyword argument to
             </dd>
            </dl>
            <dl class="py method">
-            <dt{{ sig_object_class }} id="id11">
+            <dt{{ sig_object_class }} id="id12">
              <{{ sig_prename_tag }} class="sig-name descname">
               __repr__
              </{{ sig_prename_tag }}>
@@ -1077,14 +1017,14 @@ If you prefer you can instead provide this as a keyword argument to
              <span class="sig-paren">
               )
              </span>
-             <a class="headerlink" href="#id11" title="Permalink to this definition">
+             <a class="headerlink" href="#id12" title="Permalink to this definition">
               ¶
              </a>
             </dt>
             <dd>
              <p>
               Return a string representation of the
-              <a class="reference internal" href="#id5" title="attr_utils.annotations.AttrsClass">
+              <a class="reference internal" href="#id8" title="attr_utils.annotations.AttrsClass">
                <code class="xref py py-class docutils literal notranslate">
                 <span class="pre">
                  AttrsClass
@@ -1095,7 +1035,10 @@ If you prefer you can instead provide this as a keyword argument to
              </p>
              <dl class="field-list simple">
               <dt class="field-odd">
-               Return type{{ d18_colon('               ') }}
+               Return type
+               <span class="colon">
+                :
+               </span>
               </dt>
               <dd class="field-odd">
                <p>
@@ -1107,6 +1050,80 @@ If you prefer you can instead provide this as a keyword argument to
                </p>
               </dd>
              </dl>
+            </dd>
+           </dl>
+           <dl class="py attribute">
+            <dt{{ sig_object_class }} id="id13">
+             <{{ sig_prename_tag }} class="sig-name descname">
+              age
+             </{{ sig_prename_tag }}>
+             <em class="property">
+              <span class="p">
+               :
+              </span>
+              <code class="xref py py-class docutils literal notranslate">
+               int
+              </code>
+             </em>
+             <a class="headerlink" href="#id13" title="Permalink to this definition">
+              ¶
+             </a>
+            </dt>
+            <dd>
+             <p>
+              The age of the person.
+             </p>
+            </dd>
+           </dl>
+           <dl class="py attribute">
+            <dt{{ sig_object_class }} id="id14">
+             <span class="sig-name descname">
+              name
+             </span>
+             <em class="property">
+              <span class="p">
+               :
+              </span>
+              <code class="xref py py-class docutils literal notranslate">
+               str
+              </code>
+             </em>
+             <a class="headerlink" href="#id14" title="Permalink to this definition">
+              ¶
+             </a>
+            </dt>
+            <dd>
+             <p>
+              The name of the person.
+             </p>
+            </dd>
+           </dl>
+           <dl class="py attribute">
+            <dt{{ sig_object_class }} id="id15">
+             <span class="sig-name descname">
+              occupations
+             </span>
+             <em class="property">
+              <span class="p">
+               :
+              </span>
+              <code class="xref py py-class docutils literal notranslate">
+               typing.List
+              </code>
+              [
+              <code class="xref py py-class docutils literal notranslate">
+               str
+              </code>
+              ]
+             </em>
+             <a class="headerlink" href="#id15" title="Permalink to this definition">
+              ¶
+             </a>
+            </dt>
+            <dd>
+             <p>
+              The occupation(s) of the person.
+             </p>
             </dd>
            </dl>
           </dd>
