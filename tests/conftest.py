@@ -10,7 +10,7 @@ if not (repo_root / "setup.cfg").is_file():
 	(repo_root / "setup.cfg").write_text(
 			"""
 [mypy]
-python_version = 3.6
+python_version = 3.8
 namespace_packages = True
 check_untyped_defs = True
 warn_unused_ignores = True
