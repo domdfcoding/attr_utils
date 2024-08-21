@@ -72,7 +72,7 @@ except ImportError:
 	from toolz import curried  # type: ignore
 
 # 3rd party
-from attr import asdict, fields
+from attrs import asdict, fields
 
 __all__ = ["serde"]
 

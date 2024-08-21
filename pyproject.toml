@@ -116,9 +116,6 @@ autodoc_exclude_members = [
 [tool.dep_checker]
 allowed_unused = [ "toolz",]
 
-[tool.dep_checker.name_mapping]
-attrs = "attr"
-
 [tool.whey]
 base-classifiers = [
     "Intended Audience :: Developers",

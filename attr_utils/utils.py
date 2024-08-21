@@ -30,13 +30,13 @@ General utility functions.
 from typing import TYPE_CHECKING, Tuple
 
 # 3rd party
-from attr import Attribute
+from attrs import Attribute
 
 __all__ = ["AttrsClass"]
 
 if TYPE_CHECKING:
 	# 3rd party
-	from attr import AttrsInstance as AttrsClass
+	from attrs import AttrsInstance as AttrsClass
 else:
 	# 3rd party
 	from typing_extensions import Protocol, runtime_checkable

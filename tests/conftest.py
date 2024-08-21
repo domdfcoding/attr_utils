@@ -2,7 +2,7 @@
 import asyncio  # noqa: F401  # Fixes intermittent error where the import causes a KeyError
 import pathlib
 
-pytest_plugins = ("coincidence", "sphinx_toolbox.testing", "snapshottest.pytest")
+pytest_plugins = ("coincidence", "sphinx_toolbox.testing")
 
 repo_root = pathlib.Path(__file__).parent.parent
 
