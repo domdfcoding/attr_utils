@@ -38,7 +38,7 @@ python_versions:
    - "0.910"
    - "0.921"
    - "0.931"
- "3.13-dev":
+ "3.13":
   matrix_exclude:
    sphinx:
    - 4
@@ -128,7 +128,7 @@ third_party_version_matrix:
    - 22.2
    - 23.1
    - 23.2
-   - 24.1
+   - 24.2
    - latest
   mypy:
    - "0.900"
