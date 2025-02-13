@@ -32,7 +32,7 @@ from typing import Iterable, Iterator, Optional
 
 # 3rd party
 import pytest
-from bs4 import BeautifulSoup  # type: ignore[import]
+from bs4 import BeautifulSoup
 from domdf_python_tools.paths import PathPlus
 from sphinx.application import Sphinx
 from sphinx.testing.path import path

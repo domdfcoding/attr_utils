@@ -1,7 +1,7 @@
 # 3rd party
 import pytest
 import sphinx
-from bs4 import BeautifulSoup  # type: ignore[import]
+from bs4 import BeautifulSoup
 from sphinx.application import Sphinx
 from sphinx_toolbox.testing import HTMLRegressionFixture
 
@@ -22,8 +22,9 @@ def test_html_output(page: BeautifulSoup, html_regression: HTMLRegressionFixture
 
 	for div in page.select("section"):
 		children = tuple(div.children)
-		if len(children) == 3 and children[1].name == "h2":
+		if len(children) == 3 and children[1].name == "h2":  # type: ignore[attr-defined]
 			# Move sibling into section
+			assert div.parent is not None
 			siblings = list(div.parent.children)
 			next_sibling = siblings[siblings.index(div) + 2]
 			div.append(next_sibling.extract())
