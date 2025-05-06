@@ -129,6 +129,8 @@ third_party_version_matrix:
    - 23.1
    - 23.2
    - 24.2
+   - 25.1
+   - 25.3
    - latest
   mypy:
    - "0.900"
