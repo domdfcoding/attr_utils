@@ -20,6 +20,9 @@ conda_channels:
 python_versions:
  "3.7":
   matrix_exclude:
+   attrs:
+   - 25.1
+   - 25.3
    mypy:
    - "1.6.1"
    - "latest"
@@ -50,6 +53,9 @@ python_versions:
    - "0.931"
  "pypy37":
   matrix_exclude:
+   attrs:
+   - 25.1
+   - 25.3
    mypy:
    - "0.900"
    - "0.910"
