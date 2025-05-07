@@ -1,9 +1,16 @@
+# stdlib
+from typing import TYPE_CHECKING
+
 # 3rd party
 import pytest
 from attr import asdict, attrib, attrs
 
 # this package
 from attr_utils.serialise import serde
+
+if TYPE_CHECKING:
+	# 3rd party
+	from pytest_benchmark.fixture import BenchmarkFixture  # type: ignore[import]
 
 name_path = ["contact", "personal", "name"]
 phone_path = ["contact", "phone"]
@@ -21,27 +28,27 @@ person = Person(name="James", phone="555-666222")
 
 
 @pytest.mark.benchmark(group="serialization")
-def test_ser_baseline(benchmark):
+def test_ser_baseline(benchmark: "BenchmarkFixture"):
 
-	def baseline():
+	def baseline() -> None:
 		asdict(person)
 
 	benchmark(baseline)
 
 
 @pytest.mark.benchmark(group="serialization")
-def test_ser_serde(benchmark):
+def test_ser_serde(benchmark: "BenchmarkFixture"):
 
-	def serde():
+	def serde() -> None:
 		person.to_dict()
 
 	benchmark(serde)
 
 
 @pytest.mark.benchmark(group="deserialization")
-def test_deser_baseline(benchmark):
+def test_deser_baseline(benchmark: "BenchmarkFixture"):
 
-	def baseline():
+	def baseline() -> None:
 		Person(
 				name=person_dict["contact"]["personal"]["name"],  # type: ignore
 				phone=person_dict["contact"]["phone"],
@@ -51,9 +58,9 @@ def test_deser_baseline(benchmark):
 
 
 @pytest.mark.benchmark(group="deserialization")
-def test_deser_serde(benchmark):
+def test_deser_serde(benchmark: "BenchmarkFixture"):
 
-	def serde():
+	def serde() -> None:
 		p = Person.from_dict(person_dict)
 
 	benchmark(serde)

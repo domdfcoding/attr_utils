@@ -132,12 +132,12 @@ def register_pretty(
 
 
 def is_registered(
-		type,  # noqa: A002  # pylint: disable=redefined-builtin
+		type: Type,  # noqa: A002  # pylint: disable=redefined-builtin
 		*,
 		check_superclasses: bool = False,
 		check_deferred: bool = True,
 		register_deferred: bool = True,
-		):
+		) -> bool:
 	if not check_deferred and register_deferred:
 		raise ValueError("register_deferred may not be True when check_deferred is False")
 
@@ -161,7 +161,7 @@ sys.modules["prettyprinter.prettyprinter"].is_registered = is_registered  # type
 @register_pretty(enum.IntEnum)
 @register_pretty(enum.Flag)
 @register_pretty(enum.IntFlag)
-def pretty_enum(value, ctx) -> str:
+def pretty_enum(value: Any, ctx) -> str:
 	r"""
 	Pretty-prints the given :class:`~enum.Enum`.
 	"""

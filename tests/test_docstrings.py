@@ -34,7 +34,7 @@ def test_add_attrs_doc():
 		assert SomeClass.__gt__.__doc__ == doc
 		assert SomeClass.__lt__.__doc__ == doc
 		assert SomeClass.__le__.__doc__ == doc
-		assert re.sub("\\s+", ' ', SomeClass.__ne__.__doc__).strip() in {
+		assert re.sub("\\s+", ' ', str(SomeClass.__ne__.__doc__)).strip() in {
 				"Return ``self != other``.",
 				"Check equality and either forward a NotImplemented or return the result negated."
 				}
@@ -49,8 +49,8 @@ def test_add_attrs_doc():
 		assert SomeClass.__lt__.__doc__ == doc
 		assert SomeClass.__le__.__doc__ == doc
 		assert SomeClass.__repr__.__doc__ == doc
-		if attrs.__version_info__ >= (25, 3):
-			assert re.sub("\\s+", ' ', SomeClass.__ne__.__doc__).strip() in {
+		if attrs.__version_info__ >= (25, 3):  # type: ignore[operator]
+			assert re.sub("\\s+", ' ', str(SomeClass.__ne__.__doc__)).strip() in {
 					"Return ``self != other``.",
 					"Check equality and either forward a NotImplemented or return the result negated."
 					}

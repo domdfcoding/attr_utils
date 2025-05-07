@@ -1,8 +1,15 @@
+# stdlib
+from typing import TYPE_CHECKING
+
 # 3rd party
 from attr import attrib, attrs
 
 # this package
 from attr_utils.serialise import serde
+
+if TYPE_CHECKING:
+	# 3rd party
+	from snapshottest.pytest import PyTestSnapshotTest  # type: ignore[import]
 
 person_dict = {"contact": {"personal": {"name": "John"}, "phone": "555-112233"}}
 city_dict = {"name": "Tel-Aviv", "zipcode": "6100000"}
@@ -40,35 +47,35 @@ class GetSet:
 	phone = attrib(metadata={"set": ["phoneeee"], "get": ["phone"]})
 
 
-def test_from_to_keys(snapshot):
+def test_from_to_keys(snapshot: "PyTestSnapshotTest"):
 	g = GetSet.from_dict({"name": "John", "phone": "555-1111"})
 	snapshot.assert_match({"name": g.name, "phone": g.phone})
 	snapshot.assert_match(g.to_dict())
 
 
-def test_deser(snapshot):
+def test_deser(snapshot: "PyTestSnapshotTest"):
 	p = Person.from_dict(person_dict)
 	snapshot.assert_match({"name": p.name, "phone": p.phone})
 
 
-def test_ser(snapshot):
+def test_ser(snapshot: "PyTestSnapshotTest"):
 	snapshot.assert_match(Person(name="Slash", phone="555-334455").to_dict())
 
 
-def test_ser_with_default_values(snapshot):
+def test_ser_with_default_values(snapshot: "PyTestSnapshotTest"):
 	p_dict = City(name="Tel-Aviv", zipcode="6100000").to_dict()
 	snapshot.assert_match({"name": p_dict.get("name"), "zipcode": p_dict.get("zipcode")})
 
 
-def test_quirky_object(snapshot):
+def test_quirky_object(snapshot: "PyTestSnapshotTest"):
 	c = Contact.from_dict(person_dict)
 	snapshot.assert_match({"name": c.name, "phone": c.phone, "zip": c.zip_code})
 
 
-def test_irrelevant_object(snapshot):
+def test_irrelevant_object():
 	c = Contact.from_dict({"irrelevant": True})
 
 
-def test_deser_with_default_values(snapshot):
+def test_deser_with_default_values(snapshot: "PyTestSnapshotTest"):
 	p = City(name="Tel-Aviv", zipcode="6100000")
 	snapshot.assert_match({"name": p.name, "zipcode": p.zipcode})

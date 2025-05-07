@@ -51,7 +51,7 @@ pytest_plugins = "sphinx.testing.fixtures"
 
 
 @pytest.fixture(scope="session")
-def rootdir():
+def rootdir() -> path:
 	rdir = PathPlus(__file__).parent.absolute() / "doc-test"
 	(rdir / "test-root").maybe_make(parents=True)
 	return path(rdir)
