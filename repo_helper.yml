@@ -70,6 +70,7 @@ python_versions:
    - 6
    - 7
  "pypy38":
+  experimental: true
   matrix_exclude:
    mypy:
    - "0.900"
