@@ -10,7 +10,7 @@ from attr_utils.serialise import serde
 
 if TYPE_CHECKING:
 	# 3rd party
-	from pytest_benchmark.fixture import BenchmarkFixture  # type: ignore[import]
+	from pytest_benchmark.fixture import BenchmarkFixture
 
 name_path = ["contact", "personal", "name"]
 phone_path = ["contact", "phone"]

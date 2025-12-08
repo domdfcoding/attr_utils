@@ -117,7 +117,7 @@ __all__ = ["AttrsDocumenter", "setup"]
 
 if TYPE_CHECKING:
 	# 3rd party
-	from docutils.statemachine import StringList  # type: ignore[import]
+	from docutils.statemachine import StringList  # type: ignore[import-untyped]
 
 
 def _documenter_add_content(
@@ -183,7 +183,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 		return attrs.has(member) and isinstance(member, type)
 
-	def add_content(self, more_content: Any, no_docstring: bool = False) -> None:  # type: ignore
+	def add_content(self, more_content: Any, no_docstring: bool = False) -> None:
 		"""
 		Add extra content (from docstrings, attribute docs etc.), but not the class docstring.
 
@@ -309,13 +309,13 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 		if hasattr(self.object, "__slots__"):
 			slots_dict: MutableMapping[str, Optional[str]] = {}
-			for item in self.object.__slots__:  # type: ignore[attr-defined]
+			for item in self.object.__slots__:
 				if item in all_docs:
 					slots_dict[item] = all_docs[item]
 				else:
 					slots_dict[item] = None
 
-			self.object.__slots__ = slots_dict  # type: ignore[attr-defined]
+			self.object.__slots__ = slots_dict
 
 		if hasattr(self, "add_autosummary"):
 			self.add_autosummary()

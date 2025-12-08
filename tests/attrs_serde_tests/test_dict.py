@@ -9,7 +9,7 @@ from attr_utils.serialise import serde
 
 if TYPE_CHECKING:
 	# 3rd party
-	from snapshottest.pytest import PyTestSnapshotTest  # type: ignore[import]
+	from snapshottest.pytest import PyTestSnapshotTest  # type: ignore[import-untyped]
 
 person_dict = {"contact": {"personal": {"name": "John"}, "phone": "555-112233"}}
 city_dict = {"name": "Tel-Aviv", "zipcode": "6100000"}
