@@ -72,6 +72,9 @@ python_versions:
  "pypy38":
   experimental: true
   matrix_exclude:
+   attrs:
+   - 25.1  # Coverage failing
+   - 25.3  # Coverage failing
    mypy:
    - "0.900"
    - "0.910"
@@ -82,9 +85,11 @@ python_versions:
    - "1.4.1"
    - "1.6.1"
    - "latest"
-
  "pypy39":
   matrix_exclude:
+   attrs:
+   - 25.1  # Coverage failing
+   - 25.3  # Coverage failing
    mypy:
    - "0.900"
    - "0.910"
