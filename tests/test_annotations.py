@@ -11,11 +11,11 @@ from coincidence import PEP_563
 from attr_utils.annotations import add_init_annotations
 
 
-def my_converter(arg: List[Dict[str, Any]]):
+def my_converter(arg: List[Dict[str, Any]]):  # noqa: MAN002
 	return arg
 
 
-def untyped_converter(arg):
+def untyped_converter(arg):  # noqa: MAN001,MAN002
 	return arg
 
 
@@ -52,15 +52,14 @@ def test_add_init_annotations():
 				}
 
 	# print(typing.get_type_hints(SomeClass.__init__))
-	assert get_type_hints(
-			SomeClass.__init__, globalns=globals()
-			) == {
-					"return": type(None),
-					"a_string": str,
-					"custom_converter": List[Dict[str, Any]],
-					"untyped": Tuple[str, int, float],
-					"no_converter": Callable[[str], None],
-					}
+	expected_hints = {
+			"return": type(None),
+			"a_string": str,
+			"custom_converter": List[Dict[str, Any]],
+			"untyped": Tuple[str, int, float],
+			"no_converter": Callable[[str], None],
+			}
+	assert get_type_hints(SomeClass.__init__, globalns=globals()) == expected_hints
 
 
 def test_add_init_annotations_not_attrs_class():

@@ -17,5 +17,5 @@ warn_unused_ignores = True
 plugins = attr_utils.mypy_plugin
 incremental = False
 """,
-			encoding="UTF-8"
+			encoding="UTF-8",
 			)

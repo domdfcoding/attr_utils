@@ -286,7 +286,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 			# Prefer doc from class docstring
 			if field in params:
-				doc, arg_type = params.pop(field).values()  # type: ignore
+				doc, arg_type = params.pop(field).values()  # type: ignore[assignment]
 
 			# Otherwise use attribute docstring
 			if not ''.join(doc).strip() and field in member_docstrings:
@@ -348,7 +348,7 @@ class AttrsDocumenter(PatchedAutoSummClassDocumenter):
 
 		no_init_attribs = self.options.get("no-init-attribs", False)
 
-		def unskip_attrs(app, what, name, obj, skip, options):
+		def unskip_attrs(app: Sphinx, what: Any, name: str, obj: Any, skip: bool, options: Any) -> Optional[bool]:
 			if skip and not no_init_attribs:
 				return not (name in attrib_names)
 			elif no_init_attribs and (name in attrib_names):

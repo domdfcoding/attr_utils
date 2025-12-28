@@ -61,8 +61,8 @@ from typing_extensions import Protocol, runtime_checkable
 
 try:
 	# 3rd party
-	import prettyprinter  # type: ignore  # nodep
-	from prettyprinter.prettyprinter import _BASE_DISPATCH, pretty_dispatch  # type: ignore  # nodep
+	import prettyprinter  # type: ignore[import-untyped]  # nodep
+	from prettyprinter.prettyprinter import _BASE_DISPATCH, pretty_dispatch  # type: ignore[import-untyped]  # nodep
 except ImportError as e:  # pragma: no cover
 	exc = type(e)(f"Could not import 'prettyprinter'. Perhaps you need to install 'attr_utils[pprint]'?\n\n{e}")
 	raise exc.with_traceback(e.__traceback__) from None
@@ -70,6 +70,7 @@ except ImportError as e:  # pragma: no cover
 __all__ = ["pretty_repr", "register_pretty", "PrettyFormatter", "_PF"]
 
 _T = TypeVar("_T")
+_TT = TypeVar("_TT", bound=Type)
 _PF = TypeVar("_PF", bound="PrettyFormatter")
 
 prettyprinter.install_extras(["attrs"])
@@ -153,7 +154,7 @@ def is_registered(
 # Resolve deferred names and prevent them being used again.
 prettyprinter.is_registered(type(_T), check_superclasses=True, check_deferred=True, register_deferred=True)
 prettyprinter.is_registered = is_registered
-sys.modules["prettyprinter.prettyprinter"].is_registered = is_registered  # type: ignore
+sys.modules["prettyprinter.prettyprinter"].is_registered = is_registered  # type: ignore[attr-defined]
 
 
 @register_pretty(enum.EnumMeta)
@@ -161,7 +162,7 @@ sys.modules["prettyprinter.prettyprinter"].is_registered = is_registered  # type
 @register_pretty(enum.IntEnum)
 @register_pretty(enum.Flag)
 @register_pretty(enum.IntFlag)
-def pretty_enum(value: Any, ctx) -> str:
+def pretty_enum(value: Any, ctx: Any) -> str:  # noqa: PRM002
 	r"""
 	Pretty-prints the given :class:`~enum.Enum`.
 	"""
@@ -169,7 +170,7 @@ def pretty_enum(value: Any, ctx) -> str:
 	return repr(value)
 
 
-def pretty_repr(obj: Type):
+def pretty_repr(obj: _TT) -> _TT:
 	"""
 	Add a pretty-printing ``__repr__`` function to the decorated attrs class.
 
@@ -196,7 +197,7 @@ def pretty_repr(obj: Type):
 
 		__repr__.__doc__ = f"Return a string representation of the :class:`~.{obj.__name__}`."
 
-		obj.__repr__ = __repr__  # type: ignore
+		obj.__repr__ = __repr__  # type: ignore[method-assign]
 		obj.__repr__.__qualname__ = f"{obj.__name__}.__repr__"
 		obj.__repr__.__module__ = obj.__module__
 

@@ -1,5 +1,5 @@
 # stdlib
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Dict
 
 # 3rd party
 import pytest
@@ -23,7 +23,7 @@ class Person:
 	phone = attrib(metadata={"to": phone_path, "from": phone_path})
 
 
-person_dict = {"contact": {"personal": {"name": "John"}, "phone": "555-112233"}}
+person_dict: Dict[str, Any] = {"contact": {"personal": {"name": "John"}, "phone": "555-112233"}}
 person = Person(name="James", phone="555-666222")
 
 
@@ -50,7 +50,7 @@ def test_deser_baseline(benchmark: "BenchmarkFixture"):
 
 	def baseline() -> None:
 		Person(
-				name=person_dict["contact"]["personal"]["name"],  # type: ignore
+				name=person_dict["contact"]["personal"]["name"],
 				phone=person_dict["contact"]["phone"],
 				)
 

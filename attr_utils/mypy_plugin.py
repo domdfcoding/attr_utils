@@ -108,15 +108,24 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext) -> None:
 	str_type = cls_def_ctx.api.named_type(f"{_builtins}.str")
 	bool_type = cls_def_ctx.api.named_type(f"{_builtins}.bool")
 	implicit_any = AnyType(TypeOfAny.special_form)
+
 	mapping = cls_def_ctx.api.lookup_fully_qualified_or_none("typing.Mapping")
+	assert mapping is not None
+	mapping_str_any_type = Instance(mapping.node, [str_type, implicit_any])  # type: ignore[arg-type]
+
 	mutable_mapping = cls_def_ctx.api.lookup_fully_qualified_or_none("typing.MutableMapping")
-	mapping_str_any_type = Instance(mapping.node, [str_type, implicit_any])  # type: ignore
-	mutable_mapping_str_any_type = Instance(mutable_mapping.node, [str_type, implicit_any])  # type: ignore
-	# # maybe_mapping_str_any = UnionType.make_union([typ, NoneType()])(mapping_str_any_type)
-	decorated_class_instance = Instance(
-			cls_def_ctx.api.lookup_fully_qualified_or_none(cls_def_ctx.cls.fullname).node,  # type: ignore
-			[],
+	assert mutable_mapping is not None
+	assert mutable_mapping.node is not None
+	mutable_mapping_str_any_type = Instance(
+			mutable_mapping.node,  # type: ignore[arg-type]
+			[str_type, implicit_any],
 			)
+
+	# # maybe_mapping_str_any = UnionType.make_union([typ, NoneType()])(mapping_str_any_type)
+	new_type = cls_def_ctx.api.lookup_fully_qualified_or_none(cls_def_ctx.cls.fullname)
+	assert new_type is not None
+	node = new_type.node
+	decorated_class_instance = Instance(node, [])  # type: ignore[arg-type]
 
 	if "to_dict" not in info.names:
 		add_method_to_class(
@@ -154,7 +163,7 @@ def attr_utils_serialise_serde(cls_def_ctx: ClassDefContext) -> None:
 # 	# if "__attrs_attrs__" not in info.names:
 # 	# 	info.names["__attrs_attrs__"] = SymbolTableNode(
 # 	# 			MDEF,
-# 	# 			Var("__attrs_attrs__", Instance(list_.node, [attribute])),  # type: ignore
+# 	# 			Var("__attrs_attrs__", Instance(list_.node, [attribute])),
 # 	# 			plugin_generated=True,
 # 	# 			)
 

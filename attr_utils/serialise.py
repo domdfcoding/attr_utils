@@ -67,9 +67,9 @@ from typing import TYPE_CHECKING, Any, Callable, Mapping, MutableMapping, Option
 
 try:
 	# 3rd party
-	from cytoolz import curried  # type: ignore
+	from cytoolz import curried  # type: ignore[import-not-found]
 except ImportError:
-	from toolz import curried  # type: ignore
+	from toolz import curried  # type: ignore[import-untyped]
 
 # 3rd party
 from attrs import asdict, fields
@@ -99,7 +99,7 @@ def serde(
 		) -> Callable[[Type[AttrsClass]], Type[AttrsClass]]: ...
 
 
-def serde(
+def serde(  # noqa: PRM003
 		cls: Optional[Type[AttrsClass]] = None,
 		from_key: str = "from",
 		to_key: str = "to",
@@ -177,7 +177,7 @@ def serde(
 
 	def serde_with_class(cls: Type[AttrsClass]) -> Type[AttrsClass]:
 
-		def from_dict(cls, d: Mapping[str, Any]):
+		def from_dict(cls, d: Mapping[str, Any]):  # noqa: MAN002
 			from_fields = list(map(lambda a: (a, curried.get_in([from_key], a.metadata, [a.name])), fields(cls)))
 
 			return cls(**dict(map(

@@ -120,7 +120,7 @@ API Reference
 # stdlib
 import inspect
 import sys
-from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, Dict, Iterable, List, Optional, Type, TypeVar, Union, cast
 
 # 3rd party
 import attrs
@@ -143,7 +143,7 @@ if TYPE_CHECKING or attr_utils._docs:  # pragma: no cover
 __all__ = ["attrib", "_A", "_C", "add_init_annotations", "attr_docstring_hook", "setup"]
 
 _A = TypeVar("_A", bound=Any)
-_C = TypeVar("_C", bound=Callable)
+_C = TypeVar("_C", bound=Type)
 
 
 def add_init_annotations(obj: _C) -> _C:
@@ -151,9 +151,11 @@ def add_init_annotations(obj: _C) -> _C:
 	Add type annotations to the ``__init__`` method of an attrs_ class.
 
 	.. _attrs: https://www.attrs.org/en/stable/
+
+	:param obj:
 	"""
 
-	if not attrs.has(obj):  # type: ignore
+	if not attrs.has(obj):
 		return obj
 
 	if hasattr(obj, "__attrs_init__"):
@@ -196,7 +198,7 @@ def add_init_annotations(obj: _C) -> _C:
 	return cast(_C, obj)
 
 
-def attrib(
+def attrib(  # noqa: MAN001,MAN002,PRM002
 		default=attrs.NOTHING,
 		validator=None,
 		repr: bool = True,  # noqa: A002  # pylint: disable=redefined-builtin

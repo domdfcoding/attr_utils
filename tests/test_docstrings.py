@@ -10,11 +10,11 @@ from domdf_python_tools.compat import importlib_metadata
 from attr_utils.docstrings import add_attrs_doc
 
 
-def my_converter(arg: List[Dict[str, Any]]):
+def my_converter(arg: List[Dict[str, Any]]):  # noqa: MAN002
 	return arg
 
 
-def untyped_converter(arg):
+def untyped_converter(arg):  # noqa: MAN001,MAN002
 	return arg
 
 
@@ -36,7 +36,7 @@ def test_add_attrs_doc():
 		assert SomeClass.__le__.__doc__ == doc
 		assert re.sub("\\s+", ' ', str(SomeClass.__ne__.__doc__)).strip() in {
 				"Return ``self != other``.",
-				"Check equality and either forward a NotImplemented or return the result negated."
+				"Check equality and either forward a NotImplemented or return the result negated.",
 				}
 		assert SomeClass.__repr__.__doc__ == doc
 	else:
@@ -52,7 +52,7 @@ def test_add_attrs_doc():
 		if attrs.__version_info__ >= (25, 3):  # type: ignore[operator]
 			assert re.sub("\\s+", ' ', str(SomeClass.__ne__.__doc__)).strip() in {
 					"Return ``self != other``.",
-					"Check equality and either forward a NotImplemented or return the result negated."
+					"Check equality and either forward a NotImplemented or return the result negated.",
 					}
 		else:
 			assert SomeClass.__ne__.__doc__ == doc
