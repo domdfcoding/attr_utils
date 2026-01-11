@@ -113,7 +113,7 @@ attr_utils
 	:alt: Maintenance
 
 .. |pypi-downloads| image:: https://img.shields.io/pypi/dm/attr_utils
-	:target: https://pypi.org/project/attr_utils/
+	:target: https://pypistats.org/packages/attr_utils
 	:alt: PyPI - Downloads
 
 .. end shields
