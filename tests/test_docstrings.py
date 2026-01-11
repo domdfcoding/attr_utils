@@ -65,4 +65,4 @@ def test_add_attrs_doc():
 	assert SomeClass.__lt__.__doc__ == "Return ``self < other``."
 	assert SomeClass.__le__.__doc__ == "Return ``self <= other``."
 	assert SomeClass.__ne__.__doc__ == "Return ``self != other``."
-	assert SomeClass.__repr__.__doc__ == f"Return a string representation of the :class:`~.SomeClass`."
+	assert SomeClass.__repr__.__doc__ == "Return a string representation of the :class:`~.SomeClass`."

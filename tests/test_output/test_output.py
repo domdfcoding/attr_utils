@@ -16,7 +16,7 @@ def test_html_output(page: BeautifulSoup, html_regression: HTMLRegressionFixture
 
 	if sphinx.version_info >= (4, 3):  # pragma: no cover
 		for div in page.select(
-				"span.n span.pre,em.property span.pre,span.sig-name span.pre,span.sig-prename span.pre"
+				"span.n span.pre,em.property span.pre,span.sig-name span.pre,span.sig-prename span.pre",
 				):
 			div.replace_with(div.text)
 
@@ -37,7 +37,7 @@ def test_html_output_autoattrs(page: BeautifulSoup, html_regression: HTMLRegress
 
 	if sphinx.version_info >= (4, 3):  # pragma: no cover
 		for div in page.select(
-				"span.n span.pre,span.o span.pre,span.p span.pre,em.property span.pre,em.property span.p,span.sig-name span.pre,span.sig-prename span.pre,span.default_value span.pre,span.sig-return"
+				"span.n span.pre,span.o span.pre,span.p span.pre,em.property span.pre,em.property span.p,span.sig-name span.pre,span.sig-prename span.pre,span.default_value span.pre,span.sig-return",
 				):
 			div.replace_with(div.text)
 
