@@ -180,10 +180,12 @@ def serde(  # noqa: PRM003
 		def from_dict(cls, d: Mapping[str, Any]):  # noqa: MAN002
 			from_fields = list(map(lambda a: (a, curried.get_in([from_key], a.metadata, [a.name])), fields(cls)))
 
-			return cls(**dict(map(
-					lambda f: (f[0].name, curried.get_in(f[1], d, f[0].default)),
-					from_fields,
-					)))
+			return cls(
+					**dict(map(
+							lambda f: (f[0].name, curried.get_in(f[1], d, f[0].default)),
+							from_fields,
+							)),
+					)
 
 		def to_dict(self, convert_values: bool = False) -> MutableMapping[str, Any]:
 			to_fields = curried.pipe(
