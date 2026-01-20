@@ -131,7 +131,7 @@ To install with ``pip``:
 
 .. code-block:: bash
 
-	$ python -m pip install attr_utils
+	$ python -m pip install attr-utils
 
 To install with ``conda``:
 
