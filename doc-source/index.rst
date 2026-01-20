@@ -131,6 +131,7 @@ Installation
 
 .. installation:: attr_utils
 	:pypi:
+	:pypi-name: attr-utils
 	:github:
 	:anaconda:
 	:conda-channels: conda-forge, domdfcoding
