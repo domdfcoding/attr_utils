@@ -71,22 +71,22 @@ attr_utils
 		:alt: CodeFactor Grade
 
 	.. |pypi-version| pypi-shield::
-		:project: attr_utils
+		:project: attr-utils
 		:version:
 		:alt: PyPI - Package Version
 
 	.. |supported-versions| pypi-shield::
-		:project: attr_utils
+		:project: attr-utils
 		:py-versions:
 		:alt: PyPI - Supported Python Versions
 
 	.. |supported-implementations| pypi-shield::
-		:project: attr_utils
+		:project: attr-utils
 		:implementations:
 		:alt: PyPI - Supported Implementations
 
 	.. |wheel| pypi-shield::
-		:project: attr_utils
+		:project: attr-utils
 		:wheel:
 		:alt: PyPI - Wheel
 
@@ -118,7 +118,7 @@ attr_utils
 		:alt: Maintenance
 
 	.. |pypi-downloads| pypi-shield::
-		:project: attr_utils
+		:project: attr-utils
 		:downloads: month
 		:alt: PyPI - Downloads
 

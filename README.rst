@@ -70,20 +70,20 @@ attr_utils
 	:target: https://www.codefactor.io/repository/github/domdfcoding/attr_utils
 	:alt: CodeFactor Grade
 
-.. |pypi-version| image:: https://img.shields.io/pypi/v/attr_utils
-	:target: https://pypi.org/project/attr_utils/
+.. |pypi-version| image:: https://img.shields.io/pypi/v/attr-utils
+	:target: https://pypi.org/project/attr-utils/
 	:alt: PyPI - Package Version
 
-.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/attr_utils?logo=python&logoColor=white
-	:target: https://pypi.org/project/attr_utils/
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/attr-utils?logo=python&logoColor=white
+	:target: https://pypi.org/project/attr-utils/
 	:alt: PyPI - Supported Python Versions
 
-.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/attr_utils
-	:target: https://pypi.org/project/attr_utils/
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/attr-utils
+	:target: https://pypi.org/project/attr-utils/
 	:alt: PyPI - Supported Implementations
 
-.. |wheel| image:: https://img.shields.io/pypi/wheel/attr_utils
-	:target: https://pypi.org/project/attr_utils/
+.. |wheel| image:: https://img.shields.io/pypi/wheel/attr-utils
+	:target: https://pypi.org/project/attr-utils/
 	:alt: PyPI - Wheel
 
 .. |conda-version| image:: https://img.shields.io/conda/v/domdfcoding/attr_utils?logo=anaconda
@@ -112,8 +112,8 @@ attr_utils
 .. |maintained| image:: https://img.shields.io/maintenance/yes/2026
 	:alt: Maintenance
 
-.. |pypi-downloads| image:: https://img.shields.io/pypi/dm/attr_utils
-	:target: https://pypistats.org/packages/attr_utils
+.. |pypi-downloads| image:: https://img.shields.io/pypi/dm/attr-utils
+	:target: https://pypistats.org/packages/attr-utils
 	:alt: PyPI - Downloads
 
 .. end shields
