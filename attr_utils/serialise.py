@@ -172,7 +172,6 @@ def serde(  # noqa: PRM003
 			By default values are left unchanged. In version 0.4.0 these were converted
 			to basic Python types, which may be undesirable. The original behaviour can be
 			restored using the ``convert_values`` parameter.
-
 	"""
 
 	def serde_with_class(cls: Type[AttrsClass]) -> Type[AttrsClass]:
