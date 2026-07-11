@@ -143,6 +143,7 @@ directives = [ "code-block",]
 
 [tool.snippet-fmt.languages.python]
 reformat = true
+sort_imports = false
 
 [tool.snippet-fmt.languages.TOML]
 reformat = true

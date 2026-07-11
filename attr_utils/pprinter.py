@@ -121,8 +121,9 @@ def register_pretty(
 	.. code-block:: python
 
 		from collections import OrderedDict
-		from attr_utils.pprinter import register_pretty
 		from prettyprinter import pretty_call
+		from attr_utils.pprinter import register_pretty
+
 
 		@register_pretty(OrderedDict)
 		def pretty_orderreddict(value, ctx):
