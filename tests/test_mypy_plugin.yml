@@ -1,5 +1,5 @@
 - case: mypy_path_from_env
-  skip: sys.version_info >= (3, 10) and "mypy" not in os.getenv("TOX_ENV_NAME", '')
+  skip: sys.version_info >= (3, 10) and ("mypy" not in os.getenv("TOX_ENV_NAME", '') or "mypylatest" in os.getenv("TOX_ENV_NAME", ''))
   main: |
     from attr_utils.serialise import serde
     import attrs
@@ -18,7 +18,7 @@
     f = F.from_dict({"foo": 666})
     reveal_type(f)  # N: Revealed type is "main.F"
 - case: mypy_path_from_env_newer_mypy
-  skip: sys.version_info < (3, 10) or "mypy" in os.getenv("TOX_ENV_NAME", '')
+  skip: (sys.version_info < (3, 10) or ("mypy" in os.getenv("TOX_ENV_NAME", '')) and "mypylatest" not in os.getenv("TOX_ENV_NAME", ''))
   main: |
     from attr_utils.serialise import serde
     import attrs
